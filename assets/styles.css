@@ -1506,3 +1506,55 @@ h2 {
   }
 }
 
+/* About Us Gallery & Press Cover Styling */
+.about-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.gallery-item {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 3 / 2;
+  transition: var(--transition);
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--coral);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.press-cover {
+  margin-bottom: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  max-height: 360px;
+}
+
+.press-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-credit {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 40px auto 20px;
+  font-style: italic;
+}
+

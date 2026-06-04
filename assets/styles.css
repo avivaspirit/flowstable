@@ -530,7 +530,7 @@ h2 {
 
 /* Big Quote */
 .quote-band {
-  background: var(--ink);
+  background: var(--coral);
   color: #fff;
   position: relative;
   overflow: hidden;

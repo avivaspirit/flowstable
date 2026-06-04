@@ -6,8 +6,8 @@
   --paper: #faf6f2;
   --panel: #ffffff;
   --line: #efe6e0;
-  --coral: #e05e26;
-  --green: #e05e26;
+  --coral: #cc7144;
+  --green: #cc7144;
   --sage: #f6ede7;
   --gold: #bd8e3a;
   --shadow-sm: 0 4px 24px rgba(29, 23, 20, 0.04);
@@ -468,7 +468,7 @@ h2 {
   align-items: center;
   gap: 20px;
   padding: 20px 0;
-  border-bottom: 1px solid rgba(224, 94, 38, 0.15);
+  border-bottom: 1px solid rgba(204, 113, 68, 0.15);
   font-weight: 700;
   font-size: 17px;
 }

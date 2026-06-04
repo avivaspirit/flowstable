@@ -143,7 +143,7 @@ nav a:hover::after {
   padding: 180px clamp(20px, 6vw, 80px) 92px;
   color: #fff;
   background:
-    linear-gradient(180deg, rgba(20, 26, 24, 0.15), rgba(20, 26, 24, 0.82)),
+    linear-gradient(180deg, rgba(204, 113, 68, 0.5), rgba(204, 113, 68, 0.95)),
     var(--hero-image) center / cover no-repeat;
   position: relative;
   overflow: hidden;

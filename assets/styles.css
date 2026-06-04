@@ -279,7 +279,7 @@ h2 {
 }
 
 .intro-band {
-  background: #fff;
+  background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
 
@@ -452,9 +452,18 @@ h2 {
 
 /* Signals & Notes */
 .split-band {
-  background: var(--sage);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: var(--coral);
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.split-band h2 {
+  color: #fff;
+}
+
+.split-band .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .signal-list {
@@ -463,19 +472,19 @@ h2 {
   gap: 16px;
 }
 
-.signal-list div {
+.split-band .signal-list div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   padding: 20px 0;
-  border-bottom: 1px solid rgba(204, 113, 68, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 700;
   font-size: 17px;
 }
 
-.signal-list strong {
-  color: var(--coral);
+.split-band .signal-list strong {
+  color: var(--sage);
   font-family: var(--font-serif);
   font-size: 36px;
   font-weight: 400;
@@ -761,12 +770,14 @@ h2 {
 
 .archive-hero {
   padding: 132px 0 64px;
-  background: var(--paper);
+  background: var(--coral);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .archive-hero h1 {
   max-width: 900px;
-  color: var(--ink);
+  color: #fff;
   font-family: var(--font-serif);
   font-size: clamp(48px, 8vw, 92px);
   font-weight: 400;
@@ -774,9 +785,42 @@ h2 {
 
 .archive-hero p:not(.eyebrow) {
   max-width: 640px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.95);
   font-size: 19px;
   margin-top: 16px;
+}
+
+.archive-hero .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Custom overlay input & chips for orange hero */
+.archive-hero .chip {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.archive-hero .chip:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-color: transparent;
+}
+
+.archive-hero .chip.active {
+  background: #fff;
+  color: var(--coral);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.archive-hero .search-input-wrapper input {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.archive-hero .search-input-wrapper input:focus {
+  border-color: #fff;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
 }
 
 /* Category Filter Chips & Input */

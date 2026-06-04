@@ -60,19 +60,22 @@ a {
   padding: 12px 28px;
   color: #fff;
   border-radius: 50px;
-  background: rgba(27, 34, 32, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(27, 34, 32, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   transition: var(--transition);
 }
 
 .site-header.solid {
   top: 8px;
-  background: rgba(250, 248, 244, 0.85);
+  background: rgba(250, 248, 244, 0.9);
   color: var(--ink);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(29, 23, 20, 0.08);
+  box-shadow: 0 10px 30px rgba(29, 23, 20, 0.06);
 }
 
 .brand {
@@ -81,9 +84,24 @@ a {
   gap: 12px;
   text-decoration: none;
   font-weight: 800;
-  font-size: 17px;
-  letter-spacing: -0.01em;
-  color: var(--coral);
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  transition: var(--transition);
+}
+
+.brand span {
+  background: linear-gradient(135deg, #ffffff, #ffd1b9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+}
+
+.solid .brand span {
+  background: linear-gradient(135deg, var(--coral), #b55d36);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
 .brand img {
@@ -91,8 +109,14 @@ a {
   height: 36px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: var(--transition);
+}
+
+.brand:hover img {
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 0 6px 20px rgba(204, 113, 68, 0.4);
 }
 
 .solid .brand img { 
@@ -988,7 +1012,55 @@ h2 {
 @media (max-width: 860px) {
   .site-header {
     top: 8px;
-    padding: 10px 20px;
+    padding: 8px 16px;
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .brand span {
+    font-size: 15px;
+  }
+
+  .brand img {
+    width: 32px;
+    height: 32px;
+  }
+
+  nav {
+    gap: 8px;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+  }
+
+  nav a::after {
+    display: none;
+  }
+
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .solid nav a {
+    background: rgba(29, 23, 20, 0.04);
+    border-color: rgba(29, 23, 20, 0.03);
+    color: var(--muted);
+  }
+
+  .solid nav a:hover {
+    background: var(--coral);
+    color: #fff;
   }
 
   .hero {

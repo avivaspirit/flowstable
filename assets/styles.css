@@ -131,8 +131,10 @@ nav {
 
 nav a {
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
   position: relative;
   padding: 4px 0;
 }
@@ -167,7 +169,8 @@ nav a:hover::after {
   padding: 180px clamp(20px, 6vw, 80px) 92px;
   color: #fff;
   background:
-    linear-gradient(180deg, rgba(204, 113, 68, 0.5), rgba(204, 113, 68, 0.95)),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 60%),
+    linear-gradient(180deg, rgba(204, 113, 68, 0.4), rgba(163, 76, 33, 0.95)),
     var(--hero-image) center / cover no-repeat;
   position: relative;
   overflow: hidden;
@@ -199,7 +202,7 @@ nav a:hover::after {
 }
 
 .hero .eyebrow { 
-  color: var(--coral); 
+  color: rgba(255, 255, 255, 0.85); 
 }
 
 h1 {
@@ -760,13 +763,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 24px;
   padding: 42px clamp(20px, 4vw, 56px);
   background: #fff;
   border-top: 1px solid var(--line);
 }
 
-.site-footer div {
+.site-footer div:not(.footer-links) {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -777,13 +781,22 @@ h2 {
   font-size: 14px;
 }
 
-.site-footer a {
-  font-weight: 800;
-  color: var(--green);
-  text-decoration: none;
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 28px);
+  align-items: center;
 }
 
-.site-footer a:hover {
+.footer-links a {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
   color: var(--coral);
 }
 
@@ -794,7 +807,9 @@ h2 {
 
 .archive-hero {
   padding: 132px 0 64px;
-  background: var(--coral);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 65%),
+    linear-gradient(135deg, rgba(204, 113, 68, 0.9), rgba(163, 76, 33, 0.98));
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

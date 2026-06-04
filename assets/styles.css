@@ -83,6 +83,7 @@ a {
   font-weight: 800;
   font-size: 17px;
   letter-spacing: -0.01em;
+  color: var(--coral);
 }
 
 .brand img {
@@ -174,7 +175,7 @@ nav a:hover::after {
 }
 
 .hero .eyebrow { 
-  color: #ffd8c7; 
+  color: var(--coral); 
 }
 
 h1 {
@@ -218,15 +219,15 @@ h1 {
 }
 
 .button.primary {
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(204, 113, 68, 0.15);
 }
 
 .button.primary:hover {
-  background: var(--paper);
+  background: #b55d36;
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(204, 113, 68, 0.25);
 }
 
 .button.secondary {

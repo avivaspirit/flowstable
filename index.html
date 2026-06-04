@@ -802,5 +802,36 @@ foongfoong w dear natthakorn wiangin sopon supamangmee learning">
     </div>
     <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
   </footer>
+
+  <!-- Premium Lightbox Modal -->
+  <div id="postModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-visual">
+        <button class="carousel-btn prev" aria-label="Previous image">&lsaquo;</button>
+        <img id="modalImage" src="" alt="Post image">
+        <button class="carousel-btn next" aria-label="Next image">&rsaquo;</button>
+        <span id="modalCarouselCounter" class="carousel-counter">1 / 1</span>
+      </div>
+      <div class="modal-content-area">
+        <div class="modal-header">
+          <button class="modal-close" aria-label="Close modal">&times;</button>
+          <div class="modal-meta">
+            <span id="modalDate" class="date">Date</span>
+            <span id="modalCategory" class="category">Category</span>
+          </div>
+          <h2 id="modalTitle">Title</h2>
+        </div>
+        <div id="modalBody" class="modal-body">
+          <!-- Text content will be injected dynamically -->
+        </div>
+        <div class="modal-footer">
+          <span id="modalStats">0 reactions</span>
+          <a id="modalFacebookLink" href="#" target="_blank" rel="noopener">View on Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/site.js"></script>
 </body>
 </html>

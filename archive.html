@@ -28,16 +28,27 @@
         <h1>Flow's Table, in its own words.</h1>
         <p>100 original public posts with matched local media where available.</p>
         <div class="archive-tools">
-          <input id="archiveSearch" type="search" placeholder="Search the archive" aria-label="Search the archive">
-          <select id="categoryFilter" aria-label="Filter by category">
-            <option value="all">All notes</option>
-            <option value="Conversations">Conversations</option><option value="Field Notes">Field Notes</option><option value="Gatherings">Gatherings</option><option value="Learning">Learning</option><option value="Reflections">Reflections</option>
-          </select>
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input id="archiveSearch" type="search" placeholder="Search the archive..." aria-label="Search the archive">
+          </div>
+          <div class="category-chips" id="categoryChips">
+            <button class="chip active" data-value="all">All notes</button>
+            <button class="chip" data-value="Conversations">Conversations</button>
+            <button class="chip" data-value="Field Notes">Field Notes</button>
+            <button class="chip" data-value="Gatherings">Gatherings</button>
+            <button class="chip" data-value="Learning">Learning</button>
+            <button class="chip" data-value="Reflections">Reflections</button>
+          </div>
         </div>
       </div>
     </section>
     <section class="section archive-list" id="archiveList">
       <div class="section-inner">
+        <div class="empty-state" id="emptyState">
+          <h3>No notes found</h3>
+          <p>Try searching for a different keyword or category.</p>
+        </div>
         
       <article class="archive-post" data-category="Field Notes" data-search="by our amazing jenny jennisa 🥂  field notes">
         <div class="archive-head">
@@ -4918,6 +4929,36 @@ we don’t know exactly where this project will go next — and that’s part of
     </div>
     <a href="index.html">Home</a>
   </footer>
+
+  <!-- Premium Lightbox Modal -->
+  <div id="postModal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-visual">
+        <button class="carousel-btn prev" aria-label="Previous image">&lsaquo;</button>
+        <img id="modalImage" src="" alt="Post image">
+        <button class="carousel-btn next" aria-label="Next image">&rsaquo;</button>
+        <span id="modalCarouselCounter" class="carousel-counter">1 / 1</span>
+      </div>
+      <div class="modal-content-area">
+        <div class="modal-header">
+          <button class="modal-close" aria-label="Close modal">&times;</button>
+          <div class="modal-meta">
+            <span id="modalDate" class="date">Date</span>
+            <span id="modalCategory" class="category">Category</span>
+          </div>
+          <h2 id="modalTitle">Title</h2>
+        </div>
+        <div id="modalBody" class="modal-body">
+          <!-- Text content will be injected dynamically -->
+        </div>
+        <div class="modal-footer">
+          <span id="modalStats">0 reactions</span>
+          <a id="modalFacebookLink" href="#" target="_blank" rel="noopener">View on Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/site.js"></script>
 </body>
 </html>

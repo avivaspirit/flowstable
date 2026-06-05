@@ -30,7 +30,8 @@ collections:
               - { label: Summary, name: description, widget: text }
               - label: Cover Image
                 name: cover_image
-                widget: image, required: false
+                widget: image
+                required: false
               - { label: Body, name: body, widget: markdown }
 
       - name: about

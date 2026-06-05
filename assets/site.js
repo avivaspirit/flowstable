@@ -277,7 +277,7 @@ function initMobileMenu() {
   btn.innerHTML = '<span></span><span></span><span></span>';
   header.appendChild(btn);
 
-  // Create bottom sheet
+  // Create dropdown menu (was mobile-nav-sheet)
   const sheet = document.createElement('nav');
   sheet.className = 'mobile-nav-sheet';
   sheet.setAttribute('aria-label', 'Mobile navigation');
@@ -288,7 +288,7 @@ function initMobileMenu() {
     const clone = link.cloneNode(true);
     sheet.appendChild(clone);
   });
-  document.body.appendChild(sheet);
+  header.appendChild(sheet);
 
   // Toggle menu
   let menuOpen = false;
@@ -297,7 +297,6 @@ function initMobileMenu() {
     btn.classList.toggle('open', menuOpen);
     sheet.classList.toggle('open', menuOpen);
     btn.setAttribute('aria-expanded', String(menuOpen));
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
   }
 
   btn.addEventListener('click', (e) => {

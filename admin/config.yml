@@ -2,7 +2,6 @@ backend:
   name: github
   repo: avivaspirit/flowstable
   branch: main
-  base_url: https://sveltia-cms-auth.vercel.app
 
 media_folder: assets/photos/uploads
 public_folder: assets/photos/uploads

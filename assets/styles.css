@@ -170,17 +170,36 @@ nav a:hover::after {
   align-items: flex-end;
   padding: 180px clamp(20px, 6vw, 80px) 92px;
   color: #fff;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 60%),
-    linear-gradient(180deg, rgba(204, 113, 68, 0.4), rgba(163, 76, 33, 0.95)),
-    var(--hero-image) center / cover no-repeat;
+  background-color: var(--ink);
   position: relative;
   overflow: hidden;
+}
+
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 60%),
+    linear-gradient(180deg, rgba(204, 113, 68, 0.4), rgba(163, 76, 33, 0.95));
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero-content {
   width: min(920px, 100%);
   animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes heroFadeUp {
@@ -2030,15 +2049,7 @@ h2 {
   border-radius: 0 2px 2px 0;
 }
 
-/* 3. Page Fade-In */
-body {
-  animation: pageFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-@keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 /* 4. Active Nav Link Indicator */
 nav a.active-page {

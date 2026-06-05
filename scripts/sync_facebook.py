@@ -277,7 +277,50 @@ def sync_instagram_reels():
     print(f"Successfully synced Reels. Added {added_count} new reels. Total in database: {len(existing_reels)}")
     return True
 
+def sync_page_stats():
+    print("Fetching page stats from Facebook Graph API...")
+    url = f"https://graph.facebook.com/v20.0/{PAGE_ID}"
+    params = {
+        "fields": "fan_count,followers_count",
+        "access_token": PAGE_ACCESS_TOKEN
+    }
+    
+    stats_file = os.path.join(BASE_DIR, "assets", "data", "page_stats.json")
+    existing_stats = {"followers_count": 1632, "last_updated": ""}
+    if os.path.exists(stats_file):
+        try:
+            with open(stats_file, "r", encoding="utf-8") as f:
+                existing_stats = json.load(f)
+        except Exception as e:
+            print(f"Error reading existing page_stats.json: {e}")
+            
+    try:
+        response = requests.get(url, params=params)
+        if response.ok:
+            res_data = response.json()
+            followers = res_data.get("followers_count") or res_data.get("fan_count") or existing_stats.get("followers_count") or 1632
+            existing_stats["followers_count"] = followers
+            existing_stats["last_updated"] = datetime.now().isoformat()
+            
+            with open(stats_file, "w", encoding="utf-8") as f:
+                json.dump(existing_stats, f, ensure_ascii=False, indent=2)
+            print(f"Successfully updated page stats: {existing_stats}")
+            return True
+        else:
+            print(f"Error calling page stats API: {response.text}")
+            if not os.path.exists(stats_file):
+                with open(stats_file, "w", encoding="utf-8") as f:
+                    json.dump(existing_stats, f, ensure_ascii=False, indent=2)
+            return False
+    except Exception as ex:
+        print(f"Exception fetching page stats: {ex}")
+        if not os.path.exists(stats_file):
+            with open(stats_file, "w", encoding="utf-8") as f:
+                json.dump(existing_stats, f, ensure_ascii=False, indent=2)
+        return False
+
 if __name__ == "__main__":
     facebook_success = sync_facebook_posts()
     instagram_success = sync_instagram_reels()
+    page_stats_success = sync_page_stats()
     print("Sync process completed.")

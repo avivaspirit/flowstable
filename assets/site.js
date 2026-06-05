@@ -52,10 +52,78 @@ async function loadPostsDatabase() {
     } catch (cmsErr) {
       console.log('No custom CMS articles loaded yet or format invalid:', cmsErr);
     }
+
+    // Update and animate stats band on homepage
+    if (document.querySelector('.stats-band')) {
+      let followersCount = 1632;
+      try {
+        const statsRes = await fetch('assets/data/page_stats.json');
+        if (statsRes.ok) {
+          const statsData = await statsRes.json();
+          if (statsData && statsData.followers_count) {
+            followersCount = statsData.followers_count;
+          }
+        }
+      } catch (statsErr) {
+        console.log('Failed to fetch page stats, using fallback:', statsErr);
+      }
+      
+      const totalPostsCount = allPosts.length;
+      const postsWithPhotosCount = allPosts.filter(p => p.photos && p.photos.length > 0).length;
+      const totalReactionsCount = allPosts.reduce((sum, p) => sum + (p.reaction_count || 0), 0);
+      
+      initStatsCountUp(totalPostsCount, postsWithPhotosCount, followersCount, totalReactionsCount);
+    }
   } catch (err) {
     console.error('Failed to load posts database:', err);
   }
 }
+
+// Dynamic Stats Count-Up Animation
+function animateValue(element, start, end, duration) {
+  if (!element) return;
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const currentValue = Math.floor(progress * (end - start) + start);
+    element.textContent = currentValue.toLocaleString();
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      element.textContent = end.toLocaleString();
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+function initStatsCountUp(posts, photos, followers, reactions) {
+  const statsBand = document.querySelector('.stats-band');
+  if (!statsBand) return;
+
+  if (!window.IntersectionObserver) {
+    document.getElementById('stat-posts').textContent = posts.toLocaleString();
+    document.getElementById('stat-photos').textContent = photos.toLocaleString();
+    document.getElementById('stat-followers').textContent = followers.toLocaleString();
+    document.getElementById('stat-reactions').textContent = reactions.toLocaleString();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateValue(document.getElementById('stat-posts'), 0, posts, 1500);
+        animateValue(document.getElementById('stat-photos'), 0, photos, 1500);
+        animateValue(document.getElementById('stat-followers'), 0, followers, 1500);
+        animateValue(document.getElementById('stat-reactions'), 0, reactions, 1500);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  observer.observe(statsBand);
+}
+
 
 // Render CMS articles on the archive page
 function renderCmsArticles(articles) {

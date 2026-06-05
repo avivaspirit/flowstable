@@ -12,6 +12,7 @@ PAGE_ACCESS_TOKEN = "EAAOOrC2AbRQBRl0m1iySFoZAFdiD6gZBoNNO6IGw3j1OKviIyjyE2pPiGw
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_FILE = os.path.join(BASE_DIR, "assets", "data", "posts.json")
 PHOTOS_DIR = os.path.join(BASE_DIR, "assets", "photos")
+REELS_FILE = os.path.join(BASE_DIR, "_data", "reels.json")
 
 def clean_text(value):
     return re.sub(r"\n{3,}", "\n\n", (value or "").strip())
@@ -31,7 +32,6 @@ def category_for(text):
 
 def format_date(value):
     try:
-        # e.g., 2026-05-28T06:08:47+0000 -> 28 May 2026
         dt = datetime.strptime(value.replace(":", ""), "%Y-%m-%dT%H%M%S%z")
         return dt.strftime("%d %b %Y")
     except Exception:
@@ -41,19 +41,21 @@ def format_date(value):
         except Exception:
             return value[:10]
 
-def sync():
+def sync_facebook_posts():
     print("Fetching posts from Facebook Graph API...")
     url = f"https://graph.facebook.com/v20.0/{PAGE_ID}/feed"
     params = {
-        "fields": "id,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares",
+        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares",
         "access_token": PAGE_ACCESS_TOKEN,
-        "limit": 25
+        "limit": 50
     }
     
     response = requests.get(url, params=params)
     if not response.ok:
-        print(f"Error calling Graph API: {response.text}")
-        return
+        print(f"Error calling Facebook Graph API: {response.text}")
+        if "expired" in response.text.lower():
+            print("\nWARNING: Meta Access Token has expired. Please update PAGE_ACCESS_TOKEN with a new long-lived token.\n")
+        return False
         
     posts_data = response.json().get("data", [])
     print(f"Retrieved {len(posts_data)} posts from API.")
@@ -69,9 +71,21 @@ def sync():
     
     for item in posts_data:
         post_id = item["id"]
+        
+        # Verify ownership (skip shared or third-party posts)
+        author_id = item.get("from", {}).get("id")
+        if author_id and author_id != PAGE_ID:
+            print(f"Skipping post {post_id} - not authored directly by the page owner (Author ID: {author_id})")
+            continue
+            
         msg = clean_text(item.get("message", ""))
         story = clean_text(item.get("story", ""))
         
+        # Skip shared posts identified by story label containing "shared"
+        if story and "shared" in story.lower():
+            print(f"Skipping shared content post {post_id}: '{story}'")
+            continue
+            
         # Decide title
         title = msg.split("\n")[0] if msg else story.split("\n")[0] if story else "Flow's Table Update"
         if len(title) > 80:
@@ -146,7 +160,83 @@ def sync():
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(merged_posts, f, ensure_ascii=False, indent=2)
         
-    print(f"Successfully synced posts. Total posts in database: {len(merged_posts)}")
+    print(f"Successfully synced Facebook posts. Total in database: {len(merged_posts)}")
+    return True
+
+def sync_instagram_reels():
+    print("Checking for linked Instagram Business Account...")
+    url = f"https://graph.facebook.com/v20.0/{PAGE_ID}"
+    params = {
+        "fields": "instagram_business_account",
+        "access_token": PAGE_ACCESS_TOKEN
+    }
+    response = requests.get(url, params=params)
+    if not response.ok:
+        print(f"Error checking linked Instagram Business Account: {response.text}")
+        return False
+        
+    data = response.json()
+    ig_acc_id = data.get("instagram_business_account", {}).get("id")
+    if not ig_acc_id:
+        print("No linked Instagram Business Account found for this Facebook Page.")
+        return False
+        
+    print(f"Found linked Instagram Business Account: {ig_acc_id}. Fetching media...")
+    
+    media_url = f"https://graph.facebook.com/v20.0/{ig_acc_id}/media"
+    media_params = {
+        "fields": "id,caption,media_type,permalink,thumbnail_url,media_url,timestamp",
+        "access_token": PAGE_ACCESS_TOKEN,
+        "limit": 100
+    }
+    media_response = requests.get(media_url, params=media_params)
+    if not media_response.ok:
+        print(f"Error fetching Instagram media: {media_response.text}")
+        return False
+        
+    media_items = media_response.json().get("data", [])
+    print(f"Retrieved {len(media_items)} Instagram media items.")
+    
+    # Filter for videos (Reels)
+    ig_reels = []
+    for item in media_items:
+        if item.get("media_type") == "VIDEO":
+            permalink = item.get("permalink")
+            if permalink:
+                ig_reels.append({"url": permalink})
+                
+    print(f"Filtered down to {len(ig_reels)} Instagram reels.")
+    
+    # Load existing reels
+    existing_reels = []
+    if os.path.exists(REELS_FILE):
+        with open(REELS_FILE, "r", encoding="utf-8") as f:
+            try:
+                existing_reels = json.load(f)
+            except Exception:
+                existing_reels = []
+                
+    # Merge reels (keep duplicates out)
+    existing_urls = {r["url"].rstrip("/").lower() for r in existing_reels if "url" in r}
+    merged_reels = list(existing_reels)
+    
+    added_count = 0
+    for reel in ig_reels:
+        clean_url = reel["url"].rstrip("/").lower()
+        if clean_url not in existing_urls:
+            merged_reels.insert(0, reel) # Prepend new reels to display them first
+            existing_urls.add(clean_url)
+            added_count += 1
+            
+    # Save back to reels.json
+    os.makedirs(os.path.dirname(REELS_FILE), exist_ok=True)
+    with open(REELS_FILE, "w", encoding="utf-8") as f:
+        json.dump(merged_reels, f, ensure_ascii=False, indent=2)
+        
+    print(f"Successfully synced Instagram Reels. Added {added_count} new reels. Total reels in database: {len(merged_reels)}")
+    return True
 
 if __name__ == "__main__":
-    sync()
+    facebook_success = sync_facebook_posts()
+    instagram_success = sync_instagram_reels()
+    print("Sync process completed.")

@@ -49,9 +49,7 @@
           <!-- Guest 1 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_1.webp" alt="Tiwa Chinshadaphong" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">MI</div>
               <div class="guest-info">
                 <h3>Tiwa Chinshadaphong (P'Mi)</h3>
                 <span class="guest-tag">Legendary Value Investor & Mentor</span>
@@ -63,9 +61,7 @@
           <!-- Guest 2 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_2.webp" alt="Suthon Singhasitthangkul" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">JK</div>
               <div class="guest-info">
                 <h3>Suthon Singhasitthangkul (P'Jacky)</h3>
                 <span class="guest-tag">VI & Turnaround Strategist</span>
@@ -77,9 +73,7 @@
           <!-- Guest 3 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_3.webp" alt="Pawoot Pom Ponpipat" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">PM</div>
               <div class="guest-info">
                 <h3>Pawoot Pom Ponpipat (P'Pom)</h3>
                 <span class="guest-tag">Founder, TARAD.com & Investor</span>
@@ -91,9 +85,7 @@
           <!-- Guest 4 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_4.webp" alt="Jing Chanapan" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">JG</div>
               <div class="guest-info">
                 <h3>Jing Chanapan (Shark Jing)</h3>
                 <span class="guest-tag">VP, Thai Summit & VC Investor</span>
@@ -105,9 +97,7 @@
           <!-- Guest 5 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_5.webp" alt="Supachai Parchariyanon" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">KD</div>
               <div class="guest-info">
                 <h3>Supachai Parchariyanon (Kid)</h3>
                 <span class="guest-tag">Co-Founder, RISE Corporate Innovation</span>
@@ -119,9 +109,7 @@
           <!-- Guest 6 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_6.webp" alt="Toy Kasidit" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">TY</div>
               <div class="guest-info">
                 <h3>Toy Kasidit (P'Toy)</h3>
                 <span class="guest-tag">Founder, DataRockie & Educator</span>
@@ -133,9 +121,7 @@
           <!-- Guest 7 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_7.webp" alt="Tre Pramoj" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">TR</div>
               <div class="guest-info">
                 <h3>Tre Pramoj (P'Tre)</h3>
                 <span class="guest-tag">Former MD, Sammakorn & Racing Champion</span>
@@ -147,9 +133,7 @@
           <!-- Guest 8 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_8.webp" alt="Nithi Satchatippavarn" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">MK</div>
               <div class="guest-info">
                 <h3>Nithi Satchatippavarn (P'Mek)</h3>
                 <span class="guest-tag">CEO & Co-Founder, MyCloudFulfillment</span>
@@ -161,9 +145,7 @@
           <!-- Guest 9 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_9.webp" alt="Punyawe Chantarakajorn" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">PK</div>
               <div class="guest-info">
                 <h3>Punyawe Chantarakajorn (P'Pek)</h3>
                 <span class="guest-tag">Professional Trader & Author</span>
@@ -175,9 +157,7 @@
           <!-- Guest 10 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_10.webp" alt="Benz Arnun" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">BA</div>
               <div class="guest-info">
                 <h3>Benz Arnun</h3>
                 <span class="guest-tag">Solopreneur & Digital Growth Educator</span>
@@ -189,9 +169,7 @@
           <!-- Guest 11 -->
           <div class="guest-card">
             <div class="guest-header">
-              <div class="guest-avatar">
-                <img src="assets/photos/guests/guest_11.webp" alt="Benz Vorapat" class="guest-avatar-img">
-              </div>
+              <div class="guest-avatar">BV</div>
               <div class="guest-info">
                 <h3>Benz Vorapat (Shark Benz)</h3>
                 <span class="guest-tag">Investment Director, Singha Ventures</span>
@@ -213,13 +191,19 @@
               const grid = document.getElementById('guestsGrid');
               grid.innerHTML = data.guests.map(guest => {
                 const displayName = guest.nickname ? `${guest.name} (${guest.nickname})` : guest.name;
-                const photoSrc = guest.photo || 'assets/photos/guests/default.webp';
+                const getInitials = (name) => {
+                  const clean = name.replace(/P'|Shark\s+/gi, '').trim();
+                  const parts = clean.split(/\s+/);
+                  if (parts.length >= 2) {
+                    return (parts[0][0] + parts[1][0]).toUpperCase();
+                  }
+                  return clean.substring(0, 2).toUpperCase();
+                };
+                const initials = getInitials(guest.nickname || guest.name);
                 return `
                   <div class="guest-card">
                     <div class="guest-header">
-                      <div class="guest-avatar">
-                        <img src="${photoSrc}" alt="${guest.name}" class="guest-avatar-img">
-                      </div>
+                      <div class="guest-avatar">${initials}</div>
                       <div class="guest-info">
                         <h3>${displayName}</h3>
                         <span class="guest-tag">${guest.title}</span>

@@ -60,10 +60,6 @@ collections:
               - { label: Nickname, name: nickname, widget: string, required: false }
               - { label: Title / Role, name: title, widget: string }
               - { label: Bio, name: bio, widget: text }
-              - label: Photo
-                name: photo
-                widget: image
-                required: false
 
       - name: reels
         label: Video Reels

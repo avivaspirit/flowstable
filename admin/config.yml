@@ -1,0 +1,75 @@
+backend:
+  name: github
+  repo: avivaspirit/flowstable
+  branch: main
+  base_url: https://sveltia-cms-auth.vercel.app
+
+media_folder: assets/photos/uploads
+public_folder: assets/photos/uploads
+
+collections:
+  # ── CONTENT ───────────────────────────────────────────
+  - name: content
+    label: Content Manager
+    files:
+      - name: articles
+        label: Articles List
+        file: _data/articles.json
+        fields:
+          - label: Articles
+            name: articles
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Date, name: date, widget: string, hint: "Format: YYYY-MM-DD (e.g. 2026-06-05)" }
+              - label: Category
+                name: category
+                widget: select
+                options: ["Guest Story", "Investment", "Entrepreneurship", "Tech", "Philosophy", "Leadership", "Finance"]
+              - { label: Guest Name, name: guest, widget: string, required: false }
+              - { label: Summary, name: description, widget: text }
+              - label: Cover Image
+                name: cover_image
+                widget: image, required: false
+              - { label: Body, name: body, widget: markdown }
+
+      - name: about
+        label: About Us
+        file: _data/about.json
+        fields:
+          - { label: Origin Story, name: origin_story, widget: markdown }
+          - { label: Philosophy Text, name: philosophy, widget: markdown }
+          - label: Team Members
+            name: team
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Bio, name: bio, widget: text }
+
+      - name: guests
+        label: Our Guests
+        file: _data/guests.json
+        fields:
+          - label: Guests
+            name: guests
+            widget: list
+            fields:
+              - { label: Full Name, name: name, widget: string }
+              - { label: Nickname, name: nickname, widget: string, required: false }
+              - { label: Title / Role, name: title, widget: string }
+              - { label: Bio, name: bio, widget: text }
+              - label: Photo
+                name: photo
+                widget: image
+                required: false
+
+      - name: reels
+        label: Video Reels
+        file: _data/reels.json
+        fields:
+          - label: Reels List
+            name: reels
+            widget: list
+            fields:
+              - { label: Link/URL, name: url, widget: string, hint: "Paste Facebook or Instagram reel link, e.g. https://www.facebook.com/reel/123456789 or https://www.instagram.com/reel/CODE/" }

@@ -601,17 +601,58 @@ from flow to grow 🌊
           <p class="eyebrow">Video Highlights</p>
           <h2>Flow's Table Reels.</h2>
         </div>
-        <div class="reels-grid">
+        <div class="reels-grid" id="reelsGrid">
+          <!-- Fallback hardcoded reels for SEO/No-JS -->
           <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F958723650432917%2F&show_text=0&width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4600600996826997%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
           <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F949491377580079%2F&show_text=0&width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F962717709499628%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
           <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4370623829848090%2F&show_text=0&width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2024980848895552%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', async () => {
+            try {
+              const res = await fetch('_data/reels.json');
+              if (res.ok) {
+                const reels = await res.json();
+                if (reels && reels.length > 0) {
+                  const grid = document.getElementById('reelsGrid');
+                  grid.innerHTML = reels.map(r => {
+                    const url = r.url || '';
+                    let embedUrl = '';
+                    
+                    if (url.includes('facebook.com')) {
+                      // Facebook Reel embed
+                      const encodedUrl = encodeURIComponent(url);
+                      embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&show_text=0&width=280`;
+                    } else if (url.includes('instagram.com')) {
+                      // Instagram Reel embed
+                      // Format: https://www.instagram.com/reel/CODE/ -> https://www.instagram.com/reel/CODE/embed
+                      let cleanUrl = url.split('?')[0];
+                      if (!cleanUrl.endsWith('/')) cleanUrl += '/';
+                      embedUrl = `${cleanUrl}embed`;
+                    } else {
+                      return ''; // Ignore unknown URLs
+                    }
+                    
+                    return `
+                      <div class="reel-card">
+                        <iframe src="${embedUrl}" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                      </div>
+                    `;
+                  }).filter(Boolean).join('');
+                }
+              }
+            } catch (e) {
+              console.log("Using static fallback for reels content:", e);
+            }
+          });
+        </script>
       </div>
     </section>
 

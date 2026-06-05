@@ -44,11 +44,13 @@
     <section class="section about-editorial">
       <div class="section-inner">
         <h3>The Story Behind the Table</h3>
-        <p>Every legendary story begins around a dinner table. In 2025, Mac Nattapong Vivattanaprasert, a second-generation entrepreneur building the modern shrine brand Aviva Spirit, set out on a simple mission: to learn from the brightest minds in business and finance. In a fast-changing world, he sought the wisdom of those who had successfully navigated market cycles before him.</p>
-        
-        <p>At a business seminar, Mac crossed paths with two of Thailand’s most respected Value Investors: Mi Tiwa Chinshadaphong and Jacky Suthon Singhasitthangkul. Rather than requesting a formal interview or a pitch meeting, Mac did something different. He invited them to share a meal alongside a small circle of ten close friends, setting a relaxed environment where everyone could speak freely.</p>
+        <div id="originStoryText">
+          <p>Every legendary story begins around a dinner table. In 2025, Mac Nattapong Vivattanaprasert, a second-generation entrepreneur building the modern shrine brand Aviva Spirit, set out on a simple mission: to learn from the brightest minds in business and finance. In a fast-changing world, he sought the wisdom of those who had successfully navigated market cycles before him.</p>
+          
+          <p>At a business seminar, Mac crossed paths with two of Thailand’s most respected Value Investors: Mi Tiwa Chinshadaphong and Jacky Suthon Singhasitthangkul. Rather than requesting a formal interview or a pitch meeting, Mac did something different. He invited them to share a meal alongside a small circle of ten close friends, setting a relaxed environment where everyone could speak freely.</p>
 
-        <p>What followed was an inspiring five-hour flow of business insights, life philosophies, and personal wisdom. The chemistry was electric, and the sense of fulfillment was mutual. Recognizing the rare value of this gathering, Mi suggested they make it a quarterly tradition. Thus, Flow's Table was born—not as a formal networking group, but as an organic space for authentic human connection.</p>
+          <p>What followed was an inspiring five-hour flow of business insights, life philosophies, and personal wisdom. The chemistry was electric, and the sense of fulfillment was mutual. Recognizing the rare value of this gathering, Mi suggested they make it a quarterly tradition. Thus, Flow's Table was born—not as a formal networking group, but as an organic space for authentic human connection.</p>
+        </div>
 
         <div class="editorial-image-wrapper">
           <div class="editorial-image">
@@ -58,9 +60,11 @@
         </div>
 
         <h3>The Philosophy of "No Agenda"</h3>
-        <p>In a professional ecosystem dominated by transactional meetings, pitch decks, and rigid schedules, Flow's Table stands as a deliberate exception. Every gathering is run with a simple, foundational rule: **No Agenda**.</p>
+        <div id="philosophyText">
+          <p>In a professional ecosystem dominated by transactional meetings, pitch decks, and rigid schedules, Flow's Table stands as a deliberate exception. Every gathering is run with a simple, foundational rule: **No Agenda**.</p>
 
-        <p>“When you have a fixed agenda, you are bound by constraints. You stop listening to the present because you're constantly thinking about the next question,” explains Mac. By letting go of structured goals, the table allows conversations to flow naturally, moving effortlessly from high-level investment strategies and emerging AI trends to personal philosophy, history, astrology, and mental well-being.</p>
+          <p>“When you have a fixed agenda, you are bound by constraints. You stop listening to the present because you're constantly thinking about the next question,” explains Mac. By letting go of structured goals, the table allows conversations to flow naturally, moving effortlessly from high-level investment strategies and emerging AI trends to personal philosophy, history, astrology, and mental well-being.</p>
+        </div>
 
         <div class="editorial-image-wrapper">
           <div class="editorial-image">
@@ -72,7 +76,7 @@
         <p>It is an ecosystem built on the principles of **positive energy, safety, and mutual respect**. Younger builders have the opportunity to share fresh perspectives on technology, media, and Gen-Z trends with senior leaders. In return, seasoned mentors pass down lessons that cannot be found in books or online videos—distilled wisdom born of decades of trial, failure, and success.</p>
 
         <h3>Our Core Team</h3>
-        <div class="team-grid">
+        <div class="team-grid" id="teamGrid">
           <div class="team-card">
             <span class="team-role">Co-Founder</span>
             <h4>Mac Nattapong Vivattanaprasert</h4>
@@ -114,6 +118,42 @@
         </div>
       </div>
     </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const res = await fetch('_data/about.json');
+          if (res.ok) {
+            const data = await res.json();
+            if (data.origin_story) {
+              document.getElementById('originStoryText').innerHTML = formatMarkdown(data.origin_story);
+            }
+            if (data.philosophy) {
+              document.getElementById('philosophyText').innerHTML = formatMarkdown(data.philosophy);
+            }
+            if (data.team && data.team.length > 0) {
+              const grid = document.getElementById('teamGrid');
+              grid.innerHTML = data.team.map(member => `
+                <div class="team-card">
+                  <span class="team-role">${member.role}</span>
+                  <h4>${member.name}</h4>
+                  <p class="team-bio">${member.bio}</p>
+                </div>
+              `).join('');
+            }
+          }
+        } catch (e) {
+          console.log("Using static fallback for about content:", e);
+        }
+      });
+
+      function formatMarkdown(text) {
+        return text.split('\n\n').map(p => {
+          const boldFormatted = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          return `<p>${boldFormatted.replace(/\n/g, '<br>')}</p>`;
+        }).join('');
+      }
+    </script>
 
     <section class="press-band">
       <div class="section-inner">

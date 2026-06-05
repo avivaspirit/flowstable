@@ -319,8 +319,30 @@ function initMobileMenu() {
   });
 }
 
+// Local Clean URLs fallback for development
+function initCleanUrlsLocalFallback() {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    document.querySelectorAll('a').forEach(link => {
+      let href = link.getAttribute('href') || '';
+      if (href.startsWith('/') && !href.includes('.')) {
+        const parts = href.split('#');
+        let path = parts[0];
+        const hash = parts[1] ? '#' + parts[1] : '';
+        
+        if (path === '/home' || path === '/') {
+          path = 'index.html';
+        } else {
+          path = path.substring(1) + '.html';
+        }
+        link.setAttribute('href', path + hash);
+      }
+    });
+  }
+}
+
 // ============ MAIN INIT ============
 document.addEventListener('DOMContentLoaded', () => {
+  initCleanUrlsLocalFallback();
   loadPostsDatabase();
 
   // Taste Skill Enhancements

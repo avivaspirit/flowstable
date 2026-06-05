@@ -2226,7 +2226,7 @@ nav a.active-page::before {
   border-bottom: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 990px) {
   .mobile-menu-btn {
     display: flex;
   }
@@ -2235,7 +2235,7 @@ nav a.active-page::before {
     display: block;
   }
 
-  .site-header nav {
+  .site-header nav:not(.mobile-nav-sheet) {
     display: none;
   }
 }

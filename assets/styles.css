@@ -1516,7 +1516,7 @@ h2 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--line);
+  background: rgba(29, 23, 20, 0.25);
   cursor: pointer;
   transition: background 0.3s, transform 0.3s;
 }

@@ -203,7 +203,13 @@ def sync_instagram_reels():
         if item.get("media_type") == "VIDEO":
             permalink = item.get("permalink")
             if permalink:
-                ig_reels.append({"url": permalink})
+                ig_reels.append({
+                    "url": permalink,
+                    "caption": item.get("caption", ""),
+                    "thumbnail_url": item.get("thumbnail_url", ""),
+                    "media_url": item.get("media_url", ""),
+                    "timestamp": item.get("timestamp", "")
+                })
                 
     print(f"Filtered down to {len(ig_reels)} Instagram reels.")
     
@@ -216,24 +222,59 @@ def sync_instagram_reels():
             except Exception:
                 existing_reels = []
                 
-    # Merge reels (keep duplicates out)
-    existing_urls = {r["url"].rstrip("/").lower() for r in existing_reels if "url" in r}
-    merged_reels = list(existing_reels)
-    
+    # Create a map of existing reels by URL for easy lookup
+    reels_by_url = {}
+    for r in existing_reels:
+        if "url" in r:
+            url_key = r["url"].rstrip("/").lower()
+            reels_by_url[url_key] = r
+            
     added_count = 0
+    # Merge/update Instagram reels
     for reel in ig_reels:
-        clean_url = reel["url"].rstrip("/").lower()
-        if clean_url not in existing_urls:
-            merged_reels.insert(0, reel) # Prepend new reels to display them first
-            existing_urls.add(clean_url)
+        url_key = reel["url"].rstrip("/").lower()
+        if url_key in reels_by_url:
+            existing_reel = reels_by_url[url_key]
+            for key in ["caption", "thumbnail_url", "media_url", "timestamp"]:
+                if key in reel and (key not in existing_reel or not existing_reel[key]):
+                    existing_reel[key] = reel[key]
+        else:
+            existing_reels.insert(0, reel)
+            reels_by_url[url_key] = reel
             added_count += 1
+
+    # Backfill Facebook reels details from posts.json
+    if os.path.exists(DATA_FILE):
+        try:
+            with open(DATA_FILE, "r", encoding="utf-8") as pf:
+                fb_posts = json.load(pf)
+            for post in fb_posts:
+                p_url = post.get("permalink_url") or ""
+                if "facebook.com/reel/" in p_url:
+                    url_key = p_url.rstrip("/").lower()
+                    fb_reel_data = {
+                        "url": p_url,
+                        "caption": post.get("message") or post.get("story") or "",
+                        "timestamp": post.get("created_time") or "",
+                        "thumbnail_url": post.get("photos")[0] if post.get("photos") else ""
+                    }
+                    if url_key in reels_by_url:
+                        existing_reel = reels_by_url[url_key]
+                        for key in ["caption", "thumbnail_url", "timestamp"]:
+                            if key in fb_reel_data and (key not in existing_reel or not existing_reel[key]):
+                                existing_reel[key] = fb_reel_data[key]
+                    else:
+                        existing_reels.append(fb_reel_data)
+                        reels_by_url[url_key] = fb_reel_data
+        except Exception as e:
+            print(f"Error backfilling Facebook reels: {e}")
             
     # Save back to reels.json
     os.makedirs(os.path.dirname(REELS_FILE), exist_ok=True)
     with open(REELS_FILE, "w", encoding="utf-8") as f:
-        json.dump(merged_reels, f, ensure_ascii=False, indent=2)
+        json.dump(existing_reels, f, ensure_ascii=False, indent=2)
         
-    print(f"Successfully synced Instagram Reels. Added {added_count} new reels. Total reels in database: {len(merged_reels)}")
+    print(f"Successfully synced Reels. Added {added_count} new reels. Total in database: {len(existing_reels)}")
     return True
 
 if __name__ == "__main__":

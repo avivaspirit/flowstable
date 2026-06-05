@@ -28,6 +28,7 @@
       <a href="#story">Story</a>
       <a href="#moments">Moments</a>
       <a href="archive.html">Archive</a>
+      <a href="reels.html">Reels</a>
       <a href="guests.html">Guests</a>
       <a href="about.html">About Us</a>
     </nav>
@@ -595,64 +596,36 @@ from flow to grow 🌊
     </section>
 
     <!-- Reels & Videos Section -->
-    <section id="reels" class="section reels-band">
+    <section id="reels" class="section reels-band hero-mesh-bg">
       <div class="section-inner">
         <div class="section-head text-center">
           <p class="eyebrow">Video Highlights</p>
           <h2>Flow's Table Reels.</h2>
         </div>
-        <div class="reels-grid" id="reelsGrid">
-          <!-- Fallback hardcoded reels for SEO/No-JS -->
-          <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4600600996826997%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        
+        <div class="reels-carousel-container">
+          <button class="carousel-arrow-btn prev-arrow" aria-label="Previous slide">
+            <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+          </button>
+          
+          <div class="reels-carousel" id="reelsCarousel">
+            <div class="reels-carousel-track" id="reelsCarouselTrack">
+              <div class="reel-card" style="display:flex;justify-content:center;align-items:center;background:#1a1513">
+                <span style="color:#ffffff;font-weight:600;font-size:14px">Loading Reels...</span>
+              </div>
+            </div>
           </div>
-          <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F962717709499628%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-          </div>
-          <div class="reel-card">
-            <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2024980848895552%2F&amp;show_text=0&amp;width=280" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-          </div>
+          
+          <button class="carousel-arrow-btn next-arrow" aria-label="Next slide">
+            <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>
+          </button>
+          
+          <div class="carousel-dots" id="carouselDots"></div>
         </div>
 
-        <script>
-          document.addEventListener('DOMContentLoaded', async () => {
-            try {
-              const res = await fetch('_data/reels.json');
-              if (res.ok) {
-                const reels = await res.json();
-                if (reels && reels.length > 0) {
-                  const grid = document.getElementById('reelsGrid');
-                  grid.innerHTML = reels.map(r => {
-                    const url = r.url || '';
-                    let embedUrl = '';
-                    
-                    if (url.includes('facebook.com')) {
-                      // Facebook Reel embed
-                      const encodedUrl = encodeURIComponent(url);
-                      embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&show_text=0&width=280`;
-                    } else if (url.includes('instagram.com')) {
-                      // Instagram Reel embed
-                      // Format: https://www.instagram.com/reel/CODE/ -> https://www.instagram.com/reel/CODE/embed
-                      let cleanUrl = url.split('?')[0];
-                      if (!cleanUrl.endsWith('/')) cleanUrl += '/';
-                      embedUrl = `${cleanUrl}embed`;
-                    } else {
-                      return ''; // Ignore unknown URLs
-                    }
-                    
-                    return `
-                      <div class="reel-card">
-                        <iframe src="${embedUrl}" width="280" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                      </div>
-                    `;
-                  }).filter(Boolean).join('');
-                }
-              }
-            } catch (e) {
-              console.log("Using static fallback for reels content:", e);
-            }
-          });
-        </script>
+        <div style="text-align:center;margin-top:40px">
+          <a class="button secondary" href="reels.html">View all reels</a>
+        </div>
       </div>
     </section>
 

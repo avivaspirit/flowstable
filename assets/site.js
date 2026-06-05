@@ -481,4 +481,298 @@ document.addEventListener('DOMContentLoaded', () => {
   if (vibeSlides.length > 0) {
     startAutoSlide();
   }
+
+  // Load and render Video Reels
+  loadReelsData();
 });
+
+// ============ DYNAMIC VIDEO MODAL PLAYER ============
+function createVideoModalElement() {
+  if (document.getElementById('videoModal')) return;
+  const modalHtml = `
+    <div id="videoModal" class="video-modal" aria-hidden="true">
+      <div class="video-modal-container">
+        <button class="video-modal-close" aria-label="Close video player">&times;</button>
+        <div class="video-modal-player-side"></div>
+        <div class="video-modal-details-side">
+          <span class="video-modal-meta">Video Highlight</span>
+          <h3 class="video-modal-title">Flow's Table Reel</h3>
+          <p class="video-modal-caption"></p>
+          <a href="#" class="video-modal-link-btn" target="_blank" rel="noopener">
+            <svg style="width:16px;height:16px;fill:currentColor;vertical-align:middle;margin-right:6px" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            View original post
+          </a>
+          <p class="video-modal-date"></p>
+        </div>
+      </div>
+    </div>
+  `;
+  const div = document.createElement('div');
+  div.innerHTML = modalHtml.trim();
+  document.body.appendChild(div.firstChild);
+  
+  const modal = document.getElementById('videoModal');
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.classList.contains('video-modal-close')) {
+      closeVideoModal();
+    }
+  });
+}
+
+function openVideoModal(url, caption, timestamp) {
+  createVideoModalElement();
+  const modal = document.getElementById('videoModal');
+  if (!modal) return;
+
+  let embedUrl = '';
+  let isInstagram = false;
+  let cleanUrl = url.split('?')[0];
+
+  if (url.includes('facebook.com')) {
+    const encodedUrl = encodeURIComponent(url);
+    embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&show_text=0&width=280`;
+  } else if (url.includes('instagram.com')) {
+    isInstagram = true;
+    if (!cleanUrl.endsWith('/')) cleanUrl += '/';
+    embedUrl = `${cleanUrl}embed`;
+  }
+
+  const playerSide = modal.querySelector('.video-modal-player-side');
+  if (playerSide) {
+    playerSide.innerHTML = `<iframe src="${embedUrl}" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
+  }
+
+  // Parse title and category
+  let title = "Flow's Table Video Reel";
+  let category = isInstagram ? "Instagram Reel" : "Facebook Reel";
+  let displayCaption = caption || "No description available.";
+
+  if (caption) {
+    const lines = caption.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    if (lines.length > 0) {
+      title = lines[0].replace(/^[^\w\s\u0e00-\u0e7f]+/g, '').trim();
+      if (title.length > 70) {
+        title = title.substring(0, 67) + "...";
+      }
+    }
+  }
+
+  // Set category tags
+  const lowerCaption = (caption || "").toLowerCase();
+  if (lowerCaption.includes('society')) {
+    category = "Flow Society";
+  } else if (lowerCaption.includes('interview') || lowerCaption.includes('สัมภาษณ์') || lowerCaption.includes('แชร์ประสบการณ์') || lowerCaption.includes('พี่มี่') || lowerCaption.includes('พี่เจ้กกี้') || lowerCaption.includes('พี่เชน') || lowerCaption.includes('พี่ตรี')) {
+    category = "Guest Interview";
+  } else if (lowerCaption.includes('mindset') || lowerCaption.includes('ความเชื่อ') || lowerCaption.includes('ความฝัน')) {
+    category = "Mindset Reflection";
+  } else if (lowerCaption.includes('kbtg') || lowerCaption.includes('company visit')) {
+    category = "Gathering / Event";
+  }
+
+  modal.querySelector('.video-modal-meta').textContent = category;
+  modal.querySelector('.video-modal-title').textContent = title;
+  modal.querySelector('.video-modal-caption').textContent = displayCaption;
+  
+  // Link button
+  const linkBtn = modal.querySelector('.video-modal-link-btn');
+  linkBtn.setAttribute('href', url);
+  linkBtn.innerHTML = isInstagram 
+    ? `<svg style="width:16px;height:16px;fill:currentColor;vertical-align:middle;margin-right:6px" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> View on Instagram`
+    : `<svg style="width:16px;height:16px;fill:currentColor;vertical-align:middle;margin-right:6px" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> View on Facebook`;
+
+  // Parse Date
+  let dateLabel = "Flow's Table Video";
+  if (timestamp) {
+    try {
+      const date = new Date(timestamp);
+      dateLabel = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    } catch (e) {}
+  }
+  modal.querySelector('.video-modal-date').textContent = `Published on ${dateLabel}`;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    const playerSide = modal.querySelector('.video-modal-player-side');
+    if (playerSide) playerSide.innerHTML = '';
+  }
+}
+
+// ============ REELS CAROUSEL AND GALLERY ============
+async function loadReelsData() {
+  const carouselTrack = document.getElementById('reelsCarouselTrack');
+  const reelsGrid = document.getElementById('reelsGrid');
+  
+  if (!carouselTrack && !reelsGrid) return;
+  
+  try {
+    const res = await fetch('_data/reels.json');
+    if (!res.ok) return;
+    const reels = await res.json();
+    if (!reels || reels.length === 0) return;
+    
+    const renderCard = (r) => {
+      const url = r.url || '';
+      const caption = r.caption || '';
+      const timestamp = r.timestamp || '';
+      const thumb = r.thumbnail_url || 'assets/photos/uploads/reel_placeholder.jpg';
+      
+      let displayTag = "Highlight";
+      const lowerCap = caption.toLowerCase();
+      if (lowerCap.includes('society')) displayTag = "Society";
+      else if (lowerCap.includes('kbtg') || lowerCap.includes('visit')) displayTag = "Gathering";
+      else if (lowerCap.includes('mindset') || caption.includes('ความฝัน')) displayTag = "Mindset";
+      else if (lowerCap.includes('interview') || caption.includes('สัมภาษณ์') || caption.includes('พี่มี่') || caption.includes('พี่เจ้กกี้') || caption.includes('พี่เชน') || caption.includes('พี่ตรี') || caption.includes('พี่tre')) displayTag = "Interview";
+      
+      let excerpt = "Flow's Table Video Reel";
+      if (caption) {
+        const lines = caption.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        if (lines.length > 0) {
+          excerpt = lines[0].replace(/^[^\w\s\u0e00-\u0e7f]+/g, '').trim();
+          if (excerpt.length > 60) excerpt = excerpt.substring(0, 57) + "...";
+        }
+      }
+      
+      let formattedDate = "";
+      if (timestamp) {
+        try {
+          const date = new Date(timestamp);
+          formattedDate = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+        } catch(e){}
+      }
+      
+      return `
+        <div class="reel-card" data-url="${url}" data-caption="${encodeURIComponent(caption)}" data-timestamp="${timestamp}" data-category="${displayTag}">
+          <img class="reel-thumbnail" src="${thumb}" alt="Flow's Table Reel: ${excerpt}" loading="lazy">
+          <div class="reel-play-overlay">
+            <div class="reel-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="reel-text-info">
+            <span class="reel-meta-category">${displayTag}</span>
+            <p class="reel-title-excerpt">${excerpt}</p>
+            ${formattedDate ? `<p class="reel-date">${formattedDate}</p>` : ''}
+          </div>
+        </div>
+      `;
+    };
+
+    if (carouselTrack) {
+      // Show latest 8 items on home page carousel
+      carouselTrack.innerHTML = reels.slice(0, 8).map(renderCard).join('');
+      initReelsCarousel();
+    }
+    
+    if (reelsGrid) {
+      // Show all reels on dedicated page
+      reelsGrid.innerHTML = reels.map(renderCard).join('');
+      initReelsPageFilter();
+    }
+    
+    // Set up click handlers for dynamic cards
+    document.querySelectorAll('.reel-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = card.dataset.url;
+        const caption = decodeURIComponent(card.dataset.caption);
+        const timestamp = card.dataset.timestamp;
+        openVideoModal(url, caption, timestamp);
+      });
+    });
+
+  } catch (err) {
+    console.error("Failed to load reels data:", err);
+  }
+}
+
+function initReelsCarousel() {
+  const carousel = document.getElementById('reelsCarousel');
+  const prevBtn = document.querySelector('.carousel-arrow-btn.prev-arrow');
+  const nextBtn = document.querySelector('.carousel-arrow-btn.next-arrow');
+  const dotsContainer = document.getElementById('carouselDots');
+  if (!carousel) return;
+
+  const cardWidth = 270 + 24; // Card width + gap
+  
+  prevBtn?.addEventListener('click', () => {
+    carousel.scrollBy({ left: -cardWidth * 2, behavior: 'smooth' });
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    carousel.scrollBy({ left: cardWidth * 2, behavior: 'smooth' });
+  });
+
+  const updateDots = () => {
+    const cards = carousel.querySelectorAll('.reel-card');
+    if (cards.length === 0 || !dotsContainer) return;
+    
+    dotsContainer.innerHTML = '';
+    const visibleCards = Math.round(carousel.clientWidth / cardWidth) || 1;
+    const numDots = Math.max(1, cards.length - visibleCards + 1);
+    const scrollPos = carousel.scrollLeft;
+    const activeIndex = Math.round(scrollPos / cardWidth);
+
+    for (let i = 0; i < numDots; i++) {
+      const dot = document.createElement('div');
+      dot.className = `carousel-dot ${i === activeIndex ? 'active' : ''}`;
+      dot.addEventListener('click', () => {
+        carousel.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+      });
+      dotsContainer.appendChild(dot);
+    }
+  };
+
+  carousel.addEventListener('scroll', updateDots);
+  window.addEventListener('resize', updateDots);
+  setTimeout(updateDots, 300);
+}
+
+function initReelsPageFilter() {
+  const searchInput = document.getElementById('reelsSearch');
+  const chipsContainer = document.getElementById('reelsChips');
+  const cards = Array.from(document.querySelectorAll('.reels-grid .reel-card'));
+  const emptyState = document.getElementById('reelsEmptyState');
+  if (cards.length === 0) return;
+
+  let activeCategory = 'all';
+
+  function filterReels() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const text = decodeURIComponent(card.dataset.caption || '').toLowerCase();
+      const cat = (card.dataset.category || '').toLowerCase();
+      
+      const queryMatch = !query || text.includes(query);
+      const categoryMatch = activeCategory === 'all' || cat === activeCategory;
+      
+      const isVisible = queryMatch && categoryMatch;
+      card.style.display = isVisible ? 'block' : 'none';
+      if (isVisible) visibleCount++;
+    });
+
+    if (emptyState) {
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  searchInput?.addEventListener('input', filterReels);
+
+  chipsContainer?.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (chip) {
+      chipsContainer.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCategory = (chip.dataset.value || 'all').toLowerCase();
+      filterReels();
+    }
+  });
+}

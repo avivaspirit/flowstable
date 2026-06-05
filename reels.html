@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Reels / Flow's Table</title>
+  <meta name="description" content="A curated collection of short-form wisdom, highlights, and behind-the-scenes clips from Flow's Table sessions.">
+  <meta property="og:title" content="Video Reels | Flow's Table">
+  <meta property="og:description" content="A curated library of short-form wisdom, highlights, and behind-the-scenes clips from Flow's Table sessions.">
+  <meta property="og:image" content="assets/photos/914737241717875_122112465597110108_0.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flowstable.vercel.app/reels.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Video Reels | Flow's Table">
+  <meta name="twitter:description" content="A curated library of short-form wisdom, highlights, and behind-the-scenes clips from Flow's Table sessions.">
+  <meta name="twitter:image" content="assets/photos/914737241717875_122112465597110108_0.jpg">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="assets/photos/914737241717875_122093694105110108_3.jpg" alt="Flow's Table logo">
+      <span>Flow's Table</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="index.html#story">Story</a>
+      <a href="index.html#moments">Moments</a>
+      <a href="archive.html">Archive</a>
+      <a href="reels.html">Reels</a>
+      <a href="guests.html">Guests</a>
+      <a href="about.html">About Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Editorial Header Section with Animated Mesh Background -->
+    <section class="about-hero hero-mesh-bg" style="padding: 140px 0 80px;">
+      <div class="hero-content">
+        <p class="eyebrow">Wisdom in Short Form</p>
+        <h1>Flow's Table Reels</h1>
+        <p class="hero-copy">A curated library of video highlights, mindset reflections, and key takeaways from our community tables. Explore short-form clips featuring builders and mentors like P'Mi, P'Tre, and P'Jacky sharing their life-changing advice and business experiences.</p>
+      </div>
+    </section>
+
+    <!-- Filter Bar Section -->
+    <section class="section" style="padding: 40px 0 0 0;">
+      <div class="section-inner" style="display:flex; flex-direction:column; gap:24px; align-items:center;">
+        <!-- Search Input -->
+        <div class="search-box" style="width: min(480px, 100%);">
+          <input type="text" id="reelsSearch" placeholder="Search by topic or speaker..." style="width:100%; padding:14px 20px; border-radius:12px; border:1px solid var(--line); font-family:inherit; font-size:14px; background:var(--panel); color:var(--ink); outline:none; transition:border 0.3s;" onfocus="this.style.borderColor='var(--coral)'" onblur="this.style.borderColor='var(--line)'">
+        </div>
+        
+        <!-- Category Filter Chips -->
+        <div id="reelsChips" class="chips" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+          <button class="chip active" data-value="all">All</button>
+          <button class="chip" data-value="Interview">Interviews</button>
+          <button class="chip" data-value="Mindset">Mindset</button>
+          <button class="chip" data-value="Gathering">Gatherings</button>
+          <button class="chip" data-value="Society">Society</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid Gallery Section -->
+    <section class="section" style="padding: 40px 0 80px 0;">
+      <div class="section-inner">
+        <div class="reels-grid" id="reelsGrid">
+          <div class="reel-card" style="display:flex;justify-content:center;align-items:center;background:#1a1513">
+            <span style="color:#ffffff;font-weight:600;font-size:14px">Loading Reels...</span>
+          </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div id="reelsEmptyState" style="display:none; text-align:center; padding: 60px 20px;">
+          <p style="font-size:16px; color:var(--muted); margin:0;">No reels found matching your search.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Flow's Table</strong>
+      <span>Community archive and field notes.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:flowstable.th@gmail.com">flowstable.th@gmail.com</a>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>

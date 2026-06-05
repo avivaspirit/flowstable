@@ -321,7 +321,15 @@ function initMobileMenu() {
 
 // Local Clean URLs fallback for development
 function initCleanUrlsLocalFallback() {
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  const hn = window.location.hostname;
+  const isLocal = !hn || 
+                  hn === 'localhost' || 
+                  hn === '127.0.0.1' || 
+                  hn.startsWith('192.168.') || 
+                  hn.startsWith('10.') || 
+                  hn.startsWith('172.') || 
+                  hn.endsWith('.local');
+  if (isLocal) {
     document.querySelectorAll('a').forEach(link => {
       let href = link.getAttribute('href') || '';
       if (href.startsWith('/') && !href.includes('.')) {

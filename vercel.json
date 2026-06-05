@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/home", "destination": "/index.html" },
+    { "source": "/archive", "destination": "/archive.html" },
+    { "source": "/reels", "destination": "/reels.html" },
+    { "source": "/guests", "destination": "/guests.html" },
+    { "source": "/about", "destination": "/about.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/", "destination": "/admin/index.html" }
   ],

@@ -314,7 +314,7 @@ function initActiveNavIndicator() {
 
 // Section Fade-In (Intersection Observer)
 function initSectionFadeIn() {
-  const sections = document.querySelectorAll('.section, .about-editorial, .highlights-band, .reels-band, .split-band, .press-band');
+  const sections = document.querySelectorAll('.section:not(.archive-list):not(.reels-grid):not(.guest-section), .about-editorial, .highlights-band, .reels-band, .split-band, .press-band');
   sections.forEach(el => el.classList.add('section-fade'));
 
   const observer = new IntersectionObserver((entries) => {
@@ -324,7 +324,7 @@ function initSectionFadeIn() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.02 });
 
   sections.forEach(el => observer.observe(el));
 }

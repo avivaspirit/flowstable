@@ -521,6 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize once static items are loaded
   initArchiveElements();
+  updateArchive();
   searchInput?.addEventListener("input", updateArchive);
 
   chipsContainer?.addEventListener("click", (e) => {

@@ -170,27 +170,17 @@ nav a:hover::after {
   align-items: flex-end;
   padding: 180px clamp(20px, 6vw, 80px) 92px;
   color: #fff;
-  background:
-    linear-gradient(180deg, rgba(204, 113, 68, 0.5), rgba(204, 113, 68, 0.95)),
-    var(--hero-image) center / cover no-repeat;
+  background: linear-gradient(160deg,
+    hsl(22, 65%, 72%) 0%,
+    hsl(20, 62%, 62%) 30%,
+    hsl(18, 60%, 52%) 60%,
+    hsl(16, 58%, 42%) 100%);
   position: relative;
   overflow: hidden;
 }
 
 .hero-content {
   width: min(920px, 100%);
-  animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .eyebrow {
@@ -247,15 +237,17 @@ h1 {
 }
 
 .button.primary {
-  background: var(--coral);
+  background: rgba(0, 0, 0, 0.18);
   color: #fff;
-  box-shadow: 0 10px 30px rgba(204, 113, 68, 0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .button.primary:hover {
-  background: #b55d36;
+  background: rgba(0, 0, 0, 0.28);
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(204, 113, 68, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .button.secondary {
@@ -267,6 +259,28 @@ h1 {
   border-color: #fff;
   background: rgba(255, 255, 255, 0.08);
   transform: translateY(-2px);
+}
+
+/* Primary button on light backgrounds: revert to solid coral */
+.intro-band .button.primary,
+.section .button.primary,
+.about-editorial .button.primary,
+.press-band .button.primary {
+  background: var(--coral);
+  color: #fff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(204, 113, 68, 0.2);
+}
+
+.intro-band .button.primary:hover,
+.section .button.primary:hover,
+.about-editorial .button.primary:hover,
+.press-band .button.primary:hover {
+  background: #b55d36;
+  border-color: transparent;
+  box-shadow: 0 12px 32px rgba(204, 113, 68, 0.3);
 }
 
 /* Sections */

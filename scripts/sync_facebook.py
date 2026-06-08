@@ -6,10 +6,32 @@ from datetime import datetime
 
 # Configuration
 PAGE_ID = "914737241717875"
-PAGE_ACCESS_TOKEN = "EAAOOrC2AbRQBRnDpZB0nX1g3YiU53B1UkmrEZAuBLyQZBkD1Qby3LRql5L5QzdfRBQNG87x0EiL9E5iHRT3aLZAzqT96UHZAstOLTxYcMwILGJeMuSNIBRN8T4b7PTqei1gy6bUF8jq1t3FQARuEWW9nYZAnKBnwlwHuHJ9ZBy9X0oZCqxKIRqiMR8h6GVKF4FPKAY2LBNHki2VnL4f2BATnZAXKvjxOZC9ikg8gtaYc4ZD"
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def load_env_file():
+    """Load PAGE_ACCESS_TOKEN from .env (local) without extra dependencies."""
+    env_path = os.path.join(BASE_DIR, ".env")
+    if not os.path.exists(env_path):
+        return
+    with open(env_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_env_file()
+PAGE_ACCESS_TOKEN = os.environ.get("PAGE_ACCESS_TOKEN", "")
+
+if not PAGE_ACCESS_TOKEN:
+    raise SystemExit(
+        "PAGE_ACCESS_TOKEN is not set. Add it to .env locally or as a GitHub Actions secret."
+    )
 DATA_FILE = os.path.join(BASE_DIR, "assets", "data", "posts.json")
 PHOTOS_DIR = os.path.join(BASE_DIR, "assets", "photos")
 REELS_FILE = os.path.join(BASE_DIR, "_data", "reels.json")

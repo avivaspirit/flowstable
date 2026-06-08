@@ -28,7 +28,33 @@ def load_env_file():
 load_env_file()
 PAGE_ACCESS_TOKEN = os.environ.get("PAGE_ACCESS_TOKEN", "")
 
+# #region agent log
+def _dbg_log(hypothesis_id, location, message, data=None):
+    try:
+        log_path = os.path.join(BASE_DIR, "debug-01bd46.log")
+        entry = {
+            "sessionId": "01bd46",
+            "hypothesisId": hypothesis_id,
+            "location": location,
+            "message": message,
+            "data": data or {},
+            "timestamp": int(datetime.now().timestamp() * 1000),
+        }
+        with open(log_path, "a", encoding="utf-8") as lf:
+            lf.write(json.dumps(entry) + "\n")
+    except Exception:
+        pass
+# #endregion
+
+_dbg_log("A", "sync_facebook.py:token", "token_source_check", {
+    "has_token": bool(PAGE_ACCESS_TOKEN),
+    "from_env": bool(os.environ.get("PAGE_ACCESS_TOKEN")),
+    "from_dotenv": os.path.exists(os.path.join(BASE_DIR, ".env")),
+    "ci": os.environ.get("GITHUB_ACTIONS") == "true",
+})
+
 if not PAGE_ACCESS_TOKEN:
+    _dbg_log("A", "sync_facebook.py:token", "token_missing_exit", {"ci": os.environ.get("GITHUB_ACTIONS") == "true"})
     raise SystemExit(
         "PAGE_ACCESS_TOKEN is not set. Add it to .env locally or as a GitHub Actions secret."
     )
@@ -345,4 +371,12 @@ if __name__ == "__main__":
     facebook_success = sync_facebook_posts()
     instagram_success = sync_instagram_reels()
     page_stats_success = sync_page_stats()
+    # #region agent log
+    _dbg_log("B", "sync_facebook.py:main", "sync_complete", {
+        "facebook": facebook_success,
+        "instagram": instagram_success,
+        "page_stats": page_stats_success,
+        "ci": os.environ.get("GITHUB_ACTIONS") == "true",
+    })
+    # #endregion
     print("Sync process completed.")

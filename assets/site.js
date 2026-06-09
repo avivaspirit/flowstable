@@ -1,6 +1,117 @@
 let allPosts = [];
 let currentPost = null;
 let currentImageIndex = 0;
+let wpPostsLoaded = false;
+
+async function loadSanityPosts() {
+  const sanityId = window.SITE_CONFIG?.sanityProjectId;
+  if (!window.SanityCMS || !sanityId || sanityId === "YOUR_PROJECT_ID") return [];
+  try {
+    const docs = await window.SanityCMS.fetchAllArticles();
+    return docs.map((doc) => window.SanityCMS.mapToFlowstablePost(doc));
+  } catch (error) {
+    console.warn("Sanity posts unavailable:", error);
+    return [];
+  }
+}
+
+function postLink(post) {
+  if (post.sanitySlug && window.SanityCMS?.articleHref) {
+    return window.SanityCMS.articleHref(post);
+  }
+  return post.permalink_url;
+}
+
+function createArchivePostElement(post) {
+  const articleEl = document.createElement("article");
+  articleEl.className = "archive-post";
+  articleEl.dataset.category = post.category || "Note";
+  articleEl.dataset.search = `${(post.title || "").toLowerCase()} ${(post.message || "").toLowerCase()} ${(post.category || "").toLowerCase()}`;
+
+  let galleryHtml = "";
+  if (post.photos && post.photos.length > 0) {
+    galleryHtml = `<div class="archive-gallery">
+      <img src="${post.photos[0]}" alt="${post.title || "Flow's Table"}" loading="lazy">
+    </div>`;
+  }
+
+  const previewText =
+    (post.message || "").length > 200 ? `${post.message.substring(0, 200)}...` : post.message || "";
+  const bodyHtml = `<p>${previewText.replace(/\n/g, "<br>")}</p>`;
+  const link = postLink(post);
+  const linkLabel = post.source === "sanity" ? "Read Note" : "Open post";
+
+  articleEl.innerHTML = `
+    <div class="archive-head">
+      <div>
+        <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
+        <h2>${post.title || "Flow's Table"}</h2>
+      </div>
+      <a href="${link}" class="open-modal-trigger">${linkLabel}</a>
+    </div>
+    ${galleryHtml}
+    <div class="archive-copy">${bodyHtml}</div>
+  `;
+
+  return articleEl;
+}
+
+function renderArchiveFromPosts(posts) {
+  const container = document.querySelector("#archiveList .section-inner");
+  const emptyState = document.getElementById("emptyState");
+  if (!container) return;
+
+  container.querySelectorAll(".archive-post").forEach((node) => node.remove());
+
+  posts.forEach((post) => {
+    const articleEl = createArchivePostElement(post);
+    if (emptyState?.nextSibling) {
+      container.insertBefore(articleEl, emptyState.nextSibling);
+    } else {
+      container.appendChild(articleEl);
+    }
+  });
+
+  window.dispatchEvent(new Event("cmsLoaded"));
+}
+
+function createPostCardElement(post) {
+  const card = document.createElement("article");
+  card.className = "post-card";
+  card.dataset.category = post.category || "Note";
+  card.dataset.search = `${(post.title || "").toLowerCase()} ${(post.message || "").toLowerCase()} ${(post.category || "").toLowerCase()}`;
+
+  const thumb = post.photos?.[0] || "";
+  const link = postLink(post);
+  const preview =
+    (post.message || "").length > 140 ? `${post.message.substring(0, 140)}...` : post.message || "";
+
+  card.innerHTML = `
+    <a class="post-media" href="${link}">
+      ${thumb ? `<img src="${thumb}" alt="${post.title || "Flow's Table"}" loading="lazy">` : ""}
+    </a>
+    <div class="post-copy">
+      <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
+      <h3>${post.title || "Flow's Table"}</h3>
+      <p>${preview.replace(/\n/g, "<br>")}</p>
+    </div>
+  `;
+
+  return card;
+}
+
+function renderMomentsFromPosts(posts) {
+  const section = document.getElementById("moments");
+  const container = section?.querySelector(".section-inner");
+  if (!container) return;
+
+  container.querySelectorAll(".post-card").forEach((node) => node.remove());
+
+  posts.slice(0, 12).forEach((post) => {
+    const cta = container.querySelector(".button.primary");
+    container.insertBefore(createPostCardElement(post), cta || null);
+  });
+}
 
 // Fetch posts database on load and combine with CMS articles
 async function loadPostsDatabase() {
@@ -51,6 +162,18 @@ async function loadPostsDatabase() {
       }
     } catch (cmsErr) {
       console.log('No custom CMS articles loaded yet or format invalid:', cmsErr);
+    }
+
+    const sanityPosts = await loadSanityPosts();
+    if (sanityPosts.length) {
+      wpPostsLoaded = true;
+      allPosts = [...sanityPosts, ...allPosts];
+      if (document.getElementById('archiveList')) {
+        renderArchiveFromPosts(allPosts);
+      }
+      if (document.getElementById('moments')) {
+        renderMomentsFromPosts(allPosts);
+      }
     }
 
     // Update and animate stats band on homepage
@@ -178,7 +301,16 @@ function renderCmsArticles(articles) {
 function openModal(permalink) {
   const post = allPosts.find(p => p.permalink_url === permalink);
   if (!post) {
+    if (permalink.startsWith("sanity-") && window.SanityCMS?.articleHref) {
+      window.location.href = window.SanityCMS.articleHref({ sanitySlug: permalink.replace(/^sanity-/, "") });
+      return;
+    }
     window.open(permalink, '_blank');
+    return;
+  }
+
+  if (post.source === "sanity" && post.sanitySlug) {
+    window.location.href = window.SanityCMS.articleHref(post);
     return;
   }
 
@@ -195,10 +327,15 @@ function openModal(permalink) {
   modal.querySelector('#modalCategory').textContent = post.category || 'Note';
   modal.querySelector('#modalTitle').textContent = post.title || "Flow's Table";
   
-  const messageHtml = (post.message || '')
-    .split('\n\n')
-    .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
-    .join('');
+  let messageHtml;
+  if (post.contentHtml) {
+    messageHtml = post.contentHtml;
+  } else {
+    messageHtml = (post.message || '')
+      .split('\n\n')
+      .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+      .join('');
+  }
   modal.querySelector('#modalBody').innerHTML = messageHtml || '<p>No content available.</p>';
 
   const commentText = post.comment_count === 1 ? '1 comment' : `${post.comment_count || 0} comments`;

@@ -2308,4 +2308,6 @@ nav a.active-page::before {
   transform: translateY(0);
 }
 
-
+.wp-content img { max-width: 100%; height: auto; border-radius: 12px; }
+.wp-content p, .wp-content li, .wp-content blockquote { margin: 0 0 1rem; line-height: 1.7; }
+.wp-content h2, .wp-content h3 { margin: 1.5rem 0 0.75rem; }

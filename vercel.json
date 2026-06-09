@@ -1,9 +1,15 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 15
+    }
+  },
   "rewrites": [
     { "source": "/home", "destination": "/index.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/", "destination": "/admin/index.html" }
+    { "source": "/admin/", "destination": "/admin/index.html" },
+    { "source": "/articles/:slug", "destination": "/article.html?slug=:slug" }
   ],
   "headers": [
     {

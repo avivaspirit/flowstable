@@ -224,7 +224,9 @@ function initStatsCountUp(posts, photos, followers, reactions) {
   const statsBand = document.querySelector('.stats-band');
   if (!statsBand) return;
 
-  if (!window.IntersectionObserver) {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!window.IntersectionObserver || prefersReduced) {
     document.getElementById('stat-posts').textContent = posts.toLocaleString();
     document.getElementById('stat-photos').textContent = photos.toLocaleString();
     document.getElementById('stat-followers').textContent = followers.toLocaleString();

@@ -1,6 +1,6 @@
 $siteRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $python = "C:\Users\Re dmi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
-$port = 4173
+$port = 4350
 
 Set-Location $siteRoot
 

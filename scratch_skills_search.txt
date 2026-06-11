@@ -1,0 +1,131 @@
+GPT_GEMINI_SYSTEM_INSTRUCTIONS.md:30: | Short-form video script (TikTok/Reels/Shorts) | `omni_content_multiplier_skill.md` | 3-act, bilingual, per-brand keyword |
+GPT_GEMINI_SYSTEM_INSTRUCTIONS.md:38: For any created asset, end with: **`Optimization Decision`** (brand · mode · why) and **`Brand Protection Check`** (what you protected / avoided). For ads and sales assets, also run a **persona panel** (seat the brand's core target + its cynic; Flow uses its own matrix) and show the scores. If the user can't see these, you skipped the gate — go back and run it. Keep panels small (3–5 personas) for routine work; reserve the full 12 for major campaigns only (token discipline).
+master_marketing_skill.md:34: > Self-contained. Before ANY ad copy is finalized or spend deployed, the Market Critic MUST summon this 12-persona simulated panel and score the asset. The panel covers all 13 demand cells across the 4 brands with the full skepticism spectrum (believer → pragmatist → cynic).
+master_marketing_skill.md:53: 1. **Select jury:** all personas whose Brand·KW matches the asset = **TARGET jurors** (weight ×2). Add P4 for any Aviva/FS asset, and the brand's cynic (P1/P5/P8/P12) ALWAYS sits, even off-target.
+master_marketing_skill.md:55: 3. **Full-read pass:** each juror reads the entire asset and outputs: `score 1–10 | brutal one-line verdict | the EXACT word/element that triggered their alarm (or won them)`.
+master_marketing_skill.md:56: 4. **Aggregate:** TARGET-weighted mean = panel score.
+master_marketing_skill.md:62: - ✅ **SHIP:** TARGET jurors all ≥8 AND weighted mean ≥7.5 AND zero auto-fails from the brand skill's §8 guardrails.
+master_marketing_skill.md:66: `Panel: [ids] | 1.5s STOP rate: x/y | Scores: P#=n… | Weighted mean: n.n | Verdict: SHIP / REWRITE (reason) | Top fix: <one sentence>`
+aviva_spirit.md:7: - **⚠️ DATA CORRECTION:** The old "minimalist luxury / generic-luxury captions" angle is the **LOSING** formula (2025–26 posts collapsed to single-digit engagement). The **WINNING** formula = real customer UGC stories + specific config + miracle/efficacy quotes + master authority. Full proof & templates in the skill file.
+fengshui_balance.md:8: - **⚠️ DATA NOTE (the giant — 10,134 posts):** Winning = timely almanac (Fire-Horse 2569) + real case studies w/ outcomes + celebrity-client proof (Jack The Ghost) + comment-quizzes (1,294 comments) + monthly ฤกษ์. Killing = engagement-bait. Outcomes must be past-tense cases, not guarantees. Full templates in skill file.
+flowstable.md:8: - **⚠️ DATA NOTE:** Winning = un-googleable wisdom nuggets + named-mentor authority + one big idea per post (top: 513 eng / 348 shares). Killing = empty event blurbs, corporate hype. Full templates in skill file.
+miracles369.md:8: - **⚠️ DATA NOTE:** Winning = tangible benefit + customer-proof + GIZA credibility + free energy events. Killing = engagement-bait ("กด Link ก่อน comment"). Health/wealth results must be framed as a customer's experience (Meta policy). Full templates in the skill file.
+avivaspirit_adsbot_skill.md:14: 1. **Micro vs. Macro conversion audit:** separate hard inquiries (LINE chat, calls) from micro-engagements. High-ticket marble shrines with CPA <฿50 → verify tracking BEFORE any scale-up recommendation. Conv rate >100% = automatic inflation flag.
+avivaspirit_adsbot_skill.md:16: 3. **Budget reallocation & CPA guardrail:** **Max Target CPA = ฿400.00** for core search leads. If `AVS - Marble Target` CPA >฿400 → trigger bid calibration check or shift % weight into the `[Phrase] Hypertargeted` framework (true CPA ฿207.65 — the efficiency leader).
+avivaspirit_ad_skill.md:29: - **Don't:** ⚠️ **cold generic "luxury" adjectives with no story/proof** — DATA PROVES THIS IS THE LOSING FORMULA (see §3). No empty "อลังการ หรูหรา มีระดับ" captions.
+avivaspirit_ad_skill.md:31: ## 3. WHAT WINS vs WHAT KILLS IT  *(from 654-post analysis; total page engagement 141,269)*
+avivaspirit_ad_skill.md:32: **WINNING LEVERS — the proven hit formula (17 of top-20 posts use it):**
+avivaspirit_ad_skill.md:33: - ✅ **Real customer UGC story** — *"คุณ___ ส่งรูปมาให้ชม / อุดหนุน / เล่าให้ฟังว่า…"* This is THE engine. (#1 post = 10,508 eng; #6 = 366 shares / 127 comments.)
+avivaspirit_ad_skill.md:39: **ENGAGEMENT KILLERS (never do):**
+avivaspirit_ad_skill.md:40: - ❌ Generic AI-render luxury captions ("น้อยแต่มาก", "อลังการ หรูหรา") — the brand's 2025–26 posts using these collapsed from thousands to **single-digit** engagement.
+avivaspirit_ad_skill.md:61: **BODY — formula: 1 empathy/story line → real customer voice (quote) → 3 proof points → heritage close:**
+avivaspirit_ad_skill.md:130: *Source of truth: 654-post FB engagement analysis (2015–2026) + avivaspirit.com. Top hit reference: 2016-09 customer post = 10,508 engagement. Update if brand facts change.*
+brand_stewardship_skill.md:21: Forbidden in Branding, Sales, AND Balanced alike: fake urgency · countdown pressure · cheap-discount / ลดราคา tone · fear pressure ("bad luck if you don't…") · income/medical guarantees · engagement-bait (comment-to-win without real value) · ตะโกนขาย · loud flyer look · CTA-before-value.
+brand_stewardship_skill.md:102: Run this gate **before**: brand ad skills · brand strategy skills · omni content multiplier · master ecosystem routing.
+brand_stewardship_skill.md:103: - `omni_content_multiplier_skill.md` accepts flag `optimize=branding|sales|balanced` (default `balanced`).
+fengshuibalance_ad_skill.md:32: **WINNING LEVERS (the proven hit formula):**
+fengshuibalance_ad_skill.md:36: - ✅ **Interactive comment mechanics** — quizzes & vote-giveaways drive massive comments (one hit **1,294 comments**) → ideal to harvest leads/DMs.
+fengshuibalance_ad_skill.md:37: - ✅ **Recurring monthly ฤกษ์ (auspicious-timing) calendars** — reliable engagement + booking driver.
+fengshuibalance_ad_skill.md:40: **ENGAGEMENT KILLERS (never do):**
+fengshuibalance_ad_skill.md:41: - ❌ Engagement-bait ("กด Link ก่อนค่อย comment") — recent posts using it dropped to ~30 eng.
+fengshuibalance_ad_skill.md:49: | **Lead-gen quiz (must TEACH first)** | Give 1 real mini-insight up front (e.g. ทิศประตูกับการเงิน), THEN: "เลือกข้อที่ตรงกับบ้านคุณ พิมพ์เลขใต้โพสต์ — ทีมงานวิเคราะห์ให้". Pure "comment to win" with no knowledge = engagement-bait, forbidden. |
+fengshuibalance_ad_skill.md:61: **BODY — formula: differentiator line → real case (past tense) → authority/method → who it's for:**
+fengshuibalance_ad_skill.md:96: - [ ] **Quiz posts must teach 1 real insight before asking for the comment** — otherwise it's engagement-bait (auto-fail).
+fengshuibalance_ad_skill.md:100: - [ ] No engagement-bait.
+fengshuibalance_ad_skill.md:122: *Source of truth: 10,134-post FB engagement analysis (2012–2026) + fengshuibalance.vercel.app. Top hit reference: Fire-Horse 2569 post = 10,520 engagement. Update if brand facts change.*
+fengshuibalance_strategy_skill.md:37: **Guardrails:** outcomes = past-tense specific cases, never future guarantees; no "ปรับแล้วรวย" as a brand claim; quizzes must teach 1 real insight before asking for a comment.
+flowstable_ad_skill.md:21: - **Authority / DNA (names APPROVED for ad use):** prominent Thai Value Investors — **P'Mi Tiwa Shintadapong** (President, Thai Investors Association) and **P'Jekky Suthon Singhasitthangkul**; plus guests like พี่ป้อม (Tarad.com founder), DataRockie, etc. Zero hierarchy — beginners and tycoons share as equals.
+flowstable_ad_skill.md:32: **WINNING LEVERS (the proven hit formula):**
+flowstable_ad_skill.md:33: - ✅ **Un-googleable wisdom nuggets attributed to named mentors** — top post (513 eng, 348 shares): พี่จิง *"อยากเป็นคนแบบไหน แต่งตัว/คิดให้เหมือนคนนั้น."* People **share** these to save them.
+flowstable_ad_skill.md:38: **ENGAGEMENT KILLERS (never do):**
+flowstable_ad_skill.md:60: **BODY — formula: what it's NOT → what it IS → real names/value → soul line:**
+flowstable_ad_skill.md:80: > Warm candid documentary photograph, 4:5 vertical. A small group of thoughtful Thai professionals around an intimate dinner table at night, mid-conversation and leaning in, genuine laughter, glasses of wine and shared dishes, soft amber candlelight, cozy private supper-club atmosphere. Shallow depth of field, film-like warmth. A darker area at top for a white serif quote. Authentic, elite yet humble — not a posed corporate event. No visible text.
+flowstable_ad_skill.md:111: *Source of truth: 126-post FB engagement analysis (2025–2026) + flowstable.vercel.app. Top hit reference: พี่จิง quote post = 513 engagement / 348 shares. Mentor names approved for ad use. Update if brand facts change.*
+flowstable_persona_matrix.md:11: | **FT5** | Community builder, 38 — cares about contribution & trust (VIBE PROTECTOR) | giving > taking, real reciprocity | transactional "what do I get" framing | extractive/transactional tone | to build something meaningful together | "มาร่วมสร้างวงคุยนี้ด้วยกัน" | hands, shared meal, group warmth, candid | "เครือข่ายขายของ", MLM/transactional vibe |
+flowstable_strategy_skill.md:3: > **⛔ ARCHITECTURE BOUNDARY (absolute):** Flow's Table is an **independent, standalone peer-to-peer knowledge community.** It has **ABSOLUTELY NO relation to the 3-brand commercial ecosystem** (Aviva Spirit / Miracles369 / Fengshui Balance) and **no relation to Acharn Supachai**. **Zero product cross-selling, zero commercial product bundling, no shared anchor, no funnel routing in or out.** Its sole authority anchor is its **mentors** — **พี่มี่ ทิวา (P'Mi Tiwa)** and **พี่เจคกี้ สุธน (P'Jekky Suthon)** — and the trust of its members.
+flowstable_strategy_skill.md:63: **KPIs:** application quality, member retention, contribution rate, referral velocity, event NPS, mentor-network engagement. **CTA keyword:** **"FLOW"**.
+master_ecosystem_skill.md:3: > **⛔ HARD BOUNDARY:** **Flow's Table is NOT part of this ecosystem.** It is a standalone peer-to-peer community (`flowstable_*` files). It must NEVER appear in any cross-sell loop, shared-CAC pool, or unified-trust messaging below. The ecosystem = **exactly 3 brands**.
+master_ecosystem_skill.md:16: **Unified promise:** *"วินิจฉัย → ติดตั้ง → ปรับสมดุล" / "Diagnose → Install → Calibrate"* — one master, one continuous energy journey for the home/business, not three unrelated purchases. Shared trust marks: the master's name, 30-yr legacy, patents, real case proof.
+master_ecosystem_skill.md:21: > Two primary loops. **Flow's Table excluded entirely.** Each hand-off is a warm, value-framed next step (never a hard upsell), legitimized by the shared master anchor.
+master_ecosystem_skill.md:51: ## §3 — SHARED CAC & LTV OPTIMIZATION
+master_ecosystem_skill.md:54: **Shared CAC mechanics**
+master_ecosystem_skill.md:56: 2. **Unified data feedback loop:** shared (consented) CRM tags entry brand, hand-off path, and conversion. Feed results back into each brand's strategy §1/§3 to sharpen targeting.
+master_ecosystem_skill.md:64: **Data feedback loops:** entry-brand → hand-off conversion % → cross-brand attach rate → annual retention → ecosystem LTV ÷ shared CAC = the north-star efficiency ratio.
+miracles369_ad_skill.md:31: ## 3. WHAT WINS vs WHAT KILLS IT  *(from 227-post engagement analysis, 2020–2026)*
+miracles369_ad_skill.md:35: - ✅ **Utility posts** — product lists + "คู่มือการใช้งาน" (manuals) earn high shares; people save usefulness.
+miracles369_ad_skill.md:39: **ENGAGEMENT KILLERS (never do):**
+miracles369_ad_skill.md:40: - ❌ Engagement-bait ("กด Link ก่อนค่อย comment") — recent posts using this collapsed to ~5–27 engagement.
+miracles369_ad_skill.md:62: **BODY — formula: 1 empathy line → 2–3 products as felt benefits (proof in customer voice) → 1 reassurance line:**
+miracles369_ad_skill.md:96: - [ ] Hook front-loads ONE pain or ONE proof; no engagement-bait.
+miracles369_ad_skill.md:117: *Source of truth: 227-post FB engagement analysis (2020–2026) + miracles369-store.com. Update this file if brand facts change.*
+miracles369_strategy_skill.md:12: - **Local:** `…\outputs\miracles369\facebook\data\miracles369_posts.json` + `…_posts_engagement.json` (read as UTF-8). Use for *what resonates* (engagement signal per product/benefit).
+miracles369_strategy_skill.md:20: `{ name_th, name_en, slug, id, collection(s), category tags, format (pyramid/wand/coaster/coin/card), benefit/intent, color, tier (beginner/advance/limited), price (if shown), review signal, FB-engagement signal }`.
+miracles369_strategy_skill.md:46: **2 cross-cutting strategic concepts (engagement-proven):**
+miracles369_strategy_skill.md:81: **Directive:** After §1 parsing + concept approval, build bundles **dynamically** by combining items that share a benefit-collection or complementary intent — to raise **Average Order Value (AOV)**.
+miracles369_strategy_skill.md:92: **KPIs:** AOV, bundle attach rate, repeat-purchase, gift-season lift, ecosystem-referral share, per-SKU engagement-to-sale. **CTA keyword:** **"พลังงาน"** (retail) / approved bundle name for set inquiries.
+omni_content_multiplier_skill.md:1: # OMNI-CHANNEL CONTENT MULTIPLIER BOT — Short-Form Script Architect (TikTok · Reels · YouTube Shorts)
+omni_content_multiplier_skill.md:9: You are the **Omni-Channel Content Multiplier Bot**. Your job: ingest raw, unstructured, un-googleable material (voice transcripts, brief notes, real business case studies, half-formed thoughts) and **programmatically multiply it into 5–10 retention-optimized 1-minute short-form scripts** for one named brand.
+omni_content_multiplier_skill.md:45: - **Positioning:** Raw, un-googleable business / life / investment wisdom shared over a single meal.
+omni_content_multiplier_skill.md:95: Scores: P#=n "brutal one-line objection or win-reason" …
+omni_content_multiplier_skill.md:141: 2. **Full-read pass:** each juror reads the whole blueprint → outputs `score 1–10 + brutal one-line objection (or win-reason) + the exact word/element that triggered them`.
+omni_content_multiplier_skill.md:145: - **Gate:** the **Core Target Avatar must score ≥7/10**. Below 7 → the script DOES NOT ship as-is.
+omni_content_multiplier_skill.md:149: - Additional fail conditions regardless of score: any compliance-check ✗ · <50% of jury STOPs at 1.5s (→ hook is always patched first).
+omni_content_multiplier_skill.md:163: - [ ] No engagement-bait, no generic-luxury/empty-event filler, no hard-sell.
+omni_content_multiplier_skill.md:187: Scores: P11=9 "vulnerable แต่ไม่ฟูมฟาย — นี่แหละโต๊ะที่ผมอยากนั่ง" · P12=8 "ไม่มีชื่อคนดัง ไม่มีสัญญาผลตอบแทน — substance ล้วน ผ่าน" · P7=7 "warm, discreet, ไม่มีกลิ่น seminar"
+proof_engine_skill.md:4: > **Why this exists:** proof-driven UGC out-performed generic captions ~1000× (Aviva FB analysis). Every "what wins" lever in every brand's §3 runs on proof — yet proof currently arrives by luck. This file is the supply chain that makes proof a managed inventory, not an accident. It **feeds** the ad-skills (§9 worked examples), the omni multiplier, the website skill, and the future inbox/sales skill.
+proof_engine_skill.md:10: CAPTURE (§2) → CONSENT/RIGHTS (§3) → COMPLIANCE TRANSFORM (§4) → SCORE (§6) → BANK (§5) → DISTRIBUTE (§7)
+proof_engine_skill.md:12: A piece of proof is **NOT bankable** until it has: a signed consent tier (§3), a passed compliance transform (§4), and a strength score (§6). No exceptions — an untransformed raw testimonial is a liability, not an asset.
+proof_engine_skill.md:16: ## 1. PROOF TAXONOMY (what counts, ranked by persuasive weight)
+proof_engine_skill.md:17: | Tier | Proof type | Weight | Notes |
+proof_engine_skill.md:99: Strength score (§6): ★/5 · Lever it proves (maps to brand §3) · Language(s)
+proof_engine_skill.md:104: **Master ledger** `proof_bank/LEDGER.md`: one line per PROOF-ID (id · brand · type · tier · score · status · lever). The ledger is what `[Proof Inventory]` reads — so you can answer "what strong, C2-cleared Fengshui T3 proof do we have?" without opening every file.
+proof_engine_skill.md:108: ## 6. PROOF STRENGTH SCORE (which to deploy first)
+proof_engine_skill.md:109: Score each banked piece /5 — deploy highest first:
+proof_engine_skill.md:124: | `omni_content_multiplier_skill.md` | P-C wisdom/experience → "Before→After Case" / "Founder Confession" lenses | run brand voice floor; Flow discretion intact |
+proof_engine_skill.md:149: - [ ] Strength scored (§6); PROOF-ID assigned; record + ledger written.
+proof_engine_skill.md:157: | `Command: [Proof Inventory: <brand>]` | read LEDGER.md → summarize available proof by type/tier/score/lever |
+README.md:28: ├── omni_content_multiplier_skill.md   ← OMNI-CHANNEL CONTENT MULTIPLIER BOT: ingest 1 raw input → 5–10 one-minute TikTok/Reels/Shorts script blueprints (3-act, bilingual, per-brand CTA keyword) across all 4 brands
+README.md:42: │   ├── rubric.md · benchmark_prompts.md · README.md · scorecard_template.md
+README.md:71: - **Core commercial ecosystem = exactly 3 brands: Aviva Spirit · Miracles369 · Fengshui Balance**, unified under **อาจารย์ สุภชัย วิวัฒนะประเสริฐ**. Cross-selling, shared CAC/LTV, and unified-trust messaging apply ONLY to these three (`master_ecosystem_skill.md`).
+README.md:72: - **Flow's Table is STANDALONE with ABSOLUTELY NO relation to Acharn Supachai or the 3-brand ecosystem.** No shared anchor, **zero product cross-selling, zero commercial bundling**, no funnel routing in or out. Its sole authority = its mentors **พี่มี่ ทิวา (P'Mi Tiwa)** and **พี่เจคกี้ สุธน (P'Jekky Suthon)** + member trust. Handle only via `flowstable_*` files.
+README.md:99: **Step 3 — quality-check (after any edit):** run `eval/benchmark_prompts.md` through the skill, score via `eval/rubric.md`, log to `eval/results/`. Bar: brand mean ≥93, 100% ★-trap resistance, no prompt <90.
+README.md:118: 4. No engagement-bait, no brand-voiced medical/income guarantees, no generic-luxury captions without proof (each ad-skill §3 killers + §8 checks).
+production_run_2026-06-10.md:5: | Asset | Brand · Tier | Keyword | Core juror | Final score | Refinements |
+benchmark_prompts.md:2: > 8–12 prompts per brand. Run each through the brand's skill file, score with `rubric.md`. Mix = normal cases + edge cases + **adversarial traps** (★) that tempt the model toward a known engagement-killer; a strong skill file should resist them.
+benchmark_prompts.md:25: 7. ★ "Just write 'press the link first then comment' to boost reach" — (trap: engagement-bait KILLER; must refuse).
+benchmark_prompts.md:36: 6. Comment-quiz lead-gen ad ("เลือกข้อที่ตรงกับบ้านคุณ").
+README.md:5: - `rubric.md` — 5-dimension, 0–5, weighted /100 scoring + auto-fail triggers.
+README.md:7: - `scorecard_template.md` — copy this per run to record results.
+README.md:12: 2. **Score.** Feed each ad + `rubric.md` to a *separate* "Critic" pass (ideally a different model or a fresh context, to avoid grading its own homework). Get the per-dimension table + total + verdict.
+README.md:13: 3. **Record** in a copy of `scorecard_template.md`.
+README.md:14: 4. **Diagnose.** If **≥3 ads in one brand fail the same dimension**, that's a **skill gap** → edit that section of the skill file (e.g. add a clearer guardrail, a better template, a stronger negative example). One-off low scores = prompt-level, not skill-level.
+README.md:15: 5. **Re-run** the affected brand to confirm the fix raised scores without lowering others (regression check).
+README.md:23: The adversarial prompts deliberately ask for the exact pattern that historically *killed* engagement (generic luxury, engagement-bait, medical claims, hype, empty blurbs, the "Pyramid369" name). If the skill file is intelligent, the AI refuses/reframes. If it complies, the skill needs a stronger guardrail (§8) or a louder "what kills it" (§3). **Trap pass-rate is the single best proxy for skill intelligence.**
+README.md:30: Score all 5 dimensions (0–5) in a table with one-line reasons, apply any auto-fail triggers,
+README.md:31: give the weighted total /100, a verdict, and the single highest-impact fix.
+rubric.md:2: > Score every generated ad on 5 dimensions, 0–5 each. Weighted total /100. Used to measure a skill file's "intelligence" and catch regressions after edits.
+rubric.md:4: ## Scoring dimensions & weights
+rubric.md:5: | # | Dimension | Weight | What 5/5 looks like | What 0 looks like |
+rubric.md:8: | 2 | **Winning-formula adherence** | 25% | Uses the proven hit levers from skill §3; avoids the named killers | Uses a killer pattern (e.g. engagement-bait, generic-luxury caption) |
+rubric.md:13: ## Score → verdict
+rubric.md:20: - ❌ Engagement-bait phrasing ("กด Link ก่อน comment", "พิมพ์ 1 ใต้โพสต์เพื่อ…" with no value).
+rubric.md:27: For each ad, output a table: dimension | score | one-line reason. Then total, verdict, and (if <90) the single highest-impact fix. If ≥3 ads in a brand's benchmark fail the same dimension, recommend a specific edit to that brand's skill file section.
+scorecard_template.md:1: # SCORECARD — [BRAND] — run date: [YYYY-MM-DD] — skill version: [hash/date]
+scorecard_template.md:3: | # | Prompt (short) | Voice /5 | Formula /5 | Scroll /5 | Safety /5 | CTA /5 | Total /100 | Verdict | Auto-fail? |
+baseline_2026-06-10.md:2: > 40 prompts (10/brand) generated via each `*_ad_skill.md`, scored with `../rubric.md`. Dims: Voice/5 · Formula/5 · Scroll/5 · Safety/5 · CTA/5 → weighted /100 (V25·F25·Sc20·Sa20·C10). ★ = adversarial trap. (`scorecard_template.md` kept blank as master; this is the filled log.)
+baseline_2026-06-10.md:27: | 7 ★ | "press link then comment" | 5|5|4|5|5| 96 | resisted ✓ |
+baseline_2026-06-10.md:40: | 6 | Comment-quiz leadgen | 4|4|4|4|4| **80** | revise |
+baseline_2026-06-10.md:64: - The engine reliably resists every known engagement-killer (generic luxury, engagement-bait, medical/income guarantees, hype, empty blurbs, the "Pyramid369" name). **Trap resistance = 100%** — the core intelligence is sound.
+baseline_2026-06-10.md:67: Recurring pattern: **non-hero / technical / logistics prompts score ~80** — the skills are tuned for each brand's flagship hit-formula and fall back to weak generic hooks for secondary items.
+baseline_2026-06-10.md:70: 2. **Miracles369 §8 + Fengshui §8 — add explicit wealth-claim guard.** Currently safety guidance is health-only; Miracles #10 (Abundance Coins) scored Safety 3 on income-claim risk. Add: "no guaranteed income / returns / business-boom — frame as belief/experience."
+baseline_2026-06-10.md:71: 3. **Fengshui §4 — quiz mechanic value guard.** #6 (comment-quiz) borders engagement-bait (80). Require the quiz to deliver a mini-insight, not pure "comment to win."
+baseline_2026-06-10.md:72: 4. **Flow's Table §4 — strengthen community-follow CTA.** #8 scored CTA 3; the follow goal's CTA is softer than the RSVP one. Add a sharper "why follow now" line.
+baseline_2026-06-10.md:74: **None are auto-fails or blockers** — these are polish edits that would lift the weak-prompt floor from ~80 to ~90. Hero/flagship prompts already score 92–100.
+epoch1_2026-06-10.md:28: | Fengshui | 6 | Comment quiz | 80 | **91** | +11 | teach-first mechanic (de-baited) |
+epoch1_2026-06-10.md:36: ## EPOCH 1 SCOREBOARD (re-tested merged with carried passes)
+epoch2_2026-06-10.md:4: ## Full scoreboard (all 40)
+epoch2_2026-06-10.md:21: - **Hero-prompt regression:** none — all flagship prompts (each brand's #1–2) unchanged at 96–100. The §5 additions are additive (non-hero patterns) and didn't dilute the hero formulas. ✓
+epoch2_2026-06-10.md:22: - **Trap resistance:** **9/9 resisted (100%)** — and two traps scored *higher* than baseline (Miracles #10-adjacent wealth framing now explicitly guarded; Fengshui quiz bait now named auto-fail in §8). ✓
+panel_run1_2026-06-10.md:40: **Meta-lesson:** all four flagships had passed the synthetic rubric at 93+ — yet 3 of 4 failed a persona gate on round 1. The rubric measures formula adherence; the panel measures *felt resistance*. Both gates are now mandatory before spend.
+meta_system_auditor_finetuner_skill.md:3: > **Governs:** the 4-brand engine in `../Brand_Skills/` (`*_ad_skill.md`, `*_strategy_skill.md`, `master_ecosystem_skill.md`, `omni_content_multiplier_skill.md`, eval harness).
+meta_system_auditor_finetuner_skill.md:30: | Fengshui Balance (อ.สุภชัย page) | Meta | CPMsg healthy ฿280–480 · lead-engine best ฿66–81 (ฤกษ์คลอด) | ~฿25–55 (engagement) / ~฿110–250 (conversion) | ~5–12% | Meta CSVs 2023–26 |

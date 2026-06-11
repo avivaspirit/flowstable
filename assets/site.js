@@ -101,15 +101,55 @@ function createPostCardElement(post) {
 }
 
 function renderMomentsFromPosts(posts) {
-  const section = document.getElementById("moments");
-  const container = section?.querySelector(".section-inner");
+  const container = document.getElementById("momentsGrid");
   if (!container) return;
 
+  // Filter to keep only Session Summaries
+  const filteredPosts = posts.filter(post => (post.category || '').toLowerCase() === 'session summaries');
+
+  // Clear existing static posts
   container.querySelectorAll(".post-card").forEach((node) => node.remove());
 
-  posts.slice(0, 12).forEach((post) => {
-    const cta = container.querySelector(".button.primary");
-    container.insertBefore(createPostCardElement(post), cta || null);
+  // Filter out duplicates (permalink_url and title)
+  const seenUrls = new Set();
+  const seenTitles = new Set();
+  const uniquePosts = [];
+
+  filteredPosts.forEach(post => {
+    const url = post.permalink_url;
+    const title = (post.title || '').trim().toLowerCase();
+    if (url && !seenUrls.has(url)) {
+      if (!title || !seenTitles.has(title)) {
+        seenUrls.add(url);
+        if (title) seenTitles.add(title);
+        uniquePosts.push(post);
+      }
+    }
+  });
+
+  // Calculate WEI score and sort
+  const scoredPosts = uniquePosts.map(post => {
+    let wei = 0;
+    if (post.metrics && typeof post.metrics.wei === 'number') {
+      wei = post.metrics.wei;
+    } else {
+      const reactions = post.reaction_count || 0;
+      const comments = post.comment_count || 0;
+      const shares = post.share_count || 0;
+      wei = reactions * 1 + comments * 3 + shares * 5;
+    }
+    return { ...post, weiScore: wei };
+  });
+
+  // Sort descending by WEI score
+  scoredPosts.sort((a, b) => b.weiScore - a.weiScore);
+
+  // Take top 8 unique posts
+  const top8 = scoredPosts.slice(0, 8);
+
+  // Render cards
+  top8.forEach((post) => {
+    container.appendChild(createPostCardElement(post));
   });
 }
 
@@ -168,12 +208,14 @@ async function loadPostsDatabase() {
     if (sanityPosts.length) {
       wpPostsLoaded = true;
       allPosts = [...sanityPosts, ...allPosts];
-      if (document.getElementById('archiveList')) {
-        renderArchiveFromPosts(allPosts);
-      }
-      if (document.getElementById('moments')) {
-        renderMomentsFromPosts(allPosts);
-      }
+    }
+
+    // Always render dynamic content after combining all post sources
+    if (document.getElementById('archiveList')) {
+      renderArchiveFromPosts(allPosts);
+    }
+    if (document.getElementById('momentsGrid')) {
+      renderMomentsFromPosts(allPosts);
     }
 
     // Update and animate stats band on homepage

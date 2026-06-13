@@ -366,6 +366,11 @@ function openModal(permalink) {
     return;
   }
 
+  if (post.permalink_url && (post.permalink_url.includes('facebook.com/reel/') || post.permalink_url.includes('instagram.com/reel/') || post.permalink_url.includes('facebook.com/watch/'))) {
+    openVideoModal(post.permalink_url, post.message || post.story, post.created_time);
+    return;
+  }
+
   currentPost = post;
   currentImageIndex = 0;
 

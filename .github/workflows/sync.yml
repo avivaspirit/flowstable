@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "Flow's Table Auto-Sync"
           git config user.email "flowstable.th@gmail.com"
-          git add assets/data/posts.json assets/data/page_stats.json assets/photos/
+          git add assets/data/posts.json assets/data/page_stats.json _data/reels.json assets/photos/
           if git diff --staged --quiet; then
             echo "No changes to commit"
             exit 0

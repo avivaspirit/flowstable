@@ -2641,3 +2641,12 @@ nav a.nav-join:hover {
     transform: none;
   }
 }
+
+
+/* Ensure all article card texts are fully readable (dark text) */
+.archive-post, .archive-post h2, .archive-post p, .archive-copy {
+  color: var(--ink) !important;
+}
+.archive-post .eyebrow {
+  color: var(--coral) !important;
+}

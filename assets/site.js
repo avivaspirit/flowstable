@@ -181,6 +181,7 @@ async function loadPostsDatabase() {
           
           return {
             permalink_url: `cms-${art.title.replace(/\s+/g, '-').toLowerCase()}-${art.date}`,
+            created_time: art.date,
             date_label: dateLabel,
             category: art.category || 'Note',
             title: art.title,
@@ -209,6 +210,13 @@ async function loadPostsDatabase() {
       wpPostsLoaded = true;
       allPosts = [...sanityPosts, ...allPosts];
     }
+
+    // Sort all combined posts by date (newest to oldest)
+    allPosts.sort((a, b) => {
+      const timeA = new Date(a.created_time || a.date || 0);
+      const timeB = new Date(b.created_time || b.date || 0);
+      return timeB - timeA;
+    });
 
     // Always render dynamic content after combining all post sources
     if (document.getElementById('archiveList')) {
@@ -680,6 +688,31 @@ document.addEventListener('DOMContentLoaded', () => {
     archivePosts = Array.from(document.querySelectorAll(".archive-post"));
   }
 
+  function sortArchivePosts(order) {
+    const container = document.querySelector("#archiveList .section-inner");
+    if (!container) return;
+    
+    const posts = Array.from(container.querySelectorAll(".archive-post"));
+    
+    posts.sort((a, b) => {
+      // Find the date text inside .eyebrow
+      const eyebrowA = a.querySelector(".eyebrow")?.textContent || "";
+      const eyebrowB = b.querySelector(".eyebrow")?.textContent || "";
+      
+      // Extract date part (before the /)
+      const dateStrA = eyebrowA.split("/")[0].trim();
+      const dateStrB = eyebrowB.split("/")[0].trim();
+      
+      const dateA = new Date(dateStrA);
+      const dateB = new Date(dateStrB);
+      
+      return order === "newest" ? dateB - dateA : dateA - dateB;
+    });
+    
+    posts.forEach(post => container.appendChild(post));
+    initArchiveElements();
+  }
+
   function updateArchive() {
     const query = (searchInput?.value || "").trim().toLowerCase();
     let visibleCount = 0;
@@ -688,7 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const haystack = post.dataset.search || "";
       const postCategory = post.dataset.category || "";
       const queryMatch = !query || haystack.includes(query);
-      const categoryMatch = activeCategory === "all" || postCategory === activeCategory;
+      const categoryMatch = activeCategory === "all" || activeCategory === "new-release" || postCategory === activeCategory;
       const isVisible = queryMatch && categoryMatch;
 
       post.classList.toggle("is-hidden", !isVisible);
@@ -711,6 +744,11 @@ document.addEventListener('DOMContentLoaded', () => {
       chipsContainer.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
       chip.classList.add("active");
       activeCategory = chip.dataset.value || "all";
+      
+      if (activeCategory === "new-release") {
+        sortArchivePosts("newest");
+      }
+      
       updateArchive();
     }
   });

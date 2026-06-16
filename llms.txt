@@ -7,7 +7,7 @@ Flow's Table is a public website documenting community gatherings, field notes, 
 ## Public pages
 - https://flowstable.vercel.app/
 - https://flowstable.vercel.app/about
-- https://flowstable.vercel.app/archive
+- https://flowstable.vercel.app/articles
 - https://flowstable.vercel.app/reels
 - https://flowstable.vercel.app/guests
 

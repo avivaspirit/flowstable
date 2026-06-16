@@ -1,5 +1,6 @@
 # Flow's Table — public site, open to search engines and AI crawlers
 User-agent: *
+Content-Signal: search=yes, ai-train=no
 Allow: /
 Disallow: /admin
 Disallow: /admin/

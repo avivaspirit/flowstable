@@ -19,7 +19,7 @@ function postLink(post) {
   if (post.sanitySlug && window.SanityCMS?.articleHref) {
     return window.SanityCMS.articleHref(post);
   }
-  return `articles/${post.id}`;
+  return `notes/${post.id}`;
 }
 
 function createArchivePostElement(post) {

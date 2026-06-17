@@ -40,7 +40,7 @@ def generate_sitemap():
                 posts = json.load(f)
                 for post in posts:
                     if "id" in post:
-                        loc = f"https://flowstable.vercel.app/articles/{post['id']}"
+                        loc = f"https://flowstable.vercel.app/notes/{post['id']}"
                         lastmod = today
                         if post.get("created_time"):
                             lastmod = post["created_time"][:10]

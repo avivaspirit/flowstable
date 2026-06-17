@@ -98,7 +98,7 @@
           </div>
         </div>
         ${image ? `<div class="archive-gallery"><img src="${image}" alt="${alt}" loading="eager"></div>` : ""}
-        <div class="archive-copy wp-content"><p>${summaryHtml}${content}</p></div>
+        <div class="archive-copy wp-content">${summaryHtml}<p>${content}</p></div>
         ${footerCta}
       </article>`;
 

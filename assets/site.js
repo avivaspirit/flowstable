@@ -19,7 +19,7 @@ function postLink(post) {
   if (post.sanitySlug && window.SanityCMS?.articleHref) {
     return window.SanityCMS.articleHref(post);
   }
-  return post.permalink_url;
+  return `articles/${post.id}`;
 }
 
 function createArchivePostElement(post) {
@@ -39,7 +39,7 @@ function createArchivePostElement(post) {
     (post.message || "").length > 200 ? `${post.message.substring(0, 200)}...` : post.message || "";
   const bodyHtml = `<p>${previewText.replace(/\n/g, "<br>")}</p>`;
   const link = postLink(post);
-  const linkLabel = post.source === "sanity" ? "Read Note" : "Open post";
+  const linkLabel = "Read Note";
 
   articleEl.innerHTML = `
     <div class="archive-head">

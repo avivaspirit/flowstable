@@ -39,7 +39,7 @@
 
   function imageUrl(ref) {
     if (!ref) return "";
-    if (typeof ref === "string" && ref.startsWith("http")) return ref;
+    if (typeof ref === "string" && (ref.startsWith("http") || ref.startsWith("assets/"))) return ref;
     const assetRef = ref?.asset?._ref || ref?._ref;
     if (!assetRef) return "";
     const pid = projectId();

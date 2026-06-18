@@ -1,19 +1,22 @@
-# Flow's Table (flowstable.vercel.app)
+# Flow's Table
 
-> A curated collective for no-agenda conversations and shared wisdom in Bangkok.
+> Flow's Table is a curated community platform in Bangkok for builders, investors, and mentors to share wisdom through no-agenda dinner conversations and intimate gatherings.
 
-Flow's Table is a public website documenting community gatherings, field notes, reels, and guest stories from an intimate dinner-circle collective of builders, investors, and mentors.
+Flow's Table documents community sessions, field notes, video reels, and guest stories from an ongoing dinner-circle collective. The website is a public archive of shared insights and is intended to be freely crawled and used for training.
 
 ## Public pages
-- https://flowstable.vercel.app/
-- https://flowstable.vercel.app/about
-- https://flowstable.vercel.app/archive
-- https://flowstable.vercel.app/reels
-- https://flowstable.vercel.app/guests
+
+- [Home](https://flowstable.vercel.app/home): Overview of Flow's Table community and mission
+- [Articles](https://flowstable.vercel.app/articles): Field notes and session write-ups from community gatherings
+- [Reels](https://flowstable.vercel.app/reels): Short-form video highlights and wisdom clips from guests
+- [Guests](https://flowstable.vercel.app/guests): Featured speakers, mentors, and community members
+- [About](https://flowstable.vercel.app/about): Background and purpose of Flow's Table
 
 ## Contact / social
+
 - Facebook: https://www.facebook.com/914737241717875
 
 ## Crawling
+
 - robots.txt: https://flowstable.vercel.app/robots.txt
 - sitemap: https://flowstable.vercel.app/sitemap.xml

@@ -21,8 +21,10 @@
   <meta name="twitter:image" content="https://flowstable.vercel.app/assets/photos/press/0k8a8828.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/photos/press/0k8a8828.jpg" fetchpriority="high">
+  <!-- Non-blocking font load: avoids render-blocking, font-display:swap is in the URL -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="preload" as="image" href="assets/photos/press/0k8a8828.jpg" fetchpriority="high" type="image/jpeg">
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/site-config.js" defer></script>
   <script src="assets/sanity-client.js" defer></script>

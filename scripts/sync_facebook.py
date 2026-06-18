@@ -371,6 +371,15 @@ if __name__ == "__main__":
     facebook_success = sync_facebook_posts()
     instagram_success = sync_instagram_reels()
     page_stats_success = sync_page_stats()
+    
+    # Regenerate sitemap after sync
+    import subprocess
+    import sys
+    try:
+        subprocess.run([sys.executable, os.path.join(BASE_DIR, "scripts", "generate_sitemap.py")], check=True)
+    except Exception as e:
+        print(f"Failed to generate sitemap: {e}")
+
     # #region agent log
     _dbg_log("B", "sync_facebook.py:main", "sync_complete", {
         "facebook": facebook_success,

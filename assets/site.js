@@ -153,6 +153,23 @@ function renderMomentsFromPosts(posts) {
   });
 }
 
+// Render latest posts into the homepage "Recent Notes" section dynamically.
+// This replaces the hardcoded static articles so new FB posts appear automatically.
+function renderRecentNotesFromPosts(posts) {
+  const container = document.getElementById("recentNotesGrid");
+  if (!container) return;
+
+  // Clear existing static posts
+  container.querySelectorAll(".post-card").forEach((node) => node.remove());
+
+  // Take the 8 most recent posts (already sorted newest-first by loadPostsDatabase)
+  const recent = posts.slice(0, 8);
+
+  recent.forEach((post) => {
+    container.appendChild(createPostCardElement(post));
+  });
+}
+
 // Fetch posts database on load and combine with CMS articles
 async function loadPostsDatabase() {
   try {
@@ -224,6 +241,9 @@ async function loadPostsDatabase() {
     }
     if (document.getElementById('momentsGrid')) {
       renderMomentsFromPosts(allPosts);
+    }
+    if (document.getElementById('recentNotesGrid')) {
+      renderRecentNotesFromPosts(allPosts);
     }
 
     // Update and animate stats band on homepage

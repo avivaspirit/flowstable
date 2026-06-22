@@ -31,43 +31,70 @@ function isFacebookPost(post) {
   return url.includes("facebook.com") && !post.sanitySlug;
 }
 
+// Returns true when a rendered card element represents a post from the last 30 days.
+function isCardNewRelease(postEl) {
+  const created = (postEl && postEl.dataset && postEl.dataset.created) || "";
+  if (!created) return false;
+  const d = new Date(created);
+  if (isNaN(d.getTime())) return false;
+  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  return d.getTime() >= cutoff;
+}
+
 function createArchivePostElement(post) {
   const articleEl = document.createElement("article");
   articleEl.className = "archive-post";
   articleEl.dataset.category = post.category || "Note";
+  articleEl.dataset.created = post.created_time || "";
+  articleEl.dataset.permalink = postLink(post);
   articleEl.dataset.search = `${(post.title || "").toLowerCase()} ${(post.message || "").toLowerCase()} ${(post.category || "").toLowerCase()}`;
 
-  let galleryHtml = "";
-  if (post.photos && post.photos.length > 0) {
-    galleryHtml = `<div class="archive-gallery">
-      <img src="${post.photos[0]}" alt="${post.title || "Flow's Table"}" loading="lazy">
-    </div>`;
-  }
-
-  const previewText =
-    (post.message || "").length > 200 ? `${post.message.substring(0, 200)}...` : post.message || "";
-  const bodyHtml = `<p>${previewText.replace(/\n/g, "<br>")}</p>`;
   const fbPost = isFacebookPost(post);
   const link = postLink(post);
-  const linkLabel = fbPost ? "Read on Facebook" : "Read Note";
-  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : '';
+  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : "";
+
+  // Photo thumbnail (first image only, top of card)
+  let thumbHtml = "";
+  if (post.photos && post.photos.length > 0) {
+    const alt = (post.title || "Flow's Table").replace(/"/g, "&quot;");
+    thumbHtml = `<div class="archive-media"><img src="${post.photos[0]}" alt="${alt}" loading="lazy"></div>`;
+  }
+
+  const category = post.category || "Note";
+  const dateLabel = post.date_label || "Recent";
+
+  // Preview text - collapse whitespace, clamp to ~3 lines
+  const rawMsg = (post.message || "").split("\n").join(" ").replace(/\s+/g, " ").trim();
+  const previewText = rawMsg.length > 200 ? rawMsg.substring(0, 200) + "\u2026" : rawMsg;
+
+  // Engagement stats
+  let statsHtml = "";
+  if (typeof post.reaction_count === "number" && post.reaction_count > 0) {
+    statsHtml = `<span class="archive-reactions">\u2665 ${post.reaction_count}</span>`;
+  }
+
+  // CTA - blue Facebook button for FB posts, neutral button otherwise
+  const ctaLabel = fbPost ? "Read on Facebook \u2192" : "Read Note";
+  const ctaClass = fbPost ? "fb-cta-button" : "read-note-button";
 
   articleEl.innerHTML = `
-    <div class="archive-head">
-      <div>
-        <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
-        <h2>${post.title || "Flow's Table"}</h2>
+    ${thumbHtml}
+    <div class="archive-card-body">
+      <div class="archive-head">
+        <span class="archive-badge">${category}</span>
+        <span class="archive-date">${dateLabel}</span>
       </div>
-      <a href="${link}" class="open-modal-trigger fb-read-link"${externalAttr}>${linkLabel} ${fbPost ? '↗' : ''}</a>
+      <h3 class="archive-title">${post.title || "Flow's Table"}</h3>
+      ${previewText ? `<p class="archive-copy">${previewText}</p>` : ""}
+      <div class="archive-foot">
+        ${statsHtml}
+        <a href="${link}" class="${ctaClass}"${externalAttr}>${ctaLabel}</a>
+      </div>
     </div>
-    ${galleryHtml}
-    <div class="archive-copy">${bodyHtml}</div>
-    ${fbPost ? `<a href="${link}" class="fb-cta-button" target="_blank" rel="noopener noreferrer">Read full post on Facebook →</a>` : ''}
   `;
 
   return articleEl;
 }
-
 function renderArchiveFromPosts(posts) {
   const container = document.querySelector("#archiveList .section-inner");
   const emptyState = document.getElementById("emptyState");
@@ -91,30 +118,42 @@ function createPostCardElement(post) {
   const card = document.createElement("article");
   card.className = "post-card";
   card.dataset.category = post.category || "Note";
+  card.dataset.created = post.created_time || "";
+  card.dataset.permalink = postLink(post);
   card.dataset.search = `${(post.title || "").toLowerCase()} ${(post.message || "").toLowerCase()} ${(post.category || "").toLowerCase()}`;
 
-  const thumb = post.photos?.[0] || "";
+  const thumb = (post.photos && post.photos[0]) ? post.photos[0] : "";
   const link = postLink(post);
   const fbPost = isFacebookPost(post);
-  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : '';
-  const preview =
-    (post.message || "").length > 140 ? `${post.message.substring(0, 140)}...` : post.message || "";
+  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : "";
+
+  const rawMsg = (post.message || "").split("\n").join(" ").replace(/\s+/g, " ").trim();
+  const preview = rawMsg.length > 140 ? rawMsg.substring(0, 140) + "\u2026" : rawMsg;
+
+  let statsHtml = "";
+  if (typeof post.reaction_count === "number" && post.reaction_count > 0) {
+    statsHtml = `<span class="post-card-reactions">\u2665 ${post.reaction_count}</span>`;
+  }
+
+  const ctaLabel = fbPost ? "Read on Facebook \u2192" : "Read Note";
+  const ctaClass = fbPost ? "post-read-fb" : "read-note-button";
+  const alt = (post.title || "Flow's Table").replace(/"/g, "&quot;");
 
   card.innerHTML = `
     <a class="post-media" href="${link}"${externalAttr}>
-      ${thumb ? `<img src="${thumb}" alt="${post.title || "Flow's Table"}" loading="lazy">` : ""}
+      ${thumb ? `<img src="${thumb}" alt="${alt}" loading="lazy">` : ""}
     </a>
-    <div class="post-copy">
+    <div class="post-body">
       <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
       <h3>${post.title || "Flow's Table"}</h3>
-      <p>${preview.replace(/\n/g, "<br>")}</p>
-      ${fbPost ? `<a href="${link}" class="post-read-fb" target="_blank" rel="noopener noreferrer">Read on Facebook →</a>` : ""}
+      <p>${preview}</p>
+      ${statsHtml}
+      <a href="${link}" class="${ctaClass}"${externalAttr}>${ctaLabel}</a>
     </div>
   `;
 
   return card;
 }
-
 function renderMomentsFromPosts(posts) {
   const container = document.getElementById("momentsGrid");
   if (!container) return;
@@ -669,17 +708,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Modal Card Click Listeners
   document.addEventListener('click', (e) => {
-    const postCard = e.target.closest('.post-card') || e.target.closest('.archive-post');
     if (e.target.closest('#modalFacebookLink') || e.target.closest('.modal-close') || e.target.closest('.carousel-btn')) {
       return;
     }
-    if (postCard) {
-      e.preventDefault();
-      const linkEl = postCard.querySelector('.post-media') || postCard.querySelector('.archive-head a') || postCard.querySelector('.open-modal-trigger');
-      const permalink = linkEl?.getAttribute('href');
-      if (permalink) {
-        openModal(permalink);
-      }
+    // Let explicit CTA buttons navigate on their own (e.g. open FB in a new tab)
+    if (e.target.closest('.fb-cta-button') || e.target.closest('.read-note-button') || e.target.closest('.post-read-fb')) {
+      return;
+    }
+    const postCard = e.target.closest('.post-card') || e.target.closest('.archive-post');
+    if (!postCard) return;
+    e.preventDefault();
+    const permalink = postCard.dataset.permalink ||
+      postCard.querySelector('.post-media')?.getAttribute('href') ||
+      postCard.querySelector('.fb-cta-button')?.getAttribute('href') ||
+      postCard.querySelector('.read-note-button')?.getAttribute('href') ||
+      postCard.querySelector('.archive-head a')?.getAttribute('href') ||
+      postCard.querySelector('.open-modal-trigger')?.getAttribute('href');
+    if (permalink) {
+      openModal(permalink);
     }
   });
 
@@ -722,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.querySelector("#archiveSearch");
   const chipsContainer = document.querySelector("#categoryChips");
   const emptyState = document.querySelector("#emptyState");
-  let activeCategory = "all";
+  let activeCategory = "new-release";
 
   function initArchiveElements() {
     archivePosts = Array.from(document.querySelectorAll(".archive-post"));
@@ -731,28 +777,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function sortArchivePosts(order) {
     const container = document.querySelector("#archiveList .section-inner");
     if (!container) return;
-    
+
     const posts = Array.from(container.querySelectorAll(".archive-post"));
-    
+
     posts.sort((a, b) => {
-      // Find the date text inside .eyebrow
-      const eyebrowA = a.querySelector(".eyebrow")?.textContent || "";
-      const eyebrowB = b.querySelector(".eyebrow")?.textContent || "";
-      
-      // Extract date part (before the /)
-      const dateStrA = eyebrowA.split("/")[0].trim();
-      const dateStrB = eyebrowB.split("/")[0].trim();
-      
-      const dateA = new Date(dateStrA);
-      const dateB = new Date(dateStrB);
-      
+      const dateA = new Date(a.dataset.created || a.querySelector(".eyebrow")?.textContent?.split("/")[0].trim() || 0);
+      const dateB = new Date(b.dataset.created || b.querySelector(".eyebrow")?.textContent?.split("/")[0].trim() || 0);
       return order === "newest" ? dateB - dateA : dateA - dateB;
     });
-    
+
     posts.forEach(post => container.appendChild(post));
     initArchiveElements();
   }
-
   function updateArchive() {
     const query = (searchInput?.value || "").trim().toLowerCase();
     let visibleCount = 0;
@@ -761,7 +797,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const haystack = post.dataset.search || "";
       const postCategory = post.dataset.category || "";
       const queryMatch = !query || haystack.includes(query);
-      const categoryMatch = activeCategory === "all" || activeCategory === "new-release" || postCategory === activeCategory;
+      let categoryMatch;
+      if (activeCategory === "all") {
+        categoryMatch = true;
+      } else if (activeCategory === "new-release") {
+        categoryMatch = isCardNewRelease(post);
+      } else {
+        categoryMatch = postCategory === activeCategory;
+      }
       const isVisible = queryMatch && categoryMatch;
 
       post.classList.toggle("is-hidden", !isVisible);
@@ -1134,9 +1177,3 @@ function initReelsPageFilter() {
     }
   });
 }
-/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
-/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory
-/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
-/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory
-/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
-/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory

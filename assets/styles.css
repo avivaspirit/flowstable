@@ -2777,3 +2777,252 @@ nav a.nav-join:hover {
 .post-read-fb:hover {
   opacity: 0.8;
 }
+
+
+/* ============================================================
+   MODERN ARTICLE CARDS  (overrides legacy archive divider styles)
+   Dark cards on the light archive page, responsive 2-col grid.
+   ============================================================ */
+
+#archiveList .section-inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 860px) {
+  #archiveList .section-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+/* The card itself (overrides legacy border-bottom divider) */
+.archive-post {
+  padding: 0;
+  border: 1px solid rgba(40, 34, 30, 0.10);
+  border-bottom: 1px solid rgba(40, 34, 30, 0.10);
+  background: #28221e;
+  color: #f4ece6;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(29, 23, 20, 0.16);
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+
+.archive-post:hover {
+  background: #28221e;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 52px rgba(29, 23, 20, 0.30);
+  border-color: rgba(204, 112, 68, 0.50);
+}
+
+/* Thumbnail on top of card */
+.archive-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #1d1714;
+  overflow: hidden;
+}
+
+.archive-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-post:hover .archive-media img {
+  transform: scale(1.05);
+}
+
+/* Card body */
+.archive-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 22px 20px;
+  flex: 1 1 auto;
+}
+
+/* Head: category badge + date */
+.archive-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+}
+
+.archive-badge {
+  display: inline-block;
+  background: rgba(204, 112, 68, 0.16);
+  color: #e8916a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 30px;
+}
+
+.archive-date {
+  color: rgba(244, 236, 230, 0.55);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Title */
+.archive-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.28;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff7f1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Preview copy (overrides legacy light-text .archive-copy) */
+.archive-copy {
+  max-width: none;
+  margin: 0;
+  color: rgba(244, 236, 230, 0.72);
+  font-size: 14.5px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer of card: reactions + CTA */
+.archive-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.archive-reactions {
+  color: rgba(244, 236, 230, 0.60);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Blue Facebook CTA button */
+.fb-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 20px;
+  background: #1877F2;
+  color: #fff !important;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(24, 119, 242, 0.28);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fb-cta-button:hover {
+  background: #166FE5;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(24, 119, 242, 0.36);
+  color: #fff !important;
+}
+
+/* Neutral "Read Note" button for non-Facebook posts */
+.read-note-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--coral);
+  color: #fff !important;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.read-note-button:hover {
+  background: #b55d36;
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+/* Home-grid Facebook text link */
+.post-read-fb {
+  display: inline-block;
+  margin-top: 14px;
+  color: #1877F2;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.post-read-fb:hover {
+  opacity: 0.8;
+}
+
+.post-card-reactions {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+/* Category chips: horizontal scroll on mobile */
+.category-chips {
+  flex-wrap: wrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 600px) {
+  .category-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 0 20px 6px;
+  }
+  .category-chips .chip {
+    flex: 0 0 auto;
+  }
+}
+
+/* Terracotta active chip (light-bg contexts) */
+.chip.active {
+  background: #CC7044;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Empty state spans the full grid width when visible */
+.empty-state {
+  grid-column: 1 / -1;
+}

@@ -284,8 +284,11 @@ async function loadPostsDatabase() {
 
     // Sort all combined posts by date (newest to oldest)
     allPosts.sort((a, b) => {
-      const timeA = new Date(a.created_time || a.date || 0);
-      const timeB = new Date(b.created_time || b.date || 0);
+      const timeA = new Date(a.created_time || a.date || 0).getTime();
+      const timeB = new Date(b.created_time || b.date || 0).getTime();
+      if (isNaN(timeA) && isNaN(timeB)) return 0;
+      if (isNaN(timeA)) return 1;
+      if (isNaN(timeB)) return -1;
       return timeB - timeA;
     });
 
@@ -768,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.querySelector("#archiveSearch");
   const chipsContainer = document.querySelector("#categoryChips");
   const emptyState = document.querySelector("#emptyState");
-  let activeCategory = "new-release";
+  let activeCategory = "all";
 
   function initArchiveElements() {
     archivePosts = Array.from(document.querySelectorAll(".archive-post"));
@@ -779,10 +782,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
 
     const posts = Array.from(container.querySelectorAll(".archive-post"));
+    if (posts.length === 0) return;
 
     posts.sort((a, b) => {
-      const dateA = new Date(a.dataset.created || a.querySelector(".eyebrow")?.textContent?.split("/")[0].trim() || 0);
-      const dateB = new Date(b.dataset.created || b.querySelector(".eyebrow")?.textContent?.split("/")[0].trim() || 0);
+      const rawA = a.dataset.created || "";
+      const rawB = b.dataset.created || "";
+      const dateA = rawA ? new Date(rawA).getTime() : 0;
+      const dateB = rawB ? new Date(rawB).getTime() : 0;
       return order === "newest" ? dateB - dateA : dateA - dateB;
     });
 
@@ -838,6 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // When dynamic CMS articles are inserted, re-index archive posts
   window.addEventListener('cmsLoaded', () => {
+    sortArchivePosts("newest");
     initArchiveElements();
     updateArchive();
   });

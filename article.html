@@ -20,7 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="assets/styles.min.css">
+    <link rel="preload" as="style" href="assets/styles.min.css" onload="this.onload=null;this.rel=\'stylesheet\'">
+  <noscript><link rel="stylesheet" href="assets/styles.min.css"></noscript>
     <script src="assets/site-config.js" defer></script>
     <script src="assets/sanity-client.js" defer></script>
     <script src="assets/article-page.js" defer></script>
@@ -70,7 +71,8 @@
       </div>
     </footer>
 
-  </body>
+  <script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{})})}</script>
+</body>
 </html>
 /usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
 /usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory

@@ -22,7 +22,8 @@
   <!-- Non-blocking font load: avoids render-blocking -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.min.css">
+  <link rel="preload" as="style" href="assets/styles.min.css" onload="this.onload=null;this.rel=\'stylesheet\'">
+  <noscript><link rel="stylesheet" href="assets/styles.min.css"></noscript>
   <script src="assets/site.min.js" defer></script>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
@@ -279,10 +280,11 @@
   </header>
 
   <main>
-    <section class="about-hero" style="background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 60%), linear-gradient(180deg, rgba(204, 113, 68, 0.35), rgba(29, 23, 20, 0.95)), url('assets/photos/914737241717875_122093694105110108_0.webp') center / cover no-repeat;">
+        <section class="about-hero" style="background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 60%), linear-gradient(180deg, rgba(204, 113, 68, 0.35), rgba(29, 23, 20, 0.95)), url('assets/photos/914737241717875_122093694105110108_0.webp') center / cover no-repeat;">
       <div class="hero-content">
         <p class="eyebrow">Wisdom Around the Table</p>
         <h1>Our Renowned Guests</h1>
+    <h2 class="visually-hidden">Main content</h2>
         <p class="hero-copy">Meet the visionary founders, seasoned investors, and creative specialists who have sat at Flow's Table to share their life journeys and business insights.</p>
       </div>
     </section>
@@ -647,5 +649,6 @@
   </footer>
 
   
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{})})}</script>
 </body>
 </html>

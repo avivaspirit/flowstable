@@ -21,7 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.min.css">
+  <link rel="preload" as="style" href="assets/styles.min.css" onload="this.onload=null;this.rel=\'stylesheet\'">
+  <noscript><link rel="stylesheet" href="assets/styles.min.css"></noscript>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
   <style>
@@ -437,5 +438,6 @@
       <p class="footer-copy">© 2026 Flow's Table · From Flow to Grow</p>
     </div>
   </footer>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{})})}</script>
 </body>
 </html>

@@ -69,7 +69,8 @@
     }
   }
   </script>
-  <link rel="stylesheet" href="assets/styles.min.css">
+  <link rel="preload" as="style" href="assets/styles.min.css" onload="this.onload=null;this.rel=\'stylesheet\'">
+  <noscript><link rel="stylesheet" href="assets/styles.min.css"></noscript>
   <script src="assets/site.min.js" defer></script>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
@@ -103,10 +104,11 @@
   </header>
 
   <main>
-    <section class="about-hero">
+        <section class="about-hero">
       <div class="hero-content">
         <p class="eyebrow">Our Journey & Philosophy</p>
         <h1>About Flow's Table</h1>
+    <h2 class="visually-hidden">Main content</h2>
         <p class="hero-copy">Behind the scenes of the no-agenda dinner circle connecting builders, dreamers, and mentors.</p>
       </div>
     </section>
@@ -257,5 +259,6 @@
   </footer>
 
   
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{})})}</script>
 </body>
 </html>

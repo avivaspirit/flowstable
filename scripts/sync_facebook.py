@@ -268,7 +268,7 @@ def sync_instagram_reels():
                 ig_reels.append({
                     "url": permalink,
                     "caption": item.get("caption", ""),
-                    "thumbnail_url": item.get("thumbnail_url", ""),
+                    "thumbnail_url_raw": item.get("thumbnail_url", ""),
                     "media_url": item.get("media_url", ""),
                     "timestamp": item.get("timestamp", "")
                 })
@@ -331,7 +331,44 @@ def sync_instagram_reels():
         except Exception as e:
             print(f"Error backfilling Facebook reels: {e}")
             
-    # Save back to reels.json
+        # Download IG thumbnails locally as webp
+    reels_photo_dir = os.path.join(BASE_DIR, "assets", "photos", "reels")
+    os.makedirs(reels_photo_dir, exist_ok=True)
+    for reel in existing_reels:
+        raw_thumb = reel.pop("thumbnail_url_raw", "")
+        if not raw_thumb:
+            continue
+        if raw_thumb.startswith("assets/"):
+            reel.setdefault("thumbnail_url", raw_thumb)
+            continue
+        # Try to download CDN thumbnail
+        reel_id = reel.get("url", "").rstrip("/").split("/")[-1]
+        local_name = f"assets/photos/reels/reel_{reel_id}.webp"
+        local_path = os.path.join(BASE_DIR, local_name)
+        if os.path.exists(local_path):
+            reel["thumbnail_url"] = local_name
+            continue
+        try:
+            headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://www.instagram.com/"}
+            resp = requests.get(raw_thumb, headers=headers, timeout=15)
+            if resp.status_code == 200 and len(resp.content) > 2000:
+                try:
+                    from PIL import Image
+                    import io
+                    im = Image.open(io.BytesIO(resp.content))
+                    if im.mode in ("RGBA", "P"):
+                        im = im.convert("RGB")
+                    im.save(local_path, "WEBP", quality=85)
+                    reel["thumbnail_url"] = local_name
+                except ImportError:
+                    # Save raw and keep URL
+                    reel["thumbnail_url"] = raw_thumb
+            else:
+                reel["thumbnail_url"] = raw_thumb  # Fallback to CDN URL
+        except Exception:
+            reel["thumbnail_url"] = raw_thumb  # Fallback to CDN URL
+
+# Save back to reels.json
     os.makedirs(os.path.dirname(REELS_FILE), exist_ok=True)
     with open(REELS_FILE, "w", encoding="utf-8") as f:
         json.dump(existing_reels, f, ensure_ascii=False, indent=2)

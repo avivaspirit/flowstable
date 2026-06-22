@@ -24,13 +24,10 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.jpg">
   <style>
-    /* Flow Society page styles */
-    :root {
-      --fs-terracotta: #CC7044;
-      --fs-terracotta-light: #E89968;
-      --fs-dark: #1d1714;
-      --fs-card: #28221e;
-      --fs-border: rgba(255,255,255,0.08);
+    /* Force dark theme for entire Flow Society page */
+    body {
+      background: #1d1714 !important;
+      color: #fff;
     }
 
     .fs-hero {
@@ -45,16 +42,17 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.45);
+      filter: brightness(0.4);
     }
     .fs-hero-content {
       position: relative;
       z-index: 2;
       max-width: 800px;
       padding: 80px 24px;
+      margin: 0 auto;
     }
     .fs-hero-content .eyebrow {
-      color: var(--fs-terracotta-light);
+      color: #E89968;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: 2px;
@@ -68,7 +66,7 @@
       color: #fff;
       margin: 0 0 20px;
     }
-    .fs-hero-content p {
+    .fs-hero-content > p {
       font-size: clamp(16px, 2.5vw, 20px);
       color: rgba(255,255,255,0.85);
       line-height: 1.6;
@@ -80,6 +78,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 80px 24px;
+      background: #1d1714;
     }
     .fs-section h2 {
       font-size: clamp(28px, 4vw, 42px);
@@ -89,12 +88,13 @@
       line-height: 1.2;
     }
     .fs-section .section-eyebrow {
-      color: var(--fs-terracotta-light);
+      color: #E89968;
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 12px;
+      display: block;
     }
     .fs-section .lead {
       font-size: 18px;
@@ -104,10 +104,10 @@
     }
 
     /* Exchange section */
-    .fs-exchange {
-      background: linear-gradient(180deg, #1d1714 0%, #221b16 100%);
-      border-top: 1px solid var(--fs-border);
-      border-bottom: 1px solid var(--fs-border);
+    .fs-dark-band {
+      background: #221b16;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .fs-exchange-grid {
       display: grid;
@@ -116,8 +116,8 @@
       margin-top: 48px;
     }
     .fs-exchange-card {
-      background: var(--fs-card);
-      border: 1px solid var(--fs-border);
+      background: #28221e;
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       padding: 40px 32px;
       text-align: center;
@@ -125,7 +125,7 @@
     .fs-exchange-card h3 {
       font-size: 22px;
       font-weight: 700;
-      color: var(--fs-terracotta-light);
+      color: #E89968;
       margin: 0 0 12px;
     }
     .fs-exchange-card p {
@@ -142,11 +142,11 @@
       font-style: italic;
     }
 
-    /* Photo grid */
+    /* Photo grid — masonry style */
     .fs-photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
       margin-top: 48px;
     }
     .fs-photo-grid img {
@@ -154,8 +154,8 @@
       aspect-ratio: 4/3;
       object-fit: cover;
       border-radius: 12px;
+      background: #28221e;
       transition: transform 0.3s ease;
-      background: var(--fs-card);
     }
     .fs-photo-grid img:hover {
       transform: scale(1.03);
@@ -169,8 +169,8 @@
       margin-top: 48px;
     }
     .fs-moment-card {
-      background: var(--fs-card);
-      border: 1px solid var(--fs-border);
+      background: #28221e;
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       overflow: hidden;
     }
@@ -182,13 +182,13 @@
     .fs-moment-card-body {
       padding: 28px 24px;
     }
-    .fs-moment-card h3 {
+    .fs-moment-card-body h3 {
       font-size: 18px;
       font-weight: 700;
       color: #fff;
       margin: 0 0 8px;
     }
-    .fs-moment-card p {
+    .fs-moment-card-body p {
       font-size: 15px;
       color: rgba(255,255,255,0.65);
       line-height: 1.6;
@@ -199,7 +199,7 @@
     .fs-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 48px;
+      gap: 64px;
       margin-top: 48px;
       justify-content: center;
     }
@@ -207,21 +207,24 @@
       text-align: center;
     }
     .fs-stat .number {
-      font-size: 48px;
+      font-size: 56px;
       font-weight: 800;
-      color: var(--fs-terracotta);
+      color: #CC7044;
       display: block;
+      line-height: 1;
     }
     .fs-stat .label {
-      font-size: 14px;
+      font-size: 13px;
       color: rgba(255,255,255,0.6);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      margin-top: 8px;
+      display: block;
     }
 
     /* CTA */
     .fs-cta {
-      background: var(--fs-terracotta);
+      background: #CC7044;
       text-align: center;
       padding: 80px 24px;
     }
@@ -239,7 +242,7 @@
     .fs-cta .button {
       display: inline-block;
       background: #fff;
-      color: var(--fs-terracotta);
+      color: #CC7044;
       padding: 14px 36px;
       border-radius: 50px;
       font-weight: 700;
@@ -255,6 +258,7 @@
       .fs-exchange-grid { grid-template-columns: 1fr; }
       .fs-hero-content { padding: 60px 20px; }
       .fs-section { padding: 60px 20px; }
+      .fs-stats { gap: 32px; }
     }
   </style>
 </head>
@@ -288,9 +292,9 @@
     </section>
 
     <!-- The Exchange -->
-    <section class="fs-exchange">
+    <section class="fs-dark-band">
       <div class="fs-section">
-        <p class="section-eyebrow">The Exchange</p>
+        <span class="section-eyebrow">The Exchange</span>
         <h2>Two worlds, one table.</h2>
         <p class="lead">Flow Society brings together people who normally wouldn't sit together — and gives them a reason to stay.</p>
 
@@ -311,7 +315,7 @@
 
     <!-- Photo Gallery -->
     <section class="fs-section">
-      <p class="section-eyebrow">The Energy</p>
+      <span class="section-eyebrow">The Energy</span>
       <h2>What it looks like when the room comes alive.</h2>
       <p class="lead">Every gathering has its own rhythm. Sometimes it's a big networking party. Sometimes it's a quiet conversation that changes everything.</p>
 
@@ -324,13 +328,21 @@
         <img src="assets/photos/album/album_132.jpg" alt="Friends old and new at a Flow Society event" loading="lazy">
         <img src="assets/photos/album/album_154.jpg" alt="The warmth of a trusted community" loading="lazy">
         <img src="assets/photos/album/album_176.jpg" alt="Conversations that matter, over food that brings people together" loading="lazy">
+        <img src="assets/photos/album/album_011.jpg" alt="Community connections at Flow Society" loading="lazy">
+        <img src="assets/photos/album/album_033.jpg" alt="Genuine moments shared at the table" loading="lazy">
+        <img src="assets/photos/album/album_077.jpg" alt="New friendships forming at Flow Society" loading="lazy">
+        <img src="assets/photos/album/album_099.jpg" alt="The energy of a room full of curious minds" loading="lazy">
+        <img src="assets/photos/album/album_121.jpg" alt="Builders sharing ideas over dinner" loading="lazy">
+        <img src="assets/photos/album/album_143.jpg" alt="Mentors and builders in conversation" loading="lazy">
+        <img src="assets/photos/album/album_165.jpg" alt="A community that keeps growing" loading="lazy">
+        <img src="assets/photos/album/album_187.jpg" alt="Real connections at Flow Society" loading="lazy">
       </div>
     </section>
 
     <!-- Key Moments -->
-    <section class="fs-exchange">
+    <section class="fs-dark-band">
       <div class="fs-section">
-        <p class="section-eyebrow">Key Moments</p>
+        <span class="section-eyebrow">Key Moments</span>
         <h2>Gatherings that became something bigger.</h2>
         <p class="lead">From intimate dinners to full-room networking parties — every event adds another layer to the circle.</p>
 
@@ -362,18 +374,14 @@
 
     <!-- The Circle Keeps Expanding -->
     <section class="fs-section">
-      <p class="section-eyebrow">The Circle Keeps Expanding</p>
+      <span class="section-eyebrow">The Circle Keeps Expanding</span>
       <h2>More people. More perspectives.</h2>
       <p class="lead">Every gathering brings new faces and fresh energy — but the warmth at the center never changes. The circle grows because trust grows.</p>
 
       <div class="fs-stats">
         <div class="fs-stat">
-          <span class="number">500+</span>
+          <span class="number">100+</span>
           <span class="label">Community Members</span>
-        </div>
-        <div class="fs-stat">
-          <span class="number">20+</span>
-          <span class="label">Gatherings Hosted</span>
         </div>
         <div class="fs-stat">
           <span class="number">100%</span>

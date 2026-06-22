@@ -964,7 +964,7 @@ async function loadReelsData() {
       const url = r.url || '';
       const caption = r.caption || '';
       const timestamp = r.timestamp || '';
-      const thumb = r.thumbnail_url || 'assets/photos/uploads/reel_placeholder.jpg';
+      const thumb = r.thumbnail_url || 'assets/photos/uploads/reel_placeholder.webp';
       
       let displayTag = "Highlight";
       const lowerCap = caption.toLowerCase();

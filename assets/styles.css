@@ -1800,7 +1800,7 @@ h2 {
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 60%),
     linear-gradient(180deg, rgba(204, 113, 68, 0.35), rgba(29, 23, 20, 0.95)),
-    url('../assets/photos/914737241717875_122112465597110108_0.jpg') center / cover no-repeat;
+    url('../assets/photos/914737241717875_122112465597110108_0.webp') center / cover no-repeat;
   position: relative;
 }
 

@@ -4,27 +4,259 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flow Society | Flow's Table</title>
-  <meta name="description" content="Where generations meet and ideas flow both ways. Flow Society brings together younger builders and experienced mentors for honest exchange, positive energy, and mutual respect.">
+  <meta name="description" content="Flow Society — where different generations meet at one generous table. A networking party for builders, mentors, and curious minds in Bangkok.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://flowstable.vercel.app/flow-society">
   <meta name="theme-color" content="#1d1714">
   <meta property="og:title" content="Flow Society | Flow's Table">
-  <meta property="og:description" content="Where generations meet. Where ideas flow both ways. The exchange format within Flow's Table — connecting builders and mentors through positive energy and mutual respect.">
-  <meta property="og:image" content="https://flowstable.vercel.app/assets/photos/914737241717875_122112465597110108_0.jpg">
+  <meta property="og:description" content="Different generations. One generous table. A networking party for builders, mentors, and curious minds.">
+  <meta property="og:image" content="https://flowstable.vercel.app/assets/photos/album/album_000.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flowstable.vercel.app/flow-society">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Flow Society | Flow's Table">
-  <meta name="twitter:description" content="Where generations meet. Where ideas flow both ways.">
-  <meta name="twitter:image" content="https://flowstable.vercel.app/assets/photos/914737241717875_122112465597110108_0.jpg">
+  <meta name="twitter:description" content="Different generations. One generous table. A networking party for builders, mentors, and curious minds.">
+  <meta name="twitter:image" content="https://flowstable.vercel.app/assets/photos/album/album_000.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-  <link rel="preload" as="image" href="assets/photos/flow-society/soho-01.jpg" fetchpriority="high" type="image/jpeg">
   <link rel="stylesheet" href="assets/styles.css">
-  <script src="assets/site.js" defer></script>
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.jpg">
+  <style>
+    /* Flow Society page styles */
+    :root {
+      --fs-terracotta: #CC7044;
+      --fs-terracotta-light: #E89968;
+      --fs-dark: #1d1714;
+      --fs-card: #28221e;
+      --fs-border: rgba(255,255,255,0.08);
+    }
+
+    .fs-hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .fs-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.45);
+    }
+    .fs-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 80px 24px;
+    }
+    .fs-hero-content .eyebrow {
+      color: var(--fs-terracotta-light);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .fs-hero-content h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #fff;
+      margin: 0 0 20px;
+    }
+    .fs-hero-content p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0;
+    }
+
+    .fs-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .fs-section h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 16px;
+      line-height: 1.2;
+    }
+    .fs-section .section-eyebrow {
+      color: var(--fs-terracotta-light);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .fs-section .lead {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    /* Exchange section */
+    .fs-exchange {
+      background: linear-gradient(180deg, #1d1714 0%, #221b16 100%);
+      border-top: 1px solid var(--fs-border);
+      border-bottom: 1px solid var(--fs-border);
+    }
+    .fs-exchange-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .fs-exchange-card {
+      background: var(--fs-card);
+      border: 1px solid var(--fs-border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .fs-exchange-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--fs-terracotta-light);
+      margin: 0 0 12px;
+    }
+    .fs-exchange-card p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .fs-exchange-footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      font-style: italic;
+    }
+
+    /* Photo grid */
+    .fs-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .fs-photo-grid img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      background: var(--fs-card);
+    }
+    .fs-photo-grid img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Moments cards */
+    .fs-moments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .fs-moment-card {
+      background: var(--fs-card);
+      border: 1px solid var(--fs-border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .fs-moment-card img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+    }
+    .fs-moment-card-body {
+      padding: 28px 24px;
+    }
+    .fs-moment-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .fs-moment-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Stats */
+    .fs-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      margin-top: 48px;
+      justify-content: center;
+    }
+    .fs-stat {
+      text-align: center;
+    }
+    .fs-stat .number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--fs-terracotta);
+      display: block;
+    }
+    .fs-stat .label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* CTA */
+    .fs-cta {
+      background: var(--fs-terracotta);
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .fs-cta h2 {
+      color: #fff;
+      font-size: clamp(28px, 4vw, 42px);
+      margin: 0 0 16px;
+    }
+    .fs-cta p {
+      color: rgba(255,255,255,0.9);
+      font-size: 18px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .fs-cta .button {
+      display: inline-block;
+      background: #fff;
+      color: var(--fs-terracotta);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .fs-cta .button:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .fs-exchange-grid { grid-template-columns: 1fr; }
+      .fs-hero-content { padding: 60px 20px; }
+      .fs-section { padding: 60px 20px; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -45,104 +277,134 @@
   </header>
 
   <main>
-    <!-- Hero Section -->
-    <section class="about-hero" style="background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 60%), linear-gradient(180deg, rgba(204, 113, 68, 0.55), rgba(29, 23, 20, 0.95)), url('assets/photos/flow-society/soho-01.jpg') center / cover no-repeat;">
-      <div class="hero-content">
-        <p class="eyebrow">Where Generations Meet</p>
-        <h1>Flow Society</h1>
-        <p class="hero-copy">Where generations meet. Where ideas flow both ways.</p>
+    <!-- Hero -->
+    <section class="fs-hero">
+      <div class="fs-hero-bg" style="background-image: url('assets/photos/album/album_000.jpg');"></div>
+      <div class="fs-hero-content">
+        <p class="eyebrow">FLOW SOCIETY</p>
+        <h1>Different generations.<br>One generous table.</h1>
+        <p>Where younger builders and experienced mentors share a meal, swap stories, and find common ground. No hierarchy. No agenda. Just real connection.</p>
       </div>
     </section>
 
-    <!-- Description Section -->
-    <section class="section intro-band">
-      <div class="section-inner two-column">
-        <div>
-          <p class="story-eyebrow">The exchange format</p>
-          <h2 class="story-title">Ideas that flow <span class="coral-text">both ways.</span></h2>
+    <!-- The Exchange -->
+    <section class="fs-exchange">
+      <div class="fs-section">
+        <p class="section-eyebrow">The Exchange</p>
+        <h2>Two worlds, one table.</h2>
+        <p class="lead">Flow Society brings together people who normally wouldn't sit together — and gives them a reason to stay.</p>
+
+        <div class="fs-exchange-grid">
+          <div class="fs-exchange-card">
+            <h3>Younger Builders</h3>
+            <p>Fresh ideas, sharp instincts, and the energy of people building something right now. They bring what's next.</p>
+          </div>
+          <div class="fs-exchange-card">
+            <h3>Experienced Mentors</h3>
+            <p>Decades of scars, wins, and pattern recognition. They bring the map — and the honesty to share where it's wrong.</p>
+          </div>
         </div>
-        <div class="intro-copy">
-          <p class="lead-text">Flow Society is the exchange format within Flow's Table — bringing together younger builders with fresh perspectives on technology, media, culture, and Gen-Z shifts alongside experienced mentors carrying hard-earned lessons shaped by cycles of trial, failure, and success.</p>
-          <p class="body-text">The common language: positive energy, safety, and mutual respect. No hierarchy. No agenda. Just real people sharing what they've lived and learned, building connections that outlast the evening.</p>
-          <p class="conclusion-text">This is where the next generation meets the one that's been there — and both walk away with something new.</p>
+
+        <p class="fs-exchange-footer">The common language: positive energy, safety, and mutual respect.</p>
+      </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="fs-section">
+      <p class="section-eyebrow">The Energy</p>
+      <h2>What it looks like when the room comes alive.</h2>
+      <p class="lead">Every gathering has its own rhythm. Sometimes it's a big networking party. Sometimes it's a quiet conversation that changes everything.</p>
+
+      <div class="fs-photo-grid">
+        <img src="assets/photos/album/album_022.jpg" alt="Flow Society networking party in Bangkok" loading="lazy">
+        <img src="assets/photos/album/album_044.jpg" alt="Community members sharing a meal together" loading="lazy">
+        <img src="assets/photos/album/album_066.jpg" alt="Builders and mentors connecting at Flow Society" loading="lazy">
+        <img src="assets/photos/album/album_088.jpg" alt="A moment of genuine conversation at the table" loading="lazy">
+        <img src="assets/photos/album/album_110.jpg" alt="The circle keeps expanding — new faces at every gathering" loading="lazy">
+        <img src="assets/photos/album/album_132.jpg" alt="Friends old and new at a Flow Society event" loading="lazy">
+        <img src="assets/photos/album/album_154.jpg" alt="The warmth of a trusted community" loading="lazy">
+        <img src="assets/photos/album/album_176.jpg" alt="Conversations that matter, over food that brings people together" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Key Moments -->
+    <section class="fs-exchange">
+      <div class="fs-section">
+        <p class="section-eyebrow">Key Moments</p>
+        <h2>Gatherings that became something bigger.</h2>
+        <p class="lead">From intimate dinners to full-room networking parties — every event adds another layer to the circle.</p>
+
+        <div class="fs-moments-grid">
+          <div class="fs-moment-card">
+            <img src="assets/photos/album/album_198.jpg" alt="Networking party at Flow Society" loading="lazy">
+            <div class="fs-moment-card-body">
+              <h3>Networking Parties</h3>
+              <p>The room fills up. Conversations start everywhere at once. By the end of the night, strangers have become collaborators.</p>
+            </div>
+          </div>
+          <div class="fs-moment-card">
+            <img src="assets/photos/album/album_220.jpg" alt="Panel discussion at Flow Society" loading="lazy">
+            <div class="fs-moment-card-body">
+              <h3>Panel Discussions</h3>
+              <p>Speakers share what they wish they'd known earlier — unfiltered, practical, and grounded in real experience.</p>
+            </div>
+          </div>
+          <div class="fs-moment-card">
+            <img src="assets/photos/album/album_242.jpg" alt="Intimate dinner with the Flow Society community" loading="lazy">
+            <div class="fs-moment-card-body">
+              <h3>Intimate Dinners</h3>
+              <p>Smaller tables, deeper questions. The format that started it all — and still the heartbeat of the community.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Key Moments Section -->
-    <section class="section" style="background: var(--ink); color: #fff;">
-      <div class="section-inner">
-        <div class="section-head text-center">
-          <p class="eyebrow" style="color: rgba(255,255,255,0.85);">What We Do</p>
-          <h2 style="color: #fff;">Key Moments</h2>
+    <!-- The Circle Keeps Expanding -->
+    <section class="fs-section">
+      <p class="section-eyebrow">The Circle Keeps Expanding</p>
+      <h2>More people. More perspectives.</h2>
+      <p class="lead">Every gathering brings new faces and fresh energy — but the warmth at the center never changes. The circle grows because trust grows.</p>
+
+      <div class="fs-stats">
+        <div class="fs-stat">
+          <span class="number">500+</span>
+          <span class="label">Community Members</span>
         </div>
-        <div class="moments-grid">
-          <div class="moment-card">
-            <span class="moment-icon">🍷</span>
-            <h3>SOHO BKK Year-End Party</h3>
-            <p>Private year-end celebration bringing together the Flow Society community for an evening of stories, connection, and new beginnings.</p>
-          </div>
-          <div class="moment-card">
-            <span class="moment-icon">💬</span>
-            <h3>Panel Discussions</h3>
-            <p>Intimate panels where experienced mentors share hard-earned lessons, and younger voices bring fresh perspectives on the topics that matter.</p>
-          </div>
-          <div class="moment-card">
-            <span class="moment-icon">🎤</span>
-            <h3>Karaoke Nights</h3>
-            <p>Because the best connections happen when the guard comes down. Singing together, laughing together — the moments between the big ideas.</p>
-          </div>
-          <div class="moment-card">
-            <span class="moment-icon">🍽️</span>
-            <h3>Intimate Dinners</h3>
-            <p>Curated small-group dinners where conversations flow freely over great food — the original format of Flow's Table, refined.</p>
-          </div>
+        <div class="fs-stat">
+          <span class="number">20+</span>
+          <span class="label">Gatherings Hosted</span>
+        </div>
+        <div class="fs-stat">
+          <span class="number">100%</span>
+          <span class="label">Built on Trust</span>
         </div>
       </div>
     </section>
 
-    <!-- Photo Grid Section -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="section-head text-center">
-          <p class="eyebrow">Captured Memories</p>
-          <h2>Moments from Flow Society</h2>
-        </div>
-        <div class="society-photo-grid">
-          <img src="assets/photos/flow-society/soho-01.jpg" alt="SOHO BKK private party — Flow Society members enjoying the year-end celebration" loading="lazy" width="800" height="600">
-          <img src="assets/photos/flow-society/soho-02.jpg" alt="Flow Society gathering at SOHO BKK" loading="lazy" width="800" height="600">
-          <img src="assets/photos/flow-society/soho-03.jpg" alt="Flow Society year-end event candid moment" loading="lazy" width="800" height="600">
-          <img src="assets/photos/flow-society/soho-04.jpg" alt="Community connections at SOHO BKK Flow Society event" loading="lazy" width="800" height="600">
-          <img src="assets/photos/flow-society/soho-05.jpg" alt="Flow Society private party group photo" loading="lazy" width="800" height="600">
-          <img src="assets/photos/flow-society/soho-06.jpg" alt="Flow Society SOHO BKK celebration highlights" loading="lazy" width="800" height="600">
-          <img src="assets/photos/914737241717875_122112465597110108_0.jpg" alt="Flow Society Year-End gathering" loading="lazy" width="800" height="600">
-          <img src="assets/photos/press/0k8a8809.jpg" alt="Community gathering at Flow's Table" loading="lazy" width="800" height="600">
-          <img src="assets/photos/press/0k8a8943.jpg" alt="Group gathering at Flow Society event" loading="lazy" width="800" height="600">
-          <img src="assets/photos/press/0k8a8828.jpg" alt="Group portrait at Flow's Table community event" loading="lazy" width="800" height="600">
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section join-band" style="background: var(--coral); color: #fff; text-align: center;">
-      <div class="section-inner">
-        <p class="eyebrow" style="color: rgba(255,255,255,0.85);">Be Part of the Flow</p>
-        <h2 style="color: #fff; margin-bottom: 16px;">Ready to join the conversation?</h2>
-        <p style="color: rgba(255,255,255,0.9); font-size: 19px; max-width: 600px; margin: 0 auto 40px;">Flow Society is for anyone who brings positive energy and a willingness to share. No credentials required — just curiosity.</p>
-        <a class="button primary" href="/home#join" style="background: #fff; color: var(--coral); box-shadow: 0 8px 24px rgba(0,0,0,0.15);">Join the table</a>
-      </div>
+    <!-- CTA -->
+    <section class="fs-cta">
+      <h2>Pull up a chair.</h2>
+      <p>Flow Society is invite-driven but always open to the right energy. Come for the conversation. Stay for the people.</p>
+      <a class="button" href="/home#join">Join the next gathering</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div>
-      <img src="assets/photos/logo_text_orange.png" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
-    </div>
-    <div class="footer-links">
-      <a href="/home#join">Join the table</a>
-      <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:flowstable.th@gmail.com">flowstable.th@gmail.com</a>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/photos/914737241717875_122093694105110108_3.jpg" alt="Flow's Table" width="32" height="32">
+        <span>Flow's Table</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/home">Home</a>
+        <a href="/flow-society">Flow Society</a>
+        <a href="/articles">Articles</a>
+        <a href="/reels">Reels</a>
+        <a href="/guests">Guests</a>
+        <a href="/about">About</a>
+      </nav>
+      <p class="footer-copy">© 2026 Flow's Table · From Flow to Grow</p>
     </div>
   </footer>
 </body>

@@ -1,0 +1,29 @@
+{
+  "name": "Flow's Table",
+  "short_name": "Flow's Table",
+  "description": "A living table for thoughtful conversations, generous people, and ideas that keep moving.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1d1714",
+  "theme_color": "#1d1714",
+  "icons": [
+    {
+      "src": "assets/photos/914737241717875_122093694105110108_3.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/photos/914737241717875_122093694105110108_3.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "community",
+    "events",
+    "networking"
+  ],
+  "lang": "en"
+}

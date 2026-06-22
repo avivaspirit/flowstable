@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Video Reels & Highlights | Flow's Table</title>
-  <meta name="description" content="Watch the best moments from Flow's Table gatherings — candid conversations, speaker highlights, and the energy of Bangkok's most trusted community dinner.">
+  <meta name="description" content="Watch video highlights from Flow's Table gatherings — candid conversations, speaker insights, and behind-the-scenes moments from Bangkok's most trusted community dinner circle."'s Table gatherings — candid conversations, speaker highlights, and the energy of Bangkok's most trusted community dinner.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://flowstable.vercel.app/reels">
   <meta property="og:title" content="Video Reels | Flow's Table">
@@ -24,12 +24,24 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/site.js" defer></script>
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
+
+  <!-- Analytics: Google Analytics 4 — replace G-XXXXXXXXXX with your measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGallery", "name": "Flow's Table Reels", "description": "Video highlights and reels from Flow's Table gatherings in Bangkok.", "url": "https://flowstable.vercel.app/reels", "publisher": {"@type": "Organization", "name": "Flow's Table"}}</script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="/home">
-      <img src="assets/photos/logo_text_orange.webp" alt="Flow's Table logo" style="object-fit: contain;" width="474" height="474">
+      <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" style="object-fit: contain;" width="474" height="474">
     </a>
     <nav aria-label="Main navigation">
       <a href="/home#story">Story</a>
@@ -63,11 +75,11 @@
         
         <!-- Category Filter Chips -->
         <div id="reelsChips" class="chips" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-          <button class="chip active" data-value="all">All</button>
-          <button class="chip" data-value="Interview">Interviews</button>
-          <button class="chip" data-value="Mindset">Mindset</button>
-          <button class="chip" data-value="Gathering">Gatherings</button>
-          <button class="chip" data-value="Society">Society</button>
+          <button type="button" class="chip active" data-value="all">All</button>
+          <button type="button" class="chip" data-value="Interview">Interviews</button>
+          <button type="button" class="chip" data-value="Mindset">Mindset</button>
+          <button type="button" class="chip" data-value="Gathering">Gatherings</button>
+          <button type="button" class="chip" data-value="Society">Society</button>
         </div>
       </div>
     </section>
@@ -87,15 +99,26 @@
         </div>
       </div>
     </section>
+  
+    <section class="reels-follow-cta">
+      <h2>See more on social.</h2>
+      <p>Follow us for behind-the-scenes reels, live moments, and community updates you won't see on the website.</p>
+      <div class="reels-follow-actions">
+        <a class="button fb-btn" href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">👍 Follow on Facebook</a>
+        <a class="button ig-btn" href="https://instagram.com/flowstable" target="_blank" rel="noopener">📸 Follow on Instagram</a>
+        <a class="button line-btn-cta" href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">💬 Add on LINE</a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div>
-      <img src="assets/photos/logo_text_orange.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
+      <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
     </div>
     <div class="footer-links">
       <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
       <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">LINE @010eyqrs</a>
       <a href="mailto:flowstable.th@gmail.com">flowstable.th@gmail.com</a>
     </div>
   </footer>

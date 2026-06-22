@@ -24,6 +24,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/site.js" defer></script>
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
   <script type="application/ld+json">
   {
@@ -249,11 +250,21 @@
   }
 }
   </script>
+
+  <!-- Analytics: Google Analytics 4 — replace G-XXXXXXXXXX with your measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="/home">
-      <img src="assets/photos/logo_text_orange.webp" alt="Flow's Table logo" style="object-fit: contain;" width="474" height="474">
+      <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" style="object-fit: contain;" width="474" height="474">
     </a>
     <nav aria-label="Main navigation">
       <a href="/home#story">Story</a>
@@ -624,12 +635,13 @@
 
   <footer class="site-footer">
     <div>
-      <img src="assets/photos/logo_text_orange.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
+      <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
     </div>
     <div class="footer-links">
       <a href="/home#join">Join the table</a>
       <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
       <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">LINE @010eyqrs</a>
       <a href="mailto:flowstable.th@gmail.com">flowstable.th@gmail.com</a>
     </div>
   </footer>

@@ -22,6 +22,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
   <style>
     /* Force dark theme for entire Flow Society page */
@@ -262,8 +263,18 @@
     }
   </style>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Flow Society Networking Party", "description": "Where different generations meet at one generous table. Networking parties, panel discussions, and intimate dinners in Bangkok.", "location": {"@type": "Place", "name": "SOHO BKK", "address": {"@type": "PostalAddress", "addressLocality": "Bangkok", "addressCountry": "TH"}}, "organizer": {"@type": "Organization", "name": "Flow's Table", "url": "https://flowstable.vercel.app"}, "url": "https://flowstable.vercel.app/flow-society"}</script>
+
+  <!-- Analytics: Google Analytics 4 — replace G-XXXXXXXXXX with your measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="/home">
       <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" width="36" height="36">
@@ -395,7 +406,14 @@
     <section class="fs-cta">
       <h2>Pull up a chair.</h2>
       <p>Flow Society is invite-driven but always open to the right energy. Come for the conversation. Stay for the people.</p>
-      <a class="button" href="/home#join">Join the next gathering</a>
+      <div class="fs-cta-actions" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:32px;">
+        <a class="button" href="/home#join" style="background:#fff;color:#CC7044;padding:14px 36px;border-radius:50px;font-weight:700;text-decoration:none;">Join the next gathering</a>
+      </div>
+      <div class="fs-social-row" style="display:flex; gap:24px; justify-content:center; margin-top:32px; flex-wrap:wrap;">
+        <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:600;">👍 Facebook</a>
+        <a href="https://instagram.com/flowstable" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:600;">📸 Instagram</a>
+        <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.9);text-decoration:none;font-size:15px;font-weight:600;">💬 LINE @010eyqrs</a>
+      </div>
     </section>
   </main>
 
@@ -412,6 +430,9 @@
         <a href="/reels">Reels</a>
         <a href="/guests">Guests</a>
         <a href="/about">About</a>
+        <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">LINE</a>
       </nav>
       <p class="footer-copy">© 2026 Flow's Table · From Flow to Grow</p>
     </div>

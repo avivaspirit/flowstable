@@ -15,12 +15,23 @@
     <script src="assets/sanity-client.js" defer></script>
     <script src="assets/article-page.js" defer></script>
     <script src="assets/site.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
-  </head>
+    <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.webp">
+  
+  <!-- Analytics: Google Analytics 4 — replace G-XXXXXXXXXX with your measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Flow's Table Article", "publisher": {"@type": "Organization", "name": "Flow's Table", "url": "https://flowstable.vercel.app"}, "url": "https://flowstable.vercel.app/article"}</script>
+</head>
   <body>
     <header class="site-header">
       <a class="brand" href="/home">
-        <img src="assets/photos/logo_text_orange.webp" alt="Flow's Table logo" height="32" style="object-fit: contain;">
+        <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" height="32" style="object-fit: contain;">
       </a>
       <nav aria-label="Main navigation">
           <a href="/home#story">Story</a>

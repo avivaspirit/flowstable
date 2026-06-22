@@ -19,7 +19,16 @@ function postLink(post) {
   if (post.sanitySlug && window.SanityCMS?.articleHref) {
     return window.SanityCMS.articleHref(post);
   }
-  return `notes/${post.id}`;
+  // FB posts link directly to Facebook
+  if (post.permalink_url && (post.permalink_url.startsWith("https://") || post.permalink_url.startsWith("http"))) {
+    return post.permalink_url;
+  }
+  return "#";
+}
+
+function isFacebookPost(post) {
+  const url = post.permalink_url || "";
+  return url.includes("facebook.com") && !post.sanitySlug;
 }
 
 function createArchivePostElement(post) {
@@ -38,8 +47,10 @@ function createArchivePostElement(post) {
   const previewText =
     (post.message || "").length > 200 ? `${post.message.substring(0, 200)}...` : post.message || "";
   const bodyHtml = `<p>${previewText.replace(/\n/g, "<br>")}</p>`;
+  const fbPost = isFacebookPost(post);
   const link = postLink(post);
-  const linkLabel = "Read Note";
+  const linkLabel = fbPost ? "Read on Facebook" : "Read Note";
+  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : '';
 
   articleEl.innerHTML = `
     <div class="archive-head">
@@ -47,10 +58,11 @@ function createArchivePostElement(post) {
         <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
         <h2>${post.title || "Flow's Table"}</h2>
       </div>
-      <a href="${link}" class="open-modal-trigger">${linkLabel}</a>
+      <a href="${link}" class="open-modal-trigger fb-read-link"${externalAttr}>${linkLabel} ${fbPost ? '↗' : ''}</a>
     </div>
     ${galleryHtml}
     <div class="archive-copy">${bodyHtml}</div>
+    ${fbPost ? `<a href="${link}" class="fb-cta-button" target="_blank" rel="noopener noreferrer">Read full post on Facebook →</a>` : ''}
   `;
 
   return articleEl;
@@ -83,17 +95,20 @@ function createPostCardElement(post) {
 
   const thumb = post.photos?.[0] || "";
   const link = postLink(post);
+  const fbPost = isFacebookPost(post);
+  const externalAttr = fbPost ? ' target="_blank" rel="noopener noreferrer"' : '';
   const preview =
     (post.message || "").length > 140 ? `${post.message.substring(0, 140)}...` : post.message || "";
 
   card.innerHTML = `
-    <a class="post-media" href="${link}">
+    <a class="post-media" href="${link}"${externalAttr}>
       ${thumb ? `<img src="${thumb}" alt="${post.title || "Flow's Table"}" loading="lazy">` : ""}
     </a>
     <div class="post-copy">
       <p class="eyebrow">${post.date_label || "Recent"} / ${post.category || "Note"}</p>
       <h3>${post.title || "Flow's Table"}</h3>
       <p>${preview.replace(/\n/g, "<br>")}</p>
+      ${fbPost ? `<a href="${link}" class="post-read-fb" target="_blank" rel="noopener noreferrer">Read on Facebook →</a>` : ""}
     </div>
   `;
 
@@ -1119,3 +1134,9 @@ function initReelsPageFilter() {
     }
   });
 }
+/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
+/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory
+/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
+/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory
+/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
+/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory

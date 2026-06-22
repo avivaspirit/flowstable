@@ -2739,3 +2739,41 @@ nav a.nav-join:hover {
 .archive-post .eyebrow {
   color: var(--coral) !important;
 }
+
+
+/* === Facebook Read Button Styles === */
+.fb-read-link {
+  white-space: nowrap;
+}
+
+.fb-cta-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 24px;
+  background: #1877F2;
+  color: #fff !important;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.fb-cta-button:hover {
+  background: #166FE5;
+  transform: translateY(-1px);
+}
+
+.post-read-fb {
+  display: inline-block;
+  margin-top: 12px;
+  color: #1877F2;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.post-read-fb:hover {
+  opacity: 0.8;
+}

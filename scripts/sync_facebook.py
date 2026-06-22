@@ -162,21 +162,35 @@ def sync_facebook_posts():
                 if sub.get("media", {}).get("image", {}).get("src"):
                     photo_urls.append(sub["media"]["image"]["src"])
                     
-        # Download photos locally
+        # Download photos locally (as .webp)
         os.makedirs(PHOTOS_DIR, exist_ok=True)
         for idx, photo_url in enumerate(photo_urls):
-            local_name = f"{post_id}_{idx}.jpg"
+            local_name = f"{post_id}_{idx}.webp"
             local_path = os.path.join(PHOTOS_DIR, local_name)
-            
+
             # Save reference
             photos.append(f"assets/photos/{local_name}")
-            
-            # Download file if not exists
+
+            # Download + convert to webp if not exists
             if not os.path.exists(local_path):
                 try:
-                    img_data = requests.get(photo_url).content
-                    with open(local_path, "wb") as handler:
+                    img_data = requests.get(photo_url, timeout=30).content
+                    # Save as JPEG first, then convert
+                    tmp_jpg = local_path.replace(".webp", ".jpg")
+                    with open(tmp_jpg, "wb") as handler:
                         handler.write(img_data)
+                    # Convert to webp
+                    try:
+                        from PIL import Image
+                        im = Image.open(tmp_jpg)
+                        if im.mode in ("RGBA", "P"):
+                            im = im.convert("RGB")
+                        im.save(local_path, "WEBP", quality=85)
+                        os.remove(tmp_jpg)
+                    except ImportError:
+                        # PIL not available — keep as .jpg and update reference
+                        os.rename(tmp_jpg, local_path.replace(".webp", ".jpg"))
+                        photos[-1] = f"assets/photos/{post_id}_{idx}.jpg"
                     print(f"Downloaded photo: {local_name}")
                 except Exception as ex:
                     print(f"Failed to download photo {photo_url}: {ex}")
@@ -389,3 +403,5 @@ if __name__ == "__main__":
     })
     # #endregion
     print("Sync process completed.")
+/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
+/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory

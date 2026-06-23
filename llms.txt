@@ -6,11 +6,11 @@ Flow's Table documents community sessions, field notes, video reels, and guest s
 
 ## Public pages
 
-- [Home](https://flowstable.vercel.app/home): Overview of Flow's Table community and mission
-- [Articles](https://flowstable.vercel.app/articles): Field notes and session write-ups from community gatherings
-- [Reels](https://flowstable.vercel.app/reels): Short-form video highlights and wisdom clips from guests
-- [Guests](https://flowstable.vercel.app/guests): Featured speakers, mentors, and community members
-- [About](https://flowstable.vercel.app/about): Background and purpose of Flow's Table
+- [Home](https://www.flowstable.com/home): Overview of Flow's Table community and mission
+- [Articles](https://www.flowstable.com/articles): Field notes and session write-ups from community gatherings
+- [Reels](https://www.flowstable.com/reels): Short-form video highlights and wisdom clips from guests
+- [Guests](https://www.flowstable.com/guests): Featured speakers, mentors, and community members
+- [About](https://www.flowstable.com/about): Background and purpose of Flow's Table
 
 ## Contact / social
 
@@ -18,5 +18,5 @@ Flow's Table documents community sessions, field notes, video reels, and guest s
 
 ## Crawling
 
-- robots.txt: https://flowstable.vercel.app/robots.txt
-- sitemap: https://flowstable.vercel.app/sitemap.xml
+- robots.txt: https://www.flowstable.com/robots.txt
+- sitemap: https://www.flowstable.com/sitemap.xml

@@ -51,4 +51,4 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
-Sitemap: https://flowstable.vercel.app/sitemap.xml
+Sitemap: https://www.flowstable.com/sitemap.xml

@@ -8,15 +8,15 @@
   "theme_color": "#1d1714",
   "icons": [
     {
-      "src": "assets/photos/914737241717875_122093694105110108_3.webp",
+      "src": "/assets/favicon.png",
       "sizes": "192x192",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/photos/914737241717875_122093694105110108_3.webp",
+      "src": "/assets/favicon.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],

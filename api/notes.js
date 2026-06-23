@@ -59,7 +59,12 @@ export default function handler(req, res) {
   }
 
   // Structured data
-  const ogImage = post.photos && post.photos.length > 0 ? (post.photos[0].startsWith("http") ? post.photos[0] : `https://flowstable.vercel.app/${post.photos[0]}`) : "https://flowstable.vercel.app/assets/photos/press/0k8a8828.jpg";
+  const rawPhoto = post.photos && post.photos.length > 0 ? post.photos[0] : null;
+  const ogImage = rawPhoto
+    ? (rawPhoto.startsWith("http")
+        ? rawPhoto
+        : `https://flowstable.vercel.app/${rawPhoto.replace(/\.webp$/, ".jpg")}`)
+    : "https://flowstable.vercel.app/assets/photos/hero/hero-articles.jpg";
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
@@ -112,12 +117,14 @@ export default function handler(req, res) {
     <script src="assets/sanity-client.js" defer></script>
     <script src="assets/article-page.js" defer></script>
     <script src="assets/site.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="assets/photos/914737241717875_122093694105110108_3.jpg">
+    <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="/home">
-        <img src="assets/photos/logo_text_orange.png" alt="Flow's Table logo" height="32" style="object-fit: contain;">
+        <img src="/assets/favicon.png" alt="Flow's Table logo" height="32" style="object-fit: contain; border-radius: 50%;">
       </a>
       <nav aria-label="Main navigation">
         <a href="/home#story">Story</a>

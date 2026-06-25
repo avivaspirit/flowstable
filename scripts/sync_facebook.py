@@ -440,5 +440,3 @@ if __name__ == "__main__":
     })
     # #endregion
     print("Sync process completed.")
-/usr/bin/bash: line 5: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-snap-b2f95d95acd4.sh: No such file or directory
-/usr/bin/bash: line 6: C:/Users/Re dmi/AppData/Local/hermes/cache/terminal/hermes-cwd-b2f95d95acd4.txt: No such file or directory

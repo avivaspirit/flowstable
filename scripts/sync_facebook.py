@@ -89,41 +89,82 @@ def format_date(value):
         except Exception:
             return value[:10]
 
+def _fetch_paginated(base_url, base_params, max_pages=4, label="posts"):
+    """Helper: fetch all pages from a Graph API endpoint."""
+    results = []
+    url = base_url
+    params = base_params
+    for page_num in range(max_pages):
+        response = requests.get(url, params=params)
+        if not response.ok:
+            print(f"  Error fetching {label}: {response.text[:200]}")
+            break
+        page_data = response.json()
+        page_items = page_data.get("data", [])
+        results.extend(page_items)
+        print(f"  {label} page {page_num + 1}: {len(page_items)} (total: {len(results)})")
+        next_url = page_data.get("paging", {}).get("next")
+        if not next_url or not page_items:
+            break
+        url = next_url
+        params = None
+    return results
+
+
 def sync_facebook_posts():
     print("Fetching posts from Facebook Graph API...")
-    url = f"https://graph.facebook.com/v20.0/{PAGE_ID}/feed"
-    params = {
-        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares",
+    fields = "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares"
+    base_params = {
+        "fields": fields,
         "access_token": PAGE_ACCESS_TOKEN,
-        "limit": 50
+        "limit": 50,
     }
-    
-    # Fetch with pagination (up to 4 pages = 200 posts)
-    posts_data = []
-    current_url = url
-    current_params = params
-    for page_num in range(4):
-        response = requests.get(current_url, params=current_params)
-        if not response.ok:
-            print(f"Error calling Facebook Graph API: {response.text}")
-            if "expired" in response.text.lower():
-                print("\nWARNING: Meta Access Token has expired. Please update PAGE_ACCESS_TOKEN with a new long-lived token.\n")
-            return False
-        
-        page_data = response.json()
-        page_posts = page_data.get("data", [])
-        posts_data.extend(page_posts)
-        print(f"  Page {page_num + 1}: {len(page_posts)} posts (total: {len(posts_data)})")
-        
-        # Check for next page
-        paging = page_data.get("paging", {})
-        next_url = paging.get("next")
-        if not next_url or not page_posts:
-            break
-        current_url = next_url
-        current_params = None  # next URL already has all params
-    
-    print(f"Retrieved {len(posts_data)} posts from API.")
+
+    # Fetch from BOTH /posts (page's own posts incl shared) AND /feed (all)
+    print("  --- /posts endpoint (includes shared posts) ---")
+    posts_data = _fetch_paginated(
+        f"https://graph.facebook.com/v20.0/{PAGE_ID}/posts",
+        base_params, max_pages=4, label="/posts"
+    )
+    # Also fetch /feed to catch anything /posts misses
+    print("  --- /feed endpoint ---")
+    feed_data = _fetch_paginated(
+        f"https://graph.facebook.com/v20.0/{PAGE_ID}/feed",
+        base_params, max_pages=2, label="/feed"
+    )
+
+    # Also fetch videos/reels
+    print("  --- /videos endpoint (Facebook reels) ---")
+    video_params = {
+        "fields": "id,description,created_time,permalink_url,length",
+        "access_token": PAGE_ACCESS_TOKEN,
+        "limit": 100,
+    }
+    video_data = _fetch_paginated(
+        f"https://graph.facebook.com/v20.0/{PAGE_ID}/videos",
+        video_params, max_pages=2, label="/videos"
+    )
+
+    # Merge — dedupe by post ID
+    seen_ids = set()
+    all_raw = []
+    for item in posts_data + feed_data + video_data:
+        pid = item.get("id", "")
+        if pid and pid not in seen_ids:
+            seen_ids.add(pid)
+            all_raw.append(item)
+
+    # Convert video items to post-like format
+    for item in video_data:
+        pid = item.get("id", "")
+        if pid in seen_ids:
+            continue
+        seen_ids.add(pid)
+        item["_from_videos"] = True
+        all_raw.append(item)
+
+    posts_data = all_raw
+    print(f"Retrieved {len(posts_data)} unique items (posts+feed+videos).")
     
     # Load existing posts database
     existing_posts = []
@@ -144,6 +185,37 @@ def sync_facebook_posts():
             print(f"Skipping post {post_id} - not from this page (Author ID: {author_id})")
             continue
             
+        # Handle video items (from /videos endpoint — different field names)
+        if item.get("_from_videos"):
+            msg = clean_text(item.get("description", ""))
+            story = ""
+            permalink = item.get("permalink_url", "")
+            if not permalink:
+                permalink = f"https://www.facebook.com/{PAGE_ID}/videos/{post_id}"
+            created = item.get("created_time", "")
+            title = msg.split("\n")[0] if msg else "Flow's Table Video"
+            if len(title) > 80:
+                title = title[:77] + "..."
+            category = category_for(msg)
+            date_label = format_date(created)
+            post_obj = {
+                "id": post_id,
+                "created_time": created,
+                "date_label": date_label,
+                "message": msg,
+                "story": "",
+                "title": title,
+                "category": category,
+                "permalink_url": permalink,
+                "reaction_count": 0,
+                "comment_count": 0,
+                "share_count": 0,
+                "photos": [],
+                "alt": f"Flow's Table video from {date_label}",
+            }
+            new_or_updated.append(post_obj)
+            continue
+
         msg = clean_text(item.get("message", ""))
         story = clean_text(item.get("story", ""))
         

@@ -93,7 +93,7 @@ def sync_facebook_posts():
     print("Fetching posts from Facebook Graph API...")
     url = f"https://graph.facebook.com/v20.0/{PAGE_ID}/feed"
     params = {
-        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,title,description,subattachments},reactions.summary(true),comments.summary(true),shares",
+        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares",
         "access_token": PAGE_ACCESS_TOKEN,
         "limit": 50
     }
@@ -148,16 +148,12 @@ def sync_facebook_posts():
         story = clean_text(item.get("story", ""))
         
         # For shared posts (story contains "shared"), try to extract text
-        # from attachments if there's no message
+        # from message field if Flow's Table added a caption
         is_shared = story and "shared" in story.lower()
-        if is_shared and not msg:
-            # Try to get description from attachments
-            attachments = item.get("attachments", {}).get("data", [])
-            for att in attachments:
-                desc = att.get("description", "") or att.get("title", "")
-                if desc:
-                    msg = clean_text(desc)
-                    break
+        if is_shared:
+            if not msg:
+                # No caption from Flow's Table — use story as the message
+                msg = story
             print(f"Including shared post {post_id}: '{story[:50]}'")
             
         # Decide title — for shared posts, story often has useful context

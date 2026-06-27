@@ -93,9 +93,9 @@ def sync_facebook_posts():
     print("Fetching posts from Facebook Graph API...")
     url = f"https://graph.facebook.com/v20.0/{PAGE_ID}/feed"
     params = {
-        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares",
+        "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,title,description,subattachments},reactions.summary(true),comments.summary(true),shares",
         "access_token": PAGE_ACCESS_TOKEN,
-        "limit": 50
+        "limit": 100
     }
     
     response = requests.get(url, params=params)
@@ -120,21 +120,30 @@ def sync_facebook_posts():
     for item in posts_data:
         post_id = item["id"]
         
-        # Verify ownership (skip shared or third-party posts)
+        # Keep all posts by the page (including shared posts)
+        # Only skip truly third-party posts that somehow appear
         author_id = item.get("from", {}).get("id")
         if author_id and author_id != PAGE_ID:
-            print(f"Skipping post {post_id} - not authored directly by the page owner (Author ID: {author_id})")
+            print(f"Skipping post {post_id} - not from this page (Author ID: {author_id})")
             continue
             
         msg = clean_text(item.get("message", ""))
         story = clean_text(item.get("story", ""))
         
-        # Skip shared posts identified by story label containing "shared"
-        if story and "shared" in story.lower():
-            print(f"Skipping shared content post {post_id}: '{story}'")
-            continue
+        # For shared posts (story contains "shared"), try to extract text
+        # from attachments if there's no message
+        is_shared = story and "shared" in story.lower()
+        if is_shared and not msg:
+            # Try to get description from attachments
+            attachments = item.get("attachments", {}).get("data", [])
+            for att in attachments:
+                desc = att.get("description", "") or att.get("title", "")
+                if desc:
+                    msg = clean_text(desc)
+                    break
+            print(f"Including shared post {post_id}: '{story[:50]}'")
             
-        # Decide title
+        # Decide title — for shared posts, story often has useful context
         title = msg.split("\n")[0] if msg else story.split("\n")[0] if story else "Flow's Table Update"
         if len(title) > 80:
             title = title[:77] + "..."

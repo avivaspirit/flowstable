@@ -98,14 +98,31 @@ def sync_facebook_posts():
         "limit": 50
     }
     
-    response = requests.get(url, params=params)
-    if not response.ok:
-        print(f"Error calling Facebook Graph API: {response.text}")
-        if "expired" in response.text.lower():
-            print("\nWARNING: Meta Access Token has expired. Please update PAGE_ACCESS_TOKEN with a new long-lived token.\n")
-        return False
+    # Fetch with pagination (up to 4 pages = 200 posts)
+    posts_data = []
+    current_url = url
+    current_params = params
+    for page_num in range(4):
+        response = requests.get(current_url, params=current_params)
+        if not response.ok:
+            print(f"Error calling Facebook Graph API: {response.text}")
+            if "expired" in response.text.lower():
+                print("\nWARNING: Meta Access Token has expired. Please update PAGE_ACCESS_TOKEN with a new long-lived token.\n")
+            return False
         
-    posts_data = response.json().get("data", [])
+        page_data = response.json()
+        page_posts = page_data.get("data", [])
+        posts_data.extend(page_posts)
+        print(f"  Page {page_num + 1}: {len(page_posts)} posts (total: {len(posts_data)})")
+        
+        # Check for next page
+        paging = page_data.get("paging", {})
+        next_url = paging.get("next")
+        if not next_url or not page_posts:
+            break
+        current_url = next_url
+        current_params = None  # next URL already has all params
+    
     print(f"Retrieved {len(posts_data)} posts from API.")
     
     # Load existing posts database

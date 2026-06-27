@@ -399,20 +399,22 @@ def sync_instagram_reels():
             reels_by_url[url_key] = reel
             added_count += 1
 
-    # Backfill Facebook reels details from posts.json
+    # Backfill Facebook reels AND videos from posts.json
     if os.path.exists(DATA_FILE):
         try:
             with open(DATA_FILE, "r", encoding="utf-8") as pf:
                 fb_posts = json.load(pf)
             for post in fb_posts:
                 p_url = post.get("permalink_url") or ""
-                if "facebook.com/reel/" in p_url:
+                is_reel = "facebook.com/reel/" in p_url
+                is_video = "facebook.com" in p_url and "/videos/" in p_url
+                if is_reel or is_video:
                     url_key = p_url.rstrip("/").lower()
                     fb_reel_data = {
                         "url": p_url,
                         "caption": post.get("message") or post.get("story") or "",
                         "timestamp": post.get("created_time") or "",
-                        "thumbnail_url": post.get("photos")[0] if post.get("photos") else ""
+                        "thumbnail_url": post.get("photos", [None])[0] if post.get("photos") else ""
                     }
                     if url_key in reels_by_url:
                         existing_reel = reels_by_url[url_key]
@@ -420,10 +422,11 @@ def sync_instagram_reels():
                             if key in fb_reel_data and (key not in existing_reel or not existing_reel[key]):
                                 existing_reel[key] = fb_reel_data[key]
                     else:
-                        existing_reels.append(fb_reel_data)
+                        existing_reels.insert(0, fb_reel_data)
                         reels_by_url[url_key] = fb_reel_data
+                        added_count += 1
         except Exception as e:
-            print(f"Error backfilling Facebook reels: {e}")
+            print(f"Error backfilling Facebook reels/videos: {e}")
             
         # Download IG thumbnails locally as webp
     reels_photo_dir = os.path.join(BASE_DIR, "assets", "photos", "reels")

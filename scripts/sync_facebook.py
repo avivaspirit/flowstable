@@ -111,9 +111,65 @@ def _fetch_paginated(base_url, base_params, max_pages=4, label="posts"):
     return results
 
 
+
+def _add_unique(items, value):
+    if value and value not in items:
+        items.append(value)
+
+
+def _attachment_image_urls(attachment):
+    """Collect preview images from Facebook attachment trees."""
+    urls = []
+    media = attachment.get("media") or {}
+    image = media.get("image") or {}
+    _add_unique(urls, image.get("src"))
+
+    subattachments = ((attachment.get("subattachments") or {}).get("data") or [])
+    for subattachment in subattachments:
+        for url in _attachment_image_urls(subattachment):
+            _add_unique(urls, url)
+
+    return urls
+
+
+def _download_photo(photo_url, local_name):
+    local_path = os.path.join(PHOTOS_DIR, local_name)
+    if os.path.exists(local_path):
+        return local_name
+
+    tmp_jpg = local_path.replace(".webp", ".jpg")
+    try:
+        img_data = requests.get(photo_url, timeout=30).content
+        with open(tmp_jpg, "wb") as handler:
+            handler.write(img_data)
+
+        try:
+            from PIL import Image
+            im = Image.open(tmp_jpg)
+            if im.mode in ("RGBA", "P"):
+                im = im.convert("RGB")
+            im.save(local_path, "WEBP", quality=85)
+            os.remove(tmp_jpg)
+            print(f"Downloaded photo: {local_name}")
+            return local_name
+        except ImportError:
+            jpg_name = local_name.replace(".webp", ".jpg")
+            os.rename(tmp_jpg, os.path.join(PHOTOS_DIR, jpg_name))
+            print(f"Downloaded photo: {jpg_name}")
+            return jpg_name
+    except Exception as ex:
+        if os.path.exists(tmp_jpg):
+            os.remove(tmp_jpg)
+        print(f"Failed to download photo {photo_url}: {ex}")
+        return ""
+
 def sync_facebook_posts():
     print("Fetching posts from Facebook Graph API...")
-    fields = "id,from,message,story,created_time,permalink_url,attachments{media,type,url,subattachments},reactions.summary(true),comments.summary(true),shares"
+    fields = (
+        "id,from,message,story,created_time,permalink_url,full_picture,picture,"
+        "attachments{media{image},type,url,target,subattachments{media{image},type,url,target}},"
+        "reactions.summary(true),comments.summary(true),shares"
+    )
     base_params = {
         "fields": fields,
         "access_token": PAGE_ACCESS_TOKEN,
@@ -274,52 +330,21 @@ def sync_facebook_posts():
         attachments = item.get("attachments", {}).get("data", [])
         
         photo_urls = []
+        _add_unique(photo_urls, item.get("full_picture"))
+        _add_unique(photo_urls, item.get("picture"))
         for att in attachments:
-            # Capture ALL attachment types that have an image preview
+            # Capture ALL attachment types that have an image preview.
             # Including: photo, added_photos, share, link, video_inline, etc.
-            att_type = att.get("type", "")
-            img_src = att.get("media", {}).get("image", {}).get("src")
-            if img_src:
-                photo_urls.append(img_src)
-            # SubAttachments (for carousel/multi-photo posts)
-            sub_atts = att.get("subattachments", {}).get("data", [])
-            for sub in sub_atts:
-                sub_src = sub.get("media", {}).get("image", {}).get("src")
-                if sub_src:
-                    photo_urls.append(sub_src)
+            for photo_url in _attachment_image_urls(att):
+                _add_unique(photo_urls, photo_url)
                     
         # Download photos locally (as .webp)
         os.makedirs(PHOTOS_DIR, exist_ok=True)
         for idx, photo_url in enumerate(photo_urls):
             local_name = f"{post_id}_{idx}.webp"
-            local_path = os.path.join(PHOTOS_DIR, local_name)
-
-            # Save reference
-            photos.append(f"assets/photos/{local_name}")
-
-            # Download + convert to webp if not exists
-            if not os.path.exists(local_path):
-                try:
-                    img_data = requests.get(photo_url, timeout=30).content
-                    # Save as JPEG first, then convert
-                    tmp_jpg = local_path.replace(".webp", ".jpg")
-                    with open(tmp_jpg, "wb") as handler:
-                        handler.write(img_data)
-                    # Convert to webp
-                    try:
-                        from PIL import Image
-                        im = Image.open(tmp_jpg)
-                        if im.mode in ("RGBA", "P"):
-                            im = im.convert("RGB")
-                        im.save(local_path, "WEBP", quality=85)
-                        os.remove(tmp_jpg)
-                    except ImportError:
-                        # PIL not available — keep as .jpg and update reference
-                        os.rename(tmp_jpg, local_path.replace(".webp", ".jpg"))
-                        photos[-1] = f"assets/photos/{post_id}_{idx}.jpg"
-                    print(f"Downloaded photo: {local_name}")
-                except Exception as ex:
-                    print(f"Failed to download photo {photo_url}: {ex}")
+            saved_name = _download_photo(photo_url, local_name)
+            if saved_name:
+                photos.append(f"assets/photos/{saved_name}")
                     
         post_obj = {
             "id": post_id,

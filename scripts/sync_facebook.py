@@ -133,10 +133,10 @@ def sync_facebook_posts():
         base_params, max_pages=2, label="/feed"
     )
 
-    # Also fetch videos/reels
+    # Also fetch videos/reels — include thumbnail + picture fields
     print("  --- /videos endpoint (Facebook reels) ---")
     video_params = {
-        "fields": "id,description,created_time,permalink_url,length",
+        "fields": "id,description,created_time,permalink_url,length,thumbnail,picture,format",
         "access_token": PAGE_ACCESS_TOKEN,
         "limit": 100,
     }
@@ -198,6 +198,34 @@ def sync_facebook_posts():
                 title = title[:77] + "..."
             category = category_for(msg)
             date_label = format_date(created)
+
+            # Download video thumbnail
+            photos = []
+            thumb_url = item.get("thumbnail") or item.get("picture") or ""
+            if thumb_url:
+                local_name = f"{post_id}_0.webp"
+                local_path = os.path.join(PHOTOS_DIR, local_name)
+                if not os.path.exists(local_path):
+                    try:
+                        img_data = requests.get(thumb_url, timeout=30).content
+                        tmp_jpg = local_path.replace(".webp", ".jpg")
+                        with open(tmp_jpg, "wb") as handler:
+                            handler.write(img_data)
+                        try:
+                            from PIL import Image
+                            im = Image.open(tmp_jpg)
+                            if im.mode in ("RGBA", "P"):
+                                im = im.convert("RGB")
+                            im.save(local_path, "WEBP", quality=85)
+                            os.remove(tmp_jpg)
+                        except ImportError:
+                            os.rename(tmp_jpg, local_path.replace(".webp", ".jpg"))
+                            local_name = local_name.replace(".webp", ".jpg")
+                        print(f"Downloaded video thumbnail: {local_name}")
+                    except Exception as ex:
+                        print(f"Failed to download video thumbnail {post_id}: {ex}")
+                photos.append(f"assets/photos/{local_name}")
+
             post_obj = {
                 "id": post_id,
                 "created_time": created,
@@ -210,7 +238,7 @@ def sync_facebook_posts():
                 "reaction_count": 0,
                 "comment_count": 0,
                 "share_count": 0,
-                "photos": [],
+                "photos": photos,
                 "alt": f"Flow's Table video from {date_label}",
             }
             new_or_updated.append(post_obj)

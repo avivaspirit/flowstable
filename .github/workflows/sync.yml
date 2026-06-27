@@ -55,4 +55,4 @@ jobs:
             exit 0
           fi
           npm install -g vercel@54
-          vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+          VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes

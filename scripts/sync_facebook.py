@@ -95,7 +95,7 @@ def sync_facebook_posts():
     params = {
         "fields": "id,from,message,story,created_time,permalink_url,attachments{media,type,url,title,description,subattachments},reactions.summary(true),comments.summary(true),shares",
         "access_token": PAGE_ACCESS_TOKEN,
-        "limit": 100
+        "limit": 50
     }
     
     response = requests.get(url, params=params)

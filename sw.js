@@ -1,5 +1,5 @@
 // Flow's Table Service Worker — offline caching
-const CACHE = "flowstable-v2";
+const CACHE = "flowstable-v3";
 const ASSETS = [
   "/",
   "/index.html",

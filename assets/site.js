@@ -58,6 +58,15 @@ function createArchivePostElement(post) {
   if (post.photos && post.photos.length > 0) {
     const alt = (post.title || "Flow's Table").replace(/"/g, "&quot;");
     thumbHtml = `<div class="archive-media"><img src="${post.photos[0]}" alt="${alt}" loading="lazy"></div>`;
+  } else {
+    // Gradient fallback for posts without photos
+    const cat = (post.category || "Note").toLowerCase();
+    let gradient = "linear-gradient(135deg, #c56b46, #1a1a2e)";
+    if (cat.includes("gather")) gradient = "linear-gradient(135deg, #8b6f47, #1a1a2e)";
+    else if (cat.includes("learn")) gradient = "linear-gradient(135deg, #5a7d6a, #1a1a2e)";
+    else if (cat.includes("invest")) gradient = "linear-gradient(135deg, #4a6fa5, #1a1a2e)";
+    else if (cat.includes("reflect") || cat.includes("life")) gradient = "linear-gradient(135deg, #7a5c8e, #1a1a2e)";
+    thumbHtml = `<div class="archive-media archive-media-fallback" style="background:${gradient};min-height:120px;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.5rem;opacity:0.15;">✎</span></div>`;
   }
 
   const category = post.category || "Note";
@@ -1029,7 +1038,9 @@ async function loadReelsData() {
       const url = r.url || '';
       const caption = r.caption || '';
       const timestamp = r.timestamp || '';
-      const thumb = r.thumbnail_url || 'assets/photos/uploads/reel_placeholder.webp';
+      const thumb = r.thumbnail_url || '';
+      const isFB = url.includes('facebook.com');
+      const fallbackColor = isFB ? 'var(--coral, #c56b46)' : 'var(--warm, #8b6f47)';
       
       let displayTag = "Highlight";
       const lowerCap = caption.toLowerCase();
@@ -1057,7 +1068,10 @@ async function loadReelsData() {
       
       return `
         <div class="reel-card" data-url="${url}" data-caption="${encodeURIComponent(caption)}" data-timestamp="${timestamp}" data-category="${displayTag}">
-          <img class="reel-thumbnail" src="${thumb}" alt="Flow's Table Reel: ${excerpt}" loading="lazy">
+          ${thumb 
+            ? `<img class="reel-thumbnail" src="${thumb}" alt="Flow's Table Reel: ${excerpt}" loading="lazy">`
+            : `<div class="reel-thumbnail reel-thumbnail-fallback" style="background:linear-gradient(135deg, ${fallbackColor}, #1a1a2e);display:flex;align-items:center;justify-content:center;"><span style="font-size:2rem;opacity:0.3;">▶</span></div>`
+          }
           <div class="reel-play-overlay">
             <div class="reel-play-btn">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>

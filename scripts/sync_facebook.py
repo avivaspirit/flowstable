@@ -269,20 +269,24 @@ def sync_facebook_posts():
         comments = item.get("comments", {}).get("summary", {}).get("total_count", 0)
         shares = item.get("shares", {}).get("count", 0)
         
-        # Photo attachments download
+        # Photo/preview attachments download
         photos = []
         attachments = item.get("attachments", {}).get("data", [])
         
         photo_urls = []
         for att in attachments:
-            if att.get("type") in ["photo", "added_photos", "profile_media"]:
-                if att.get("media", {}).get("image", {}).get("src"):
-                    photo_urls.append(att["media"]["image"]["src"])
-            # Subattachments (for carousel posts)
+            # Capture ALL attachment types that have an image preview
+            # Including: photo, added_photos, share, link, video_inline, etc.
+            att_type = att.get("type", "")
+            img_src = att.get("media", {}).get("image", {}).get("src")
+            if img_src:
+                photo_urls.append(img_src)
+            # SubAttachments (for carousel/multi-photo posts)
             sub_atts = att.get("subattachments", {}).get("data", [])
             for sub in sub_atts:
-                if sub.get("media", {}).get("image", {}).get("src"):
-                    photo_urls.append(sub["media"]["image"]["src"])
+                sub_src = sub.get("media", {}).get("image", {}).get("src")
+                if sub_src:
+                    photo_urls.append(sub_src)
                     
         # Download photos locally (as .webp)
         os.makedirs(PHOTOS_DIR, exist_ok=True)

@@ -221,15 +221,36 @@ def sync_facebook_posts():
 
     posts_data = all_raw
     print(f"Retrieved {len(posts_data)} unique items (posts+feed+videos).")
-    
+
+    # Deduplicate by normalized permalink (reels appear under both /posts and /videos with different IDs)
+    seen_permas = set()
+    deduped = []
+    for item in posts_data:
+        perma = (item.get("permalink_url") or "").replace("https://www.facebook.com", "").rstrip("/")
+        norm = perma or item.get("id", "")
+        if norm in seen_permas:
+            continue
+        seen_permas.add(norm)
+        deduped.append(item)
+    posts_data = deduped
+    print(f"After permalink dedup: {len(posts_data)} items.")
+
     # Load existing posts database
     existing_posts = []
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             existing_posts = json.load(f)
-            
+
     existing_ids = {p["id"] for p in existing_posts}
     new_or_updated = []
+
+    # Junk titles to filter out (FB auto-generated noise)
+    JUNK_TITLES = {
+        "Flow's Table Update",
+        "Flow's Table updated their status.",
+        "Flow's Table updated their cover photo.",
+        "Flow's Table updated their profile picture.",
+    }
     
     for item in posts_data:
         post_id = item["id"]
@@ -241,6 +262,15 @@ def sync_facebook_posts():
             print(f"Skipping post {post_id} - not from this page (Author ID: {author_id})")
             continue
             
+        # Skip junk auto-generated posts (status/cover/photo updates with no real message)
+        raw_msg = clean_text(item.get("message", ""))
+        raw_story = clean_text(item.get("story", ""))
+        # Check title early to skip processing
+        early_title = (raw_msg.split("\n")[0] if raw_msg else raw_story.split("\n")[0] if raw_story else "").strip()
+        if early_title in JUNK_TITLES and not raw_msg:
+            print(f"Skipping junk post {post_id}: {early_title}")
+            continue
+
         # Handle video items (from /videos endpoint — different field names)
         if item.get("_from_videos"):
             msg = clean_text(item.get("description", ""))
@@ -316,7 +346,12 @@ def sync_facebook_posts():
         title = msg.split("\n")[0] if msg else story.split("\n")[0] if story else "Flow's Table Update"
         if len(title) > 80:
             title = title[:77] + "..."
-            
+
+        # Final junk filter: skip posts whose title is junk AND have no message
+        if title in JUNK_TITLES and not msg:
+            print(f"Skipping junk post {post_id}: {title}")
+            continue
+
         category = category_for(msg + " " + story)
         date_label = format_date(item.get("created_time", ""))
         

@@ -1,3 +1,5 @@
 .vercel
 .env
 debug-01bd46.log
+__pycache__/
+*.pyc

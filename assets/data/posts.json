@@ -11,7 +11,9 @@
     "reaction_count": 111,
     "comment_count": 53,
     "share_count": 344,
-    "photos": [],
+    "photos": [
+      "assets/photos/macnp369_vibecode_30d_0.png"
+    ],
     "alt": "Mac Nattapong's reflection on 30 days of learning Vibe Coding — from zero coding experience to building websites, apps, bots, and AI agents."
   },
   {

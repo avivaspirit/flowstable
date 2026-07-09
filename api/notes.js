@@ -43,7 +43,7 @@ export default function handler(req, res) {
 
   const title = post.title || "Flow's Table";
   const description = (post.message || post.story || "").substring(0, 160).replace(/\n/g, " ");
-  const canonicalUrl = `https://flowstable.vercel.app/notes/${post.id}`;
+  const canonicalUrl = `https://flowstable.net/notes/${post.id}`;
   const datePublished = (post.created_time || "").substring(0, 10);
 
   // Photo markup
@@ -63,8 +63,8 @@ export default function handler(req, res) {
   const ogImage = rawPhoto
     ? (rawPhoto.startsWith("http")
         ? rawPhoto
-        : `https://flowstable.vercel.app/${rawPhoto.replace(/\.webp$/, ".jpg")}`)
-    : "https://flowstable.vercel.app/assets/photos/hero/hero-articles.jpg";
+        : `https://flowstable.net/${rawPhoto.replace(/\.webp$/, ".jpg")}`)
+    : "https://flowstable.net/assets/photos/hero/hero-articles.jpg";
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
@@ -76,12 +76,12 @@ export default function handler(req, res) {
     author: {
       "@type": "Organization",
       name: "Flow's Table",
-      url: "https://flowstable.vercel.app",
+      url: "https://flowstable.net",
     },
     publisher: {
       "@type": "Organization",
       name: "Flow's Table",
-      url: "https://flowstable.vercel.app",
+      url: "https://flowstable.net",
     },
     mainEntityOfPage: {
       "@type": "WebPage",

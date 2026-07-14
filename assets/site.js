@@ -804,15 +804,31 @@ document.addEventListener('DOMContentLoaded', () => {
     posts.forEach(post => container.appendChild(post));
     initArchiveElements();
   }
+  /* Highlight matched terms inside text */
+  function ftHighlightTerms(text, terms) {
+    if (!terms.length || !text) return text;
+    var html = text;
+    for (var i = 0; i < terms.length; i++) {
+      var t = terms[i];
+      if (!t) continue;
+      var re = new RegExp("(" + t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+      html = html.replace(re, "<mark class=\"search-hit\">$1</mark>");
+    }
+    return html;
+  }
+
   function updateArchive() {
     const query = (searchInput?.value || "").trim().toLowerCase();
+    var terms = query ? query.split(/\s+/).filter(Boolean) : [];
     let visibleCount = 0;
 
-    for (const post of archivePosts) {
-      const haystack = post.dataset.search || "";
-      const postCategory = post.dataset.category || "";
-      const queryMatch = !query || haystack.includes(query);
-      let categoryMatch;
+    var scored = [];
+    for (var i = 0; i < archivePosts.length; i++) {
+      var post = archivePosts[i];
+      var haystack = post.dataset.search || "";
+      var postCategory = post.dataset.category || "";
+
+      var categoryMatch;
       if (activeCategory === "all") {
         categoryMatch = true;
       } else if (activeCategory === "new-release") {
@@ -820,10 +836,46 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         categoryMatch = postCategory === activeCategory;
       }
-      const isVisible = queryMatch && categoryMatch;
+      if (!categoryMatch) {
+        post.classList.add("is-hidden");
+        continue;
+      }
 
-      post.classList.toggle("is-hidden", !isVisible);
-      if (isVisible) visibleCount++;
+      var score = 0;
+      if (!terms.length) {
+        score = 1; /* no query = keep original date order */
+      } else {
+        var titleEl = post.querySelector(".archive-title");
+        var titleText = titleEl ? titleEl.textContent.toLowerCase() : "";
+        var allMatched = true;
+        for (var j = 0; j < terms.length; j++) {
+          var t = terms[j];
+          var matched = false;
+          if (titleText.indexOf(t) !== -1) { score += 1000; matched = true; }
+          if (haystack.indexOf(t) !== -1) { score += 10; matched = true; }
+          if (!matched) { allMatched = false; break; }
+        }
+        if (!allMatched) score = -1;
+      }
+
+      if (score >= 0) {
+        scored.push({ el: post, score: score, idx: i });
+      } else {
+        post.classList.add("is-hidden");
+      }
+    }
+
+    /* Sort by score (relevance), then by original index (date order) */
+    if (terms.length) {
+      scored.sort(function(a, b) { return b.score - a.score; });
+    }
+
+    var container = document.querySelector("#archiveList .section-inner");
+    for (var k = 0; k < scored.length; k++) {
+      var el = scored[k].el;
+      el.classList.remove("is-hidden");
+      if (container) container.appendChild(el); /* re-order DOM */
+      visibleCount++;
     }
 
     if (emptyState) {
@@ -831,10 +883,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* Debounced search */
+  var _ftSearchTimer = null;
+  function debouncedUpdateArchive() {
+    if (_ftSearchTimer) clearTimeout(_ftSearchTimer);
+    _ftSearchTimer = setTimeout(function() {
+      updateArchive();
+    }, 250);
+  }
+
   // Initialize once static items are loaded
   initArchiveElements();
   updateArchive();
-  searchInput?.addEventListener("input", updateArchive);
+  searchInput?.addEventListener("input", debouncedUpdateArchive);
+
+  /* Keyboard shortcut: "/" focuses search */
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "/" && searchInput && document.activeElement !== searchInput) {
+      var tag = document.activeElement ? document.activeElement.tagName : "";
+      if (tag !== "INPUT" && tag !== "TEXTAREA") {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    }
+  });
 
   chipsContainer?.addEventListener("click", (e) => {
     const chip = e.target.closest(".chip");

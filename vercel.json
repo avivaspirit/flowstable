@@ -1,15 +1,19 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "flowstable.vercel.app" }],
+      "destination": "https://flowstable.net/$1",
+      "permanent": true
+    }
+  ],
   "functions": {
     "api/*.js": {
       "maxDuration": 15
     }
   },
   "rewrites": [
-    {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
-    },
     {
       "source": "/home",
       "destination": "/index.html"

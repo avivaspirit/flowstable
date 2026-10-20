@@ -29,7 +29,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="assets/styles.min.css?v=20260812a">
-  <script src="assets/site.min.js?v=20260812a" defer></script>
+  <script src="assets/site.min.js?v=20261021a" defer></script>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -271,22 +271,23 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="/home">
+    <a class="brand" href="/">
       <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" width="36" height="36">
+      <span>Flow's Table</span>
     </a>
     <nav aria-label="Main navigation">
-      <a href="/home#story">Story</a>
-      <a href="/home#moments">Moments</a>
+      <a href="/#story">Story</a>
+      <a href="/#moments">Moments</a>
       <a href="/flow-society">Flow Society</a>
       <a href="/articles">Articles</a>
       <a href="/reels">Reels</a>
       <a href="/guests">Guests</a>
       <a href="/about">About Us</a>
-      <a href="/home#join" class="nav-join">Join</a>
+      <a href="/#join" class="nav-join">Join</a>
     </nav>
   </header>
 
-  <main>
+  <main id="main">
         <section class="about-hero" style="background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 60%), linear-gradient(180deg, rgba(204, 113, 68, 0.35), rgba(29, 23, 20, 0.95)), url('assets/photos/914737241717875_122093694105110108_0.webp') center / cover no-repeat;">
       <div class="hero-content">
         <p class="eyebrow">Wisdom Around the Table</p>
@@ -666,49 +667,6 @@
         </div>
       </div>
     </section>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', async () => {
-        try {
-          const res = await fetch('_data/guests.json');
-          if (res.ok) {
-            const data = await res.json();
-            if (data.guests && data.guests.length > 0) {
-              const grid = document.getElementById('guestsGrid');
-              grid.innerHTML = data.guests.map(guest => {
-                const displayName = guest.nickname ? `${guest.name} (${guest.nickname})` : guest.name;
-                const avatarImg = guest.image ? `<img src="${guest.image}" class="guest-avatar-img" alt="${displayName}">` : '';
-                const getInitials = (name) => {
-                  const clean = name.replace(/P'|Shark\s+/gi, '').trim();
-                  const parts = clean.split(/\s+/);
-                  if (parts.length >= 2) {
-                    return (parts[0][0] + parts[1][0]).toUpperCase();
-                  }
-                  return clean.substring(0, 2).toUpperCase();
-                };
-                const initials = getInitials(guest.nickname || guest.name);
-                return `
-                  <div class="guest-card">
-                    <div class="guest-header">
-                      <div class="guest-avatar">
-                        ${avatarImg || initials}
-                      </div>
-                      <div class="guest-info">
-                        <h3>${displayName}</h3>
-                        <span class="guest-tag">${guest.title}</span>
-                      </div>
-                    </div>
-                    <p class="guest-bio">${guest.bio}</p>
-                  </div>
-                `;
-              }).join('');
-            }
-          }
-        } catch (e) {
-          console.log("Using static fallback for guests content:", e);
-        }
-      });
-    </script>
   </main>
 
   <footer class="site-footer">
@@ -716,7 +674,7 @@
       <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
     </div>
     <div class="footer-links">
-      <a href="/home#join">Join the table</a>
+      <a href="/#join">Join the table</a>
       <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
       <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
       <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">LINE @010eyqrs</a>

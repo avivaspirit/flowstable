@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: flowstable-fb-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -28,31 +32,42 @@ jobs:
           PAGE_ACCESS_TOKEN: ${{ secrets.PAGE_ACCESS_TOKEN }}
         run: python scripts/sync_facebook.py
 
-      - name: Regenerate sitemap
-        run: python scripts/generate_sitemap.py
-
       - name: Commit changes
+        id: commit
         run: |
           git config user.name "Flow's Table Auto-Sync"
           git config user.email "flowstable.th@gmail.com"
           git add assets/data/posts.json assets/data/page_stats.json _data/reels.json assets/photos/ sitemap.xml
           if git diff --staged --quiet; then
             echo "No changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           git commit -m "Auto-sync FB posts + sitemap"
-          git push
+          for ATTEMPT in 1 2 3; do
+            if git push origin main 2>/dev/null; then
+              echo "Push succeeded on attempt $ATTEMPT"
+              echo "changed=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            echo "Push attempt $ATTEMPT failed — rebasing and retrying..."
+            git pull --rebase origin main 2>/dev/null || true
+            sleep 5
+          done
+          echo "All push attempts failed"
+          exit 1
 
       - name: Deploy to Vercel
-        if: success()
+        if: success() && (steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch')
+        continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
             echo "VERCEL_TOKEN not set, skipping deploy"
             exit 0
           fi
           npm install -g vercel@54
-          VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes
+          mkdir -p .vercel
+          printf '{"projectId":"prj_2trHWuS475O0c3xw9pkebgt7usqF","orgId":"team_8uqgWTBz1wwwzzkN0sTWCahx","projectName":"flowstable"}' > .vercel/project.json
+          VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes --archive=tgz

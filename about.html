@@ -76,7 +76,7 @@
   }
   </script>
   <link rel="stylesheet" href="assets/styles.min.css?v=20260812a">
-  <script src="assets/site.min.js?v=20260812a" defer></script>
+  <script src="assets/site.min.js?v=20261021a" defer></script>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -94,23 +94,23 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="/home">
+    <a class="brand" href="/">
       <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table logo" width="36" height="36">
       <span>Flow's Table</span>
     </a>
     <nav aria-label="Main navigation">
-      <a href="/home#story">Story</a>
-      <a href="/home#moments">Moments</a>
+      <a href="/#story">Story</a>
+      <a href="/#moments">Moments</a>
       <a href="/flow-society">Flow Society</a>
       <a href="/articles">Articles</a>
       <a href="/reels">Reels</a>
       <a href="/guests">Guests</a>
       <a href="/about">About Us</a>
-      <a href="/home#join" class="nav-join">Join</a>
+      <a href="/#join" class="nav-join">Join</a>
     </nav>
   </header>
 
-  <main>
+  <main id="main">
         <section class="about-hero">
       <div class="hero-content">
         <p class="eyebrow">Our Journey & Philosophy</p>
@@ -140,7 +140,7 @@
 
         <h3>The Philosophy of "No Agenda"</h3>
         <div id="philosophyText">
-          <p>In a professional ecosystem dominated by transactional meetings, pitch decks, and rigid schedules, Flow's Table stands as a deliberate exception. Every gathering is run with a simple, foundational rule: **No Agenda**.</p>
+          <p>In a professional ecosystem dominated by transactional meetings, pitch decks, and rigid schedules, Flow's Table stands as a deliberate exception. Every gathering is run with a simple, foundational rule: <strong>No Agenda</strong>.</p>
 
           <p>“When you have a fixed agenda, you are bound by constraints. You stop listening to the present because you're constantly thinking about the next question,” explains Mac. By letting go of structured goals, the table allows conversations to flow naturally, moving effortlessly from high-level investment strategies and emerging AI trends to personal philosophy, history, astrology, and mental well-being.</p>
         </div>
@@ -152,7 +152,7 @@
           <p class="editorial-caption">A safe space for builders and investors to connect without predefined targets.</p>
         </div>
 
-        <p>It is an ecosystem built on the principles of **positive energy, safety, and mutual respect**. Younger builders have the opportunity to share fresh perspectives on technology, media, and Gen-Z trends with senior leaders. In return, seasoned mentors pass down lessons that cannot be found in books or online videos—distilled wisdom born of decades of trial, failure, and success.</p>
+        <p>It is an ecosystem built on the principles of <strong>positive energy, safety, and mutual respect</strong>. Younger builders have the opportunity to share fresh perspectives on technology, media, and Gen-Z trends with senior leaders. In return, seasoned mentors pass down lessons that cannot be found in books or online videos—distilled wisdom born of decades of trial, failure, and success.</p>
 
         <h3>Our Core Team</h3>
         <div class="team-grid" id="teamGrid">
@@ -198,42 +198,6 @@
       </div>
     </section>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', async () => {
-        try {
-          const res = await fetch('_data/about.json');
-          if (res.ok) {
-            const data = await res.json();
-            if (data.origin_story) {
-              document.getElementById('originStoryText').innerHTML = formatMarkdown(data.origin_story);
-            }
-            if (data.philosophy) {
-              document.getElementById('philosophyText').innerHTML = formatMarkdown(data.philosophy);
-            }
-            if (data.team && data.team.length > 0) {
-              const grid = document.getElementById('teamGrid');
-              grid.innerHTML = data.team.map(member => `
-                <div class="team-card">
-                  <span class="team-role">${member.role}</span>
-                  <h4>${member.name}</h4>
-                  <p class="team-bio">${member.bio}</p>
-                </div>
-              `).join('');
-            }
-          }
-        } catch (e) {
-          console.log("Using static fallback for about content:", e);
-        }
-      });
-
-      function formatMarkdown(text) {
-        return text.split('\n\n').map(p => {
-          const boldFormatted = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-          return `<p>${boldFormatted.replace(/\n/g, '<br>')}</p>`;
-        }).join('');
-      }
-    </script>
-
     <section class="press-band">
       <div class="section-inner">
         <div class="press-box">
@@ -257,7 +221,7 @@
       <img src="assets/photos/914737241717875_122093694105110108_3.webp" alt="Flow's Table" class="footer-logo" width="96" height="96" style="height: 48px; width: auto; display: block; object-fit: contain;">
     </div>
     <div class="footer-links">
-      <a href="/home#join">Join the table</a>
+      <a href="/#join">Join the table</a>
       <a href="https://www.facebook.com/914737241717875" target="_blank" rel="noopener">Facebook</a>
       <a href="https://instagram.com/flowstable" target="_blank" rel="noopener">Instagram</a>
       <a href="https://line.me/R/ti/p/@010eyqrs" target="_blank" rel="noopener">LINE @010eyqrs</a>

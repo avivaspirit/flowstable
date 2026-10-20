@@ -1,5 +1,5 @@
 // Flow's Table Service Worker — offline caching
-const CACHE = "flowstable-v3";
+const CACHE = "flowstable-v4";
 const ASSETS = [
   "/",
   "/index.html",
@@ -32,9 +32,14 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   // Only handle GET
   if (e.request.method !== "GET") return;
-  
-  // Network-first for HTML, cache-first for assets
-  if (e.request.mode === "navigate" || e.request.destination === "document") {
+  const url = new URL(e.request.url);
+
+  // Network-first for HTML and dynamic JSON data feeds (posts.json, reels.json, page_stats.json)
+  if (
+    e.request.mode === "navigate" ||
+    e.request.destination === "document" ||
+    url.pathname.endsWith(".json")
+  ) {
     e.respondWith(
       fetch(e.request)
         .then((res) => {

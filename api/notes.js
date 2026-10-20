@@ -51,10 +51,10 @@ export default function handler(req, res) {
   if (post.photos && post.photos.length > 0) {
     const photos = post.photos.slice(0, 3);
     photoHtml = photos
-      .map(
-        (p) =>
-          `<img src="${escapeHtml(p)}" alt="${escapeHtml(post.alt || title)}" loading="lazy" style="max-width:100%;border-radius:8px;margin:8px 0;">`
-      )
+      .map((p) => {
+        const src = p.startsWith("http") || p.startsWith("/") ? p : `/${p}`;
+        return `<img src="${escapeHtml(src)}" alt="${escapeHtml(post.alt || title)}" loading="lazy" style="max-width:100%;border-radius:8px;margin:8px 0;">`;
+      })
       .join("\n      ");
   }
 
@@ -63,7 +63,7 @@ export default function handler(req, res) {
   const ogImage = rawPhoto
     ? (rawPhoto.startsWith("http")
         ? rawPhoto
-        : `https://flowstable.net/${rawPhoto.replace(/\.webp$/, ".jpg")}`)
+        : `https://flowstable.net/${rawPhoto.replace(/^\/+/, "")}`)
     : "https://flowstable.net/assets/photos/hero/hero-articles.jpg";
 
   const schema = JSON.stringify({
@@ -112,23 +112,23 @@ export default function handler(req, res) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="assets/styles.css">
-    <script src="assets/site-config.js" defer></script>
-    <script src="assets/sanity-client.js" defer></script>
-    <script src="assets/article-page.js" defer></script>
-    <script src="assets/site.js" defer></script>
+    <link rel="stylesheet" href="/assets/styles.min.css?v=20260812a">
+    <script src="/assets/site-config.js" defer></script>
+    <script src="/assets/sanity-client.js" defer></script>
+    <script src="/assets/site.min.js?v=20260812a" defer></script>
     <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/favicon.png">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/home">
+      <a class="brand" href="/">
         <img src="/assets/favicon.png" alt="Flow's Table logo" height="32" style="object-fit: contain; border-radius: 50%;">
       </a>
       <nav aria-label="Main navigation">
-        <a href="/home#story">Story</a>
-        <a href="/home#moments">Moments</a>
+        <a href="/#story">Story</a>
+        <a href="/#moments">Moments</a>
+        <a href="/flow-society">Flow Society</a>
         <a href="/articles">Articles</a>
         <a href="/reels">Reels</a>
         <a href="/guests">Guests</a>
@@ -136,7 +136,7 @@ export default function handler(req, res) {
       </nav>
     </header>
 
-    <main class="archive-main">
+    <main id="main" class="archive-main">
       <section class="section archive-list">
         <div class="section-inner">
           <article>

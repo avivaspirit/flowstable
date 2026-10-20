@@ -282,59 +282,6 @@ async function loadPostsDatabase() {
       renderRecentNotesFromPosts(allPosts);
     }
 
-    // --- Phase 2: Fetch custom CMS articles (non-blocking, re-render if found) ---
-    try {
-      const cmsRes = await fetch('_data/articles.json');
-      if (cmsRes.ok) {
-        const cmsArticles = await cmsRes.json();
-
-        const formattedCms = cmsArticles.map(art => {
-          let dateLabel = '';
-          if (art.date) {
-            const dateObj = new Date(art.date);
-            const options = { day: 'numeric', month: 'short', year: 'numeric' };
-            dateLabel = dateObj.toLocaleDateString('en-US', options);
-          } else {
-            dateLabel = 'Recent';
-          }
-          return {
-            permalink_url: `cms-${art.title.replace(/\s+/g, '-').toLowerCase()}-${art.date}`,
-            created_time: art.date,
-            date_label: dateLabel,
-            category: art.category || 'Note',
-            title: art.title,
-            message: art.body,
-            photos: art.cover_image ? [art.cover_image] : [],
-            reaction_count: 0,
-            comment_count: 0,
-            share_count: 0
-          };
-        });
-
-        allPosts = [...formattedCms, ...allPosts];
-        allPosts.sort((a, b) => {
-          const timeA = new Date(a.created_time || a.date || 0).getTime();
-          const timeB = new Date(b.created_time || b.date || 0).getTime();
-          if (isNaN(timeA) && isNaN(timeB)) return 0;
-          if (isNaN(timeA)) return 1;
-          if (isNaN(timeB)) return -1;
-          return timeB - timeA;
-        });
-
-        if (document.getElementById('archiveList')) {
-          renderArchiveFromPosts(allPosts);
-        }
-        if (document.getElementById('momentsGrid')) {
-          renderMomentsFromPosts(allPosts);
-        }
-        if (document.getElementById('recentNotesGrid')) {
-          renderRecentNotesFromPosts(allPosts);
-        }
-      }
-    } catch (cmsErr) {
-      console.log('No custom CMS articles loaded yet or format invalid:', cmsErr);
-    }
-
     // --- Phase 3: Fetch Sanity posts (non-blocking, re-render if found) ---
     const sanityPosts = await loadSanityPosts();
     if (sanityPosts.length) {
@@ -771,8 +718,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.closest('#modalFacebookLink') || e.target.closest('.modal-close') || e.target.closest('.carousel-btn')) {
       return;
     }
-    // Let explicit CTA buttons navigate on their own (e.g. open FB in a new tab)
-    if (e.target.closest('.fb-cta-button') || e.target.closest('.read-note-button') || e.target.closest('.post-read-fb')) {
+    // Let explicit FB CTA buttons navigate on their own (open FB in a new tab), while .read-note-button opens the note modal
+    if (e.target.closest('.fb-cta-button') || e.target.closest('.post-read-fb')) {
       return;
     }
     const postCard = e.target.closest('.post-card') || e.target.closest('.archive-post');
@@ -814,8 +761,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Keyboard navigation for Modal
+  // Keyboard navigation for Modal & Video Modal
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('videoModal')?.classList.contains('active')) {
+      closeVideoModal();
+      return;
+    }
     if (modal?.classList.contains('active')) {
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') modal.querySelector('.carousel-btn.prev')?.click();
@@ -890,12 +841,22 @@ document.addEventListener('DOMContentLoaded', () => {
         continue;
       }
 
+      var titleEl = post.querySelector(".archive-title");
+      var copyEl = post.querySelector(".archive-copy");
+      if (titleEl && titleEl.dataset.origText === undefined) {
+        titleEl.dataset.origText = titleEl.textContent || "";
+      }
+      if (copyEl && copyEl.dataset.origText === undefined) {
+        copyEl.dataset.origText = copyEl.textContent || "";
+      }
+
       var score = 0;
       if (!terms.length) {
         score = 1; /* no query = keep original date order */
+        if (titleEl) titleEl.textContent = titleEl.dataset.origText;
+        if (copyEl) copyEl.textContent = copyEl.dataset.origText;
       } else {
-        var titleEl = post.querySelector(".archive-title");
-        var titleText = titleEl ? titleEl.textContent.toLowerCase() : "";
+        var titleText = titleEl ? titleEl.dataset.origText.toLowerCase() : "";
         var allMatched = true;
         for (var j = 0; j < terms.length; j++) {
           var t = terms[j];
@@ -904,7 +865,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (haystack.indexOf(t) !== -1) { score += 10; matched = true; }
           if (!matched) { allMatched = false; break; }
         }
-        if (!allMatched) score = -1;
+        if (!allMatched) {
+          score = -1;
+        } else {
+          if (titleEl) titleEl.innerHTML = ftHighlightTerms(titleEl.dataset.origText, terms);
+          if (copyEl) copyEl.innerHTML = ftHighlightTerms(copyEl.dataset.origText, terms);
+        }
       }
 
       if (score >= 0) {

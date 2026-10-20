@@ -2,7 +2,8 @@
   "use strict";
 
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("slug");
+  const pathMatch = window.location.pathname.match(/^\/notes\/([^/?#]+)/);
+  const slug = params.get("slug") || (pathMatch ? decodeURIComponent(pathMatch[1]) : null);
   const root = document.querySelector("[data-wp-article]");
   const statusEl = document.querySelector("[data-wp-status]");
 
@@ -63,6 +64,9 @@
     } else if (post.coverImage) {
       image = window.SanityCMS?.imageUrl(post.coverImage) || "";
     }
+    if (image && !image.startsWith("http") && !image.startsWith("/")) {
+      image = `/${image}`;
+    }
     const alt = post.coverImage?.alt || post.alt || post.title;
     const categories = (post.tags || [post.category]).filter(Boolean).join(" / ");
     const date = post.publishedAt
@@ -75,7 +79,7 @@
     
     const bodyText = post.body || post.message || post.story || "";
     const summary = excerpt(bodyText, 180);
-    const summaryHtml = summary ? `<p class="article-callout" style="padding: 12px 16px; border-left: 3px solid var(--coral); border-radius: 0 10px 10px 0; background: rgba(197, 107, 70, 0.08); font-weight: 600; margin-bottom: 20px;">💡 Summary: ${summary}</p>` : "";
+    const summaryHtml = (summary && bodyText.length > 220) ? `<p class="article-callout" style="padding: 12px 16px; border-left: 3px solid var(--coral); border-radius: 0 10px 10px 0; background: rgba(197, 107, 70, 0.08); font-weight: 600; margin-bottom: 20px;">💡 Summary: ${summary}</p>` : "";
     
     const content = bodyText.replace(/\n/g, "<br>");
 
@@ -122,7 +126,7 @@
 
   async function loadFromPostsJson(idOrSlug) {
     try {
-      const res = await fetch("assets/data/posts.json");
+      const res = await fetch("/assets/data/posts.json");
       if (!res.ok) {
         setStatus("Note not found.");
         return;

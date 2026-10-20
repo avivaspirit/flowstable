@@ -8,6 +8,7 @@ SITEMAP_FILE = os.path.join(BASE_DIR, "sitemap.xml")
 
 STATIC_PAGES = [
     ("", "weekly", "1.0"),
+    ("flow-society", "monthly", "0.8"),
     ("about", "monthly", "0.8"),
     ("articles", "weekly", "0.9"),
     ("reels", "weekly", "0.8"),

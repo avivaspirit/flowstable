@@ -10,7 +10,9 @@ export const config = {
 
 export default function handler() {
   try {
-    const xml = readFileSync(join(process.cwd(), 'sitemap.xml'), 'utf-8');
+    let xml = readFileSync(join(process.cwd(), 'sitemap.xml'), 'utf-8');
+    // Ensure all URLs point to .net, not .vercel.app
+    xml = xml.replace(/flowstable\.vercel\.app/g, 'flowstable.net');
     return new Response(xml, {
       status: 200,
       headers: {

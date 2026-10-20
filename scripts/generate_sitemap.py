@@ -26,7 +26,7 @@ def generate_sitemap():
     
     # Static pages
     for path, changefreq, priority in STATIC_PAGES:
-        loc = f"https://flowstable.vercel.app/{path}"
+        loc = f"https://flowstable.net/{path}"
         lines.append("  <url>")
         lines.append(f"    <loc>{loc}</loc>")
         lines.append(f"    <lastmod>{today}</lastmod>")
@@ -47,7 +47,7 @@ def generate_sitemap():
                         if len(msg) < MIN_MSG_CHARS:
                             skipped += 1
                             continue
-                        loc = f"https://flowstable.vercel.app/notes/{post['id']}"
+                        loc = f"https://flowstable.net/notes/{post['id']}"
                         lastmod = today
                         if post.get("created_time"):
                             lastmod = post["created_time"][:10]

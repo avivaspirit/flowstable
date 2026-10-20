@@ -82,22 +82,43 @@ function createArchivePostElement(post) {
     statsHtml = `<span class="archive-reactions">\u2665 ${post.reaction_count}</span>`;
   }
 
-  // CTA - blue Facebook button for FB posts, neutral button otherwise
-  const ctaLabel = fbPost ? "Read on Facebook \u2192" : "Read Note";
-  const ctaClass = fbPost ? "fb-cta-button" : "read-note-button";
+  // CTA — dual buttons: "Read on Facebook" (for FB posts) + "Read Note" (always, opens modal)
+  const fbUrl = fbPost ? link : (post.permalink_url || '').startsWith('http') ? post.permalink_url : '';
+  const fbButton = fbUrl
+    ? `<a href="${fbUrl}" class="fb-cta-button" target="_blank" rel="noopener noreferrer">Read on Facebook \u2192</a>`
+    : '';
+  const siteButton = `<a href="${link}" class="read-note-button">Read Note</a>`;
+
+  // Check if post contains expired event/promo content
+  const promoKeywords = ['ลงทะเบียน', 'สมัคร', 'จองที่นั่ง', 'ปิดรับ', 'register', 'rsvp', 'book your seat', 'limited seats'];
+  const msgLower = (post.message || '').toLowerCase();
+  const isExpiredPromo = promoKeywords.some(kw => msgLower.includes(kw.toLowerCase()));
+
+  // Badge for expired events (older than 90 days)
+  let expiredBadge = '';
+  if (isExpiredPromo) {
+    const postDate = new Date(post.created_time || post.date || 0);
+    const daysOld = Math.floor((Date.now() - postDate.getTime()) / 86400000);
+    if (daysOld > 90) {
+      expiredBadge = '<span class="archive-expired-badge" style="display:inline-block;font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:0.05em;margin-left:6px;">Past event</span>';
+    }
+  }
 
   articleEl.innerHTML = `
     ${thumbHtml}
     <div class="archive-card-body">
       <div class="archive-head">
-        <span class="archive-badge">${category}</span>
+        <span class="archive-badge">${category}</span>${expiredBadge}
         <span class="archive-date">${dateLabel}</span>
       </div>
       <h3 class="archive-title">${post.title || "Flow's Table"}</h3>
       ${previewText ? `<p class="archive-copy">${previewText}</p>` : ""}
       <div class="archive-foot">
         ${statsHtml}
-        <a href="${link}" class="${ctaClass}"${externalAttr}>${ctaLabel}</a>
+        <div class="archive-cta-row">
+          ${siteButton}
+          ${fbButton}
+        </div>
       </div>
     </div>
   `;
@@ -240,16 +261,34 @@ async function loadPostsDatabase() {
     if (res.ok) {
       allPosts = await res.json();
     }
-    
-    // Fetch custom CMS articles
+
+    // --- Phase 1: Sort and render immediately from posts.json (no waiting for Sanity) ---
+    allPosts.sort((a, b) => {
+      const timeA = new Date(a.created_time || a.date || 0).getTime();
+      const timeB = new Date(b.created_time || b.date || 0).getTime();
+      if (isNaN(timeA) && isNaN(timeB)) return 0;
+      if (isNaN(timeA)) return 1;
+      if (isNaN(timeB)) return -1;
+      return timeB - timeA;
+    });
+
+    if (document.getElementById('archiveList')) {
+      renderArchiveFromPosts(allPosts);
+    }
+    if (document.getElementById('momentsGrid')) {
+      renderMomentsFromPosts(allPosts);
+    }
+    if (document.getElementById('recentNotesGrid')) {
+      renderRecentNotesFromPosts(allPosts);
+    }
+
+    // --- Phase 2: Fetch custom CMS articles (non-blocking, re-render if found) ---
     try {
       const cmsRes = await fetch('_data/articles.json');
       if (cmsRes.ok) {
         const cmsArticles = await cmsRes.json();
-        
-        // Transform CMS format to match posts.json schema
+
         const formattedCms = cmsArticles.map(art => {
-          // Parse date
           let dateLabel = '';
           if (art.date) {
             const dateObj = new Date(art.date);
@@ -258,7 +297,6 @@ async function loadPostsDatabase() {
           } else {
             dateLabel = 'Recent';
           }
-          
           return {
             permalink_url: `cms-${art.title.replace(/\s+/g, '-').toLowerCase()}-${art.date}`,
             created_time: art.date,
@@ -272,47 +310,57 @@ async function loadPostsDatabase() {
             share_count: 0
           };
         });
-        
-        // Prepend to allPosts
+
         allPosts = [...formattedCms, ...allPosts];
-        
-        // Render in Archive list if on archive page
+        allPosts.sort((a, b) => {
+          const timeA = new Date(a.created_time || a.date || 0).getTime();
+          const timeB = new Date(b.created_time || b.date || 0).getTime();
+          if (isNaN(timeA) && isNaN(timeB)) return 0;
+          if (isNaN(timeA)) return 1;
+          if (isNaN(timeB)) return -1;
+          return timeB - timeA;
+        });
+
         if (document.getElementById('archiveList')) {
-          renderCmsArticles(formattedCms);
+          renderArchiveFromPosts(allPosts);
+        }
+        if (document.getElementById('momentsGrid')) {
+          renderMomentsFromPosts(allPosts);
+        }
+        if (document.getElementById('recentNotesGrid')) {
+          renderRecentNotesFromPosts(allPosts);
         }
       }
     } catch (cmsErr) {
       console.log('No custom CMS articles loaded yet or format invalid:', cmsErr);
     }
 
+    // --- Phase 3: Fetch Sanity posts (non-blocking, re-render if found) ---
     const sanityPosts = await loadSanityPosts();
     if (sanityPosts.length) {
       wpPostsLoaded = true;
       allPosts = [...sanityPosts, ...allPosts];
+      allPosts.sort((a, b) => {
+        const timeA = new Date(a.created_time || a.date || 0).getTime();
+        const timeB = new Date(b.created_time || b.date || 0).getTime();
+        if (isNaN(timeA) && isNaN(timeB)) return 0;
+        if (isNaN(timeA)) return 1;
+        if (isNaN(timeB)) return -1;
+        return timeB - timeA;
+      });
+
+      if (document.getElementById('archiveList')) {
+        renderArchiveFromPosts(allPosts);
+      }
+      if (document.getElementById('momentsGrid')) {
+        renderMomentsFromPosts(allPosts);
+      }
+      if (document.getElementById('recentNotesGrid')) {
+        renderRecentNotesFromPosts(allPosts);
+      }
     }
 
-    // Sort all combined posts by date (newest to oldest)
-    allPosts.sort((a, b) => {
-      const timeA = new Date(a.created_time || a.date || 0).getTime();
-      const timeB = new Date(b.created_time || b.date || 0).getTime();
-      if (isNaN(timeA) && isNaN(timeB)) return 0;
-      if (isNaN(timeA)) return 1;
-      if (isNaN(timeB)) return -1;
-      return timeB - timeA;
-    });
-
-    // Always render dynamic content after combining all post sources
-    if (document.getElementById('archiveList')) {
-      renderArchiveFromPosts(allPosts);
-    }
-    if (document.getElementById('momentsGrid')) {
-      renderMomentsFromPosts(allPosts);
-    }
-    if (document.getElementById('recentNotesGrid')) {
-      renderRecentNotesFromPosts(allPosts);
-    }
-
-    // Update and animate stats band on homepage
+    // --- Phase 4: Stats band (homepage only) ---
     if (document.querySelector('.stats-band')) {
       let followersCount = 1632;
       try {
@@ -326,11 +374,11 @@ async function loadPostsDatabase() {
       } catch (statsErr) {
         console.log('Failed to fetch page stats, using fallback:', statsErr);
       }
-      
+
       const totalPostsCount = allPosts.length;
       const postsWithPhotosCount = allPosts.filter(p => p.photos && p.photos.length > 0).length;
       const totalReactionsCount = allPosts.reduce((sum, p) => sum + (p.reaction_count || 0), 0);
-      
+
       initStatsCountUp(totalPostsCount, postsWithPhotosCount, followersCount, totalReactionsCount);
     }
   } catch (err) {
@@ -781,6 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chipsContainer = document.querySelector("#categoryChips");
   const emptyState = document.querySelector("#emptyState");
   let activeCategory = "all";
+  let postsLoaded = false;
 
   function initArchiveElements() {
     archivePosts = Array.from(document.querySelectorAll(".archive-post"));
@@ -879,7 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (emptyState) {
-      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+      emptyState.style.display = (visibleCount === 0 && postsLoaded) ? "block" : "none";
     }
   }
 
@@ -925,6 +974,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // When dynamic CMS articles are inserted, re-index archive posts
   window.addEventListener('cmsLoaded', () => {
+    postsLoaded = true;
+    const loadingState = document.getElementById('loadingState');
+    if (loadingState) loadingState.style.display = 'none';
     sortArchivePosts("newest");
     initArchiveElements();
     updateArchive();

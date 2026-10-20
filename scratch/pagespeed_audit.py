@@ -60,7 +60,7 @@ def run_psi(url, strategy):
         print(f"Error running audit for {strategy}: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
-    target_url = "https://flowstable.vercel.app"
+    target_url = "https://flowstable.net"
     run_psi(target_url, "mobile")
     print("\n" + "="*40 + "\n")
     run_psi(target_url, "desktop")

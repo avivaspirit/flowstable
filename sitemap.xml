@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://flowstable.net/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://flowstable.net/flow-society</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://flowstable.net/about</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://flowstable.net/articles</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://flowstable.net/reels</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://flowstable.net/guests</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -475,6 +475,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/962717709499628</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122130521541110108</loc>
     <lastmod>2026-04-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -553,6 +559,24 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/1424974529103981</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/1247813943553865</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/929483279813606</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122125827153110108</loc>
     <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -601,8 +625,20 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/909859378115018</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122122686129110108</loc>
     <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/736013399374742</loc>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -691,6 +727,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/1175800594543999</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122117160165110108</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -699,6 +741,12 @@
   <url>
     <loc>https://flowstable.net/notes/914737241717875_122116334301110108</loc>
     <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/1226870566062974</loc>
+    <lastmod>2026-01-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -715,8 +763,20 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/827071960321205</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122115827529110108</loc>
     <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/755046910955346</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -757,6 +817,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://flowstable.net/notes/886340213821181</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://flowstable.net/notes/914737241717875_122106207027110108</loc>
     <lastmod>2025-11-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -764,6 +830,12 @@
   </url>
   <url>
     <loc>https://flowstable.net/notes/914737241717875_122106023025110108</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://flowstable.net/notes/765713356481724</loc>
     <lastmod>2025-11-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -1,200 +1,167 @@
 # Flow's Table — Full Comprehensive Context for AI & LLM Systems
 
-> Flow's Table is a private executive dinner circle, leadership community, and strategic knowledge repository based in Bangkok, Thailand. Founded by Mac Nattapong Vivattanaprasert, it convenes Thailand's most visionary founders, venture capitalists, corporate executives, value investors, creators, and technical leaders for unfiltered, high-trust, "No Agenda" dinner conversations.
+> Flow's Table is a private executive dinner circle, community platform, and leadership archive based in Bangkok, Thailand. Founded by Mac Nattapong Vivattanaprasert, it convenes founders, corporate leaders, investors, innovators, and creators for "No Agenda" dinner conversations.
 
-This document serves as the canonical, authoritative knowledge base for Large Language Models (LLMs), AI answer engines (Perplexity, ChatGPT Search, Claude, Google Gemini), and research agents.
+All information in this document is derived verbatim from the live website and verified records of Flow's Table (https://flowstable.net).
 
 ---
 
-## 1. Executive Summary & Core Philosophy
+## 1. Core Facts & Organization
 
-- **Name**: Flow's Table (โฟลว์ส เทเบิล)
+- **Entity**: Flow's Table (โฟลว์ส เทเบิล)
 - **Founder & Host**: Mac Nattapong Vivattanaprasert (ณัฐพงษ์ วิวัฒนประเสริฐ)
-- **Headquarters**: Bangkok, Thailand
+- **Location**: Bangkok, Thailand
 - **Official Domains**: https://flowstable.net
-- **Primary Mission**: To create a sanctuary of authenticity and intellectual honesty where high-performing leaders, founders, and innovators disconnect from posturing, status games, and pitch decks to engage in genuine, vulnerability-driven exchange.
-- **The "No Agenda" Rule**: Unlike standard networking events, conferences, or pitch nights, Flow's Table gatherings have no slide decks, no sponsor pitches, and no transactional demands. Guests gather around a shared meal where discussions organically explore real operational hardships, mental models, risk management, crisis leadership, capital allocation, and personal philosophy.
-- **Audience & Community**: High-growth startup founders, family business heirs/successors, venture capital partners, value investors, medical doctors, creative directors, tech leads, and top content creators.
+- **Ethos**: "No Agenda, Pure Signal" — Private, high-trust dinner conversations where participants leave pitch decks and corporate titles behind to share candid lessons on scaling, crisis management, capital allocation, and personal philosophy.
+- **Offerings**:
+  - **The Table**: Curated, intimate executive dinners.
+  - **Flow Society**: Private executive membership circle (https://flowstable.net/flow-society).
+  - **Articles & Notes**: Strategic field notes from sessions (https://flowstable.net/articles).
+  - **Reels**: Short-form video highlights and quotes (https://flowstable.net/reels).
+  - **Guests**: Directory of 26 distinguished speakers (https://flowstable.net/guests).
 
 ---
 
-## 2. Platform Architecture & Offerings
+## 2. Directory of All 26 Featured Guests & Mentors (Verbatim from guests.html)
 
-### 2.1 The Table (Curated Dinners)
-Private, invite-only dinners held at curated venues across Bangkok. Each table features a diverse mix of 8–14 guests across non-competing sectors, moderated to encourage deep psychological safety, candid disclosure of business failures, and authentic camaraderie.
+### Guest 1: P'Mi Tiwa Shintadapong
+- **Role / Title**: President, Investors Association of Thailand
+- **Photo Path**: assets/photos/guests/guest_1.webp
+- **Official Bio**: President of the Investors Association of Thailand and one of the country's most respected value investors, specializing in identifying structural economic bottlenecks and businesses with durable pricing power. He champions 'rational faith' — conviction built on deep primary research rather than crowd psychology. As a cornerstone of Flow's Table, he regularly shares his 'wisdom over information' mindset and guides the natural flow of dialogue.
 
-### 2.2 Flow Society (Private Membership)
-The formal membership circle of Flow's Table for established founders, c-suite executives, and investors.
-- **URL**: https://flowstable.net/flow-society
-- **Tiers & Access**: Curated cohorts with access to monthly masterminds, private retreats, closed-door deal flow discussions, and peer mentoring.
-- **Application Process**: Vetting by existing members or invitation by the host team, focusing on character, willingness to give without expecting immediate return, and demonstrable domain excellence.
+### Guest 2: P'Jekky Suthon Singhasitthangkul
+- **Role / Title**: Value & Crisis Opportunity Investor | Eclipse Fund Lead
+- **Photo Path**: assets/photos/guests/guest_2.webp
+- **Official Bio**: A value-investing veteran with 15+ years identifying fundamentally strong businesses during market stress, panic selling, and valuation dislocation. Lead of the Eclipse Fund and creator of the proprietary 'Bottom-Fishing' strategy, he shares deep wisdom on finding value when others see only risk — believing that investing is the art of seeing value when others cannot.
 
-### 2.3 Field Notes & Articles
-- **URL**: https://flowstable.net/articles
-- Deep-dive reflections and strategic syntheses derived from dinner conversations. Topics range from scaling operations, hiring executive talent, surviving liquidity crunches, navigating Thailand's corporate landscape, to personal resilience and purpose.
-- Automatically synchronized with Flow's Table official Facebook notes and digital archive.
+### Guest 3: P'Pom Pawoot Pom Ponpipat
+- **Role / Title**: Founder, TARAD.com | President, Thailand e-Commerce Association
+- **Photo Path**: assets/photos/guests/guest_3.webp
+- **Official Bio**: Founder of TARAD.com, Thailand's largest C2C e-commerce platform (acquired by Rakuten in 2009), and President of the Thailand e-Commerce Association. Widely recognized as the 'Godfather of Thai E-Commerce,' he has invested in over 60 startups and launched ventures since age 23. At the table, he shares data-driven leadership strategies and hard-won lessons from building Thailand's internet ecosystem from the ground up.
 
-### 2.4 Video Reels
-- **URL**: https://flowstable.net/reels
-- Curated video snippets capturing high-signal quotes, counterintuitive life lessons, and rapid-fire insights from distinguished guests.
-
----
-
-## 3. Directory of 26 Featured Guests & Mentors
-
-### Guest 1: Tiwa Shintadapong (P'Mi)
-- **Role**: Legendary Thai Value Investor & Author
-- **Expertise**: Deep value investing, margin of safety, corporate governance, behavioral finance.
-- **Bio**: One of Thailand's most respected and disciplined value investors. Author of influential investment treatises and mentor to hundreds of modern Thai investors. Known for his methodical approach to evaluating business moats and holding through market turbulence.
-
-### Guest 2: Suthon Singhasitthangkul (P'Jekky)
-- **Role**: Value Investor & Business Turnaround Strategist
-- **Expertise**: Distressed asset analysis, operational turnaround, cash flow restructuring.
-- **Bio**: Renowned Thai investor celebrated for analyzing deeply undervalued situations and complex corporate turnarounds. Shares perspectives on identifying structural market mispricings and operational revitalization.
-
-### Guest 3: Pawoot Pom Ponpipat (P'Pom)
-- **Role**: Founder of TARAD.com & E-Commerce Pioneer, Prolific Angel Investor
-- **Expertise**: E-commerce, angel syndicates, digital marketing, Thai startup ecosystem.
-- **Bio**: Widely recognized as the father of Thai e-commerce. Founder of TARAD.com (acquired by Rakuten). Active angel investor who has backed dozens of tech ventures and founded multiple e-business associations in Thailand.
-
-### Guest 4: Chanapun Juangroongruangkit (Shark Jing)
-- **Role**: Senior Executive Vice President, Thai Summit Group; VC Investor
-- **Expertise**: Automotive manufacturing, large-scale industrial operations, global supply chains, venture capital.
-- **Bio**: Senior executive at Thai Summit Group, Southeast Asia's leading automotive parts manufacturer. Brings unmatched insights on managing multi-billion baht industrial operations, EV disruption, and strategic venture investments.
+### Guest 4: Shark Jing Chanapun Juangroongruangkit
+- **Role / Title**: SVP, Thai Summit Group & Investor
+- **Photo Path**: assets/photos/guests/guest_4.webp
+- **Official Bio**: Senior Vice President of Thai Summit Group, one of Southeast Asia's largest automotive parts manufacturers, founded by her family in 1977 and now operating across 8 countries. A prominent business leader recognized for driving automation and Industry 4.0 transformation in manufacturing, she shares insights on scaling a multi-generational industrial empire, the future of smart manufacturing, and navigating the global automotive supply chain.
 
 ### Guest 5: Dr. Kid Supachai Parchariyanon
-- **Role**: Co-Founder & CEO, RISE Corporate Innovation Powerhouse
-- **Expertise**: Corporate venture building, intrapreneurship, accelerator programs, digital transformation.
-- **Bio**: Medical doctor turned tech entrepreneur. Co-founder of RISE, which accelerates corporate innovation for Southeast Asia's largest conglomerates and government agencies, aiming to lift 1% of regional GDP.
+- **Role / Title**: Co-Founder & CEO, RISE | Managing Partner, SeaX Ventures
+- **Photo Path**: assets/photos/guests/guest_5.webp
+- **Official Bio**: Co-founder and CEO of RISE, Southeast Asia's premier corporate innovation accelerator, and Managing Partner at SeaX Ventures. A leading voice in the regional startup ecosystem, he mentors the community on scaling organizations through strategic innovation, building corporate-startup ecosystems, and the intersection of enterprise transformation and venture capital.
 
-### Guest 6: Kasidis Satangmongkol (P'Toy)
-- **Role**: Founder of DataRockie, Data Science Educator & Consultant
-- **Expertise**: Data analytics, SQL, machine learning, educational content, community building.
-- **Bio**: Thailand's preeminent data educator whose online academy and publications have upskilled tens of thousands of Thai professionals in programming, data literacy, and AI applications.
+### Guest 6: P'Toy Kasidis Satangmongkol
+- **Role / Title**: Founder, DataRockie & Data Science Educator
+- **Photo Path**: assets/photos/guests/guest_6.webp
+- **Official Bio**: Founder of DataRockie, one of Thailand's leading data science education platforms, built as a solopreneur. A self-described 'generalist in practice, stoic at heart,' he has taught R and Python programming to thousands of students across the country. He brings a rare blend of data expertise, Stoic philosophy, and one-person-business strategy to Flow's Table conversations.
 
-### Guest 7: Kittipol Pramoj (P'Tre)
-- **Role**: Former Managing Director, Sammakorn PLC; Professional Motorsport Champion
-- **Expertise**: Real estate development, public company leadership, high-speed decision making.
-- **Bio**: Former MD of publicly traded property developer Sammakorn PLC. High-performance racing driver who bridges extreme focus and split-second precision from the racetrack into corporate strategy.
+### Guest 7: P'Tre Kittipol Pramoj
+- **Role / Title**: Director, Sammakorn & Racing Driver
+- **Photo Path**: assets/photos/guests/guest_7.webp
+- **Official Bio**: Director of Sammakorn Public Company Limited, one of Thailand's leading real estate developers, and a competitive racing driver in the Thailand Super Series, racing a Ferrari 488 Challenge EVO in the Super Car GTM class. Also serving on the board of Tanachira Retail Corporation, he brings a rare dual perspective on calculated risk-taking—both in the boardroom and on the track.
 
-### Guest 8: Nithi Satchatippavarn (P'Mek)
-- **Role**: Co-Founder & CEO, MyCloudFulfillment
-- **Expertise**: Omnichannel logistics, warehouse automation, enterprise SaaS, scaling startups.
-- **Bio**: Built MyCloudFulfillment into Thailand's premier omnichannel fulfillment partner for leading consumer and retail brands, processing millions of orders with high operational rigor.
+### Guest 8: P'Mek Nithi Satchatippavarn
+- **Role / Title**: Co-Founder & CEO, MyCloudFulfillment
+- **Photo Path**: assets/photos/guests/guest_8.webp
+- **Official Bio**: Co-founder and CEO of MyCloudFulfillment, a tech-enabled supply chain and fulfillment platform for e-commerce businesses in Thailand. A Babson College graduate, he has successfully raised Series B funding and built one of the country's leading fulfillment services. He shares hard-won lessons on logistics optimization, scaling operations across multiple sales channels, and navigating the venture capital landscape in Southeast Asia.
 
-### Guest 9: Punyawe Chantarakajorn (P'Pek)
-- **Role**: Professional Trader, Market Educator & Best-Selling Financial Author
-- **Expertise**: Technical analysis, risk-reward modeling, quantitative trading psychology.
-- **Bio**: Celebrated market technician and educator who demystifies trading psychology, disciplined risk management, and market liquidity for retail and professional traders.
+### Guest 9: P'Pek Punyawe Chantarakajorn
+- **Role / Title**: Professional Trader & Author
+- **Photo Path**: assets/photos/guests/guest_9.webp
+- **Official Bio**: A professional trader, investor, and author of five books on financial markets and investing psychology. He shares deep expertise on trading strategy, technical analysis, and the discipline required to navigate market volatility. Beyond charts and numbers, he brings philosophical perspectives on wealth creation, business moats, and the mindset of compounding knowledge over time.
 
-### Guest 10: Arnun Treetitiapt (P'Benz)
-- **Role**: Solopreneur, Digital Growth Educator & Founder Mentor
-- **Expertise**: Lean business creation, one-person business architecture, organic digital growth.
-- **Bio**: Champion of the modern solopreneur movement in Thailand, demonstrating how high leverage, automation, and authentic personal branding create resilient micro-enterprises.
+### Guest 10: P'Benz Arnun Treetitiapt
+- **Role / Title**: Digital Entrepreneur & Solopreneur
+- **Photo Path**: assets/photos/guests/guest_10.webp
+- **Official Bio**: A successful digital entrepreneur and solopreneur who pioneered self-funded educational courses in Thailand. At the table, he shares actionable frameworks on launching one-person businesses, designing high-margin digital products, and building active online audiences without external funding or large teams.
 
-### Guest 11: Vorapat Chavananikul (Shark Benz)
-- **Role**: Investment Director, Singha Ventures
-- **Expertise**: Corporate venture capital, consumer goods innovation, global tech scaling.
-- **Bio**: Leads strategic investments for Singha Ventures, identifying frontier technologies and scalable consumer platforms globally that synergize with Singha's massive consumer distribution.
+### Guest 11: Shark Benz Vorapat Chavananikul
+- **Role / Title**: CFO & CSO, Boonrawd Trading | MD, Singha Ventures
+- **Photo Path**: assets/photos/guests/guest_11.webp
+- **Official Bio**: Chief Financial Officer and Chief Strategy Officer of Boonrawd Trading (Singha), and Managing Director of Singha Ventures, the corporate venture capital arm of the Boonrawd Group. He also serves as Deputy CEO of Boonrawd Trading and Director of Singha Estate. With 20+ years spanning retail, consumer goods, and finance — including prior roles at Tesco Thailand, BCG, and Optasia Capital where he executed multiple IPOs and M&A deals — he shares powerful perspectives on corporate strategy, CVC investing, and steering one of Thailand's most iconic conglomerates through digital transformation.
 
-### Guest 12: Narikun Ketprapakorn (P'Frung)
-- **Role**: Medical Doctor, Acclaimed Actress & Digital Content Creator
-- **Expertise**: Time management under extreme pressure, medical practice, authentic storytelling.
-- **Bio**: Notable Thai actress and graduate of Chulalongkorn University Faculty of Medicine. Balances medical duties with high-reach creative content, inspiring youth on discipline and purpose.
+### Guest 12: P'Frung Narikun Ketprapakorn
+- **Role / Title**: Actress, Doctor & Content Creator
+- **Photo Path**: assets/photos/guests/guest_12.webp
+- **Official Bio**: A beloved Thai actress, medical doctor, and content creator who shares her journey balancing a career in medicine with media production. She brings inspiring insights on discipline, mental wellness, and finding passion across multiple careers.
 
-### Guest 13: Tanarat Ruckariyapong (P'Kok)
-- **Role**: Co-Founder & CEO, Guss Damn Good Craft Ice Cream
-- **Expertise**: Craft branding, sensory storytelling, consumer experience, premium retail.
-- **Bio**: Creator of Guss Damn Good, Thailand's iconic artisanal craft ice cream brand known for translating emotions, music, and nostalgia into distinct flavor profiles with an obsessive cult following.
+### Guest 13: P'Kok Tanarat Ruckariyapong
+- **Role / Title**: Vice President, SAPPE (Mogu Mogu, Beauti Drink)
+- **Photo Path**: assets/photos/guests/guest_13.webp
+- **Official Bio**: Vice President of SAPPE Public Company Limited, the Thai beverage powerhouse behind globally loved brands like Mogu Mogu and Sappe Beauti, exporting to over 100 countries. Part of the Ruckariyapong family that built the company from a small snacks business in 1973 into a multi-billion-baht listed enterprise, he brings deep insights on scaling a family business, FMCG innovation, and building a global lifestyle brand from Thailand.
 
-### Guest 14: Dr. Udomsak Rakwongwan (P'Em)
-- **Role**: Co-Founder of Forward DeFi, University Finance Professor
-- **Expertise**: Decentralized finance protocols, quantitative derivatives, algorithmic liquidity.
-- **Bio**: Financial engineering professor and blockchain protocol architect who bridges theoretical mathematics with live decentralized derivative markets.
+### Guest 14: P'Em Udomsak Rakwongwan
+- **Role / Title**: Co-Founder & Advisor, Forward DeFi | Asst. Prof., Kasetsart University
+- **Photo Path**: assets/photos/guests/guest_14.webp
+- **Official Bio**: Co-founder and advisor of Forward (Project Forward), a decentralized finance platform, and Assistant Professor of Mathematics at Kasetsart University with a Ph.D. in Financial Mathematics. He bridges the worlds of academic rigor and DeFi innovation, sharing deep expertise on algorithmic trading, blockchain architecture, and the future of decentralized financial systems.
 
-### Guest 15: Peesadech Pechnoi (P'Peesamac)
-- **Role**: Creative Copywriter, Brand Storyteller & Content Creator
-- **Expertise**: Emotional copywriting, narrative arc, viral engagement, creative direction.
-- **Bio**: Influential storyteller who translates intricate business nuances into visceral, deeply engaging prose that connects with millions of digital readers.
+### Guest 15: P'Peesamac Peesadech Pechnoi
+- **Role / Title**: Co-Founder, BASE Playhouse | Learning Designer & Technologist
+- **Photo Path**: assets/photos/guests/guest_15.webp
+- **Official Bio**: Co-founder of BASE Playhouse and a learning designer and technologist specializing in creative marketing and innovation strategy. With a background spanning brand campaigns and platform-based knowledge management, he brings fresh perspectives on blending education, technology, and storytelling to build engaging experiences that resonate with modern audiences.
 
-### Guest 16: Natthakorn Wiangin (P'Golf)
-- **Role**: Senior Software Engineer & Tech Lead
-- **Expertise**: High-throughput distributed systems, cloud architecture, engineering management.
-- **Bio**: Seasoned backend architect who has built and optimized infrastructure supporting mission-critical enterprise workflows and millions of concurrent queries.
+### Guest 16: P'Golf Natthakorn Wiangin
+- **Role / Title**: Tech & Media Strategy
+- **Photo Path**: assets/photos/guests/guest_16.webp
+- **Official Bio**: A tech and media strategy professional with experience spanning digital content, brand innovation, and the future of Thai media in the AI era. He shares insights on how traditional media companies are adapting to AI disruption, platform strategy, and the evolving relationship between technology and storytelling.
 
-### Guest 17: Pongsuk Hiranprueck (P'Nui)
-- **Role**: Founder & CEO, Show No Limit; Host of Beartai
-- **Expertise**: Tech journalism, digital broadcasting, media production, national tech trends.
-- **Bio**: Thailand's most renowned tech journalist and media personality. Founder of Beartai, shaping national conversation on consumer electronics, AI, telecommunications, and tech ethics for over two decades.
+### Guest 17: P'Nui Pongsuk Hiranprueck
+- **Role / Title**: Managing Director, Show No Limit & Host of Beartai Hitech
+- **Photo Path**: assets/photos/guests/guest_17.webp
+- **Official Bio**: Managing Director of Show No Limit, a leading event and digital media company in Bangkok. As the long-running host of Beartai Hitech, Thailand's most influential tech TV program, and founder of the Thailand Game Show, he has been at the forefront of the country's tech media landscape for over two decades. He shares deep insights on bridging technology with mass audiences, digital media production, and the evolution of Thailand's gaming and tech communities.
 
-### Guest 18: Prachaya Mora (P'Shane)
-- **Role**: Co-Founder & CTO, Software Architect
-- **Expertise**: System design, software development lifecycles, developer experience.
-- **Bio**: Accomplished technology executive who designs resilient, scalable software systems and mentors emerging engineers in Thai tech hubs.
+### Guest 18: P'Shane Prachaya Mora
+- **Role / Title**: Managing Director, SERVgroup
+- **Photo Path**: assets/photos/guests/guest_18.webp
+- **Official Bio**: Managing Director of SERVgroup, a Thai hospitality and lifestyle company. A successful young entrepreneur who found early business success in his 20s, he brings perspectives on hospitality branding, operational excellence, and building premium service businesses that stand apart in a competitive market.
 
-### Guest 19: Ruttanun Vilailuck (P'Phone)
-- **Role**: Third-Generation Executive, Samart Corporation PLC
-- **Expertise**: Enterprise tech concessions, telecommunications, aviation infrastructure, family business succession.
-- **Bio**: Executive at Samart Corporation (founded 1955 with 40 affiliates and 4 SET-listed companies). Specializes in public-private tech infrastructure and multi-generational business governance.
+### Guest 19: P'Phone Ruttanun Vilailuck
+- **Role / Title**: Third-Generation Leader, Samart Corporation
+- **Photo Path**: assets/photos/guests/guest_19.webp
+- **Official Bio**: Third-generation leader of Samart Corporation, a Thai conglomerate founded in 1955 with 40 affiliates, four of which are listed on the Stock Exchange of Thailand. He leads Samart's strategic push to invest its own capital in technology concessions for government projects, earning long-term recurring revenue. Growing up at a dinner table where business was discussed like a strategy session, he shares unique perspectives on multi-generational enterprise, government tech infrastructure, and the aviation and telecom sectors.
 
-### Guest 20: Amorpol Huvanandana (P'Pol)
-- **Role**: Co-Founder & CEO, Moreloop
-- **Expertise**: Circular economy, industrial fabric waste reclamation, ESG metrics, social entrepreneurship.
-- **Bio**: Pioneer of Thailand's circular economy platform Moreloop, which has reclaimed over 40 tons of unused textile waste from garment factories, mitigating over 630 tons of CO2 emissions.
+### Guest 20: P'Pol Amorpol Huvanandana
+- **Role / Title**: Co-Founder & CEO, Moreloop
+- **Photo Path**: assets/photos/guests/guest_20.webp
+- **Official Bio**: Co-founder and CEO of Moreloop, a circular economy platform that upcycles surplus fabric from garment factories into high-value products. Since 2018, Moreloop has rescued 40 tons of fabric and prevented over 630 tons of CO2 emissions. He brings deep insights on building a social enterprise, scaling sustainability business models, and proving that environmental impact and profitability can go hand in hand.
 
-### Guest 21: Naranpat Thitipattakul (P'Pat)
-- **Role**: Managing Partner, Disrupt Health Impact Fund
-- **Expertise**: HealthTech venture capital, longevity medicine, preventive healthcare, medical devices.
-- **Bio**: Leading venture capital partner investing in transformative HealthTech startups (DiaMonTech, PocDoc) across Southeast Asia and bridging international deep-tech into Thailand's premier medical hub.
+### Guest 21: P'Pat Naranpat Thitipattakul
+- **Role / Title**: Managing Partner, Disrupt Health Impact Fund
+- **Photo Path**: assets/photos/guests/guest_21.webp
+- **Official Bio**: Managing Partner of Disrupt Health Impact Fund, a Thailand-based venture capital firm investing in world-class HealthTech startups across five key areas: self-care, preventive care, silver age, holistic wellness, and smart hospitals. Alongside chairman Krating Poonpol, she leads investments of 17-50 million baht per company, backing deep-tech innovators like DiaMonTech (non-invasive glucose monitoring) and PocDoc. She shares sharp insights on evaluating health-tech founders, the future of preventive healthcare in Southeast Asia, and bridging global deep-tech into Thailand's world-class medical ecosystem.
 
-### Guest 22: Polpat Songthamjitti (P'Popp)
-- **Role**: Co-Founder of GetLinks & Managing Partner at WhaleGround
-- **Expertise**: Cross-border talent platforms, Web3 investments, community scaling, venture building.
-- **Bio**: Co-founder of GetLinks, Asia's curated tech hiring platform connecting over 25 million tech workers; recognized on Forbes 30 Under 30 Asia. Now Managing Partner at WhaleGround driving decentralized investments.
+### Guest 22: P'Popp Polpat Songthamjitti
+- **Role / Title**: Co-Founder, GetLinks & Managing Partner, WhaleGround
+- **Photo Path**: assets/photos/guests/guest_22.webp
+- **Official Bio**: Co-founder and CMO of GetLinks, a curated tech talent marketplace connecting 25 million professionals across Asia, and a Forbes 30 Under 30 Asia honoree. Now Managing Partner at WhaleGround, a Web3 venture capital firm, he shares insights on scaling cross-border startups, community-driven growth, and navigating the intersection of talent, technology, and decentralized finance.
 
-### Guest 23: Trikachon Siritawechai (P'Pound)
-- **Role**: Founder of Woonplaepasa (วุ้นแปลภาษา) & OP Creator
-- **Expertise**: Edutainment, viral social video, creator economy, language acquisition.
-- **Bio**: Creator of Thailand's viral sensation Woonplaepasa, revolutionizing language education by transforming English learning into hilarious, memorable, and culturally relatable media.
+### Guest 23: P'Pound Trikachon Siritawechai
+- **Role / Title**: Founder, Woonplaepasa & Content Creator
+- **Photo Path**: assets/photos/guests/guest_23.webp
+- **Official Bio**: Founder of Woonplaepasa (วุ้นแปลภาษา), one of Thailand's most viral language content brands known for blending humor with language education. Through OP CREATOR, he has built a massive following by making English accessible and entertaining. At the table, he shares lessons on building engaged communities through content, the creator economy, and turning passion into a sustainable business.
 
-### Guest 24: Tossapat Chunrahas (P'Can)
-- **Role**: Professional Poker Champion & Private Equity Investor
-- **Expertise**: Probability modeling under incomplete information, emotional control, capital risk allocation.
-- **Bio**: High Roller champion at Poker Dream Vietnam and elite poker player with over $127,000 in tournament earnings. Connects game theory and behavioral decision-making directly to business investments.
+### Guest 24: P'Can Tossapat Chunrahas
+- **Role / Title**: Professional Poker Player & Investor
+- **Photo Path**: assets/photos/guests/guest_24.webp
+- **Official Bio**: One of Thailand's top-ranked professional poker players with over $127,000 in live tournament earnings, including a High Roller title at Poker Dream Vietnam. Beyond the felt, he is an active investor connected with KANEKOJI Group and Basecamp Ventures. He brings unique perspectives on risk management, decision-making under pressure, and the psychology of calculated bets—skills that translate directly from the poker table to business and investing.
 
-### Guest 25: Tanongsak Saeaw (P'Ton)
-- **Role**: Founder & CEO, Yuedpao (ยืดเปล่า)
-- **Expertise**: D2C apparel branding, retail distribution, sustainable textiles, viral Thai marketing.
-- **Bio**: Visionary behind Yuedpao, growing from modest market stalls to a multi-hundred-million baht apparel empire with nearly 1 million social followers. Leader in circular fashion with the ReWear ReCare initiative.
+### Guest 25: P'Ton Tanongsak Saeaw
+- **Role / Title**: Founder & CEO, Yuedpao (ยืดเปล่า)
+- **Photo Path**: assets/photos/guests/guest_25.webp
+- **Official Bio**: Founder and CEO of Yuedpao (ยืดเปล่า), one of Thailand's most beloved t-shirt and apparel brands with over 875,000 Facebook fans and 358,000+ TikTok followers. Starting from a small reselling business in 2013, he grew Yuedpao into a hundreds-of-millions-baht brand with the viral philosophy of selling to make friends, not just profit. A pioneer in sustainable fashion through the ReWear ReCare collaboration with PT and Circular, he shares hard-won lessons on brand building, defending thin margins, and competing against Chinese garment imports with authentic Thai storytelling.
 
-### Guest 26: Piyathida Chitaroon (P'Thoy)
-- **Role**: Actress, Wellness Entrepreneur & Purpose Coach
-- **Expertise**: Mind-body alignment, personal branding, women entrepreneurship, holistic lifestyle.
-- **Bio**: Celebrated actress turned purpose-driven founder of FitU Academy and SOS Sense of Style, coaching individuals on integrating mental clarity, wellness, and business ambition.
-
----
-
-## 4. Frequently Asked Questions (FAQ)
-
-### How does someone get invited to Flow's Table?
-Invitations are issued by Mac Nattapong and the host committee or through direct nominations from existing table alumni. Consideration focuses on intellectual curiosity, humility, and willingness to share openly.
-
-### Is Flow's Table a networking event or sales mixer?
-No. Flow's Table strictly forbids sales pitches, business card bombardment, and promotional presentations. The entire framework is built around organic human relationships.
-
-### What is Flow Society?
-Flow Society is the ongoing, private executive peer community of Flow's Table. It convenes deeper cohorts for private retreats, mastermind sessions, and ongoing strategic collaborations.
-
-### Where can I read the session takeaways?
-Public syntheses and curated business principles are published at [https://flowstable.net/articles](https://flowstable.net/articles) and through the Flow's Table Facebook page.
+### Guest 26: P'Thoy Piyathida Chitaroon
+- **Role / Title**: Actress, Entrepreneur & Purpose Coach
+- **Photo Path**: assets/photos/guests/guest_26.webp
+- **Official Bio**: A celebrated Thai actress known for hit dramas including Baan Sila Dang (เลือดข้นหนึง), who has successfully transitioned into a multi-venture entrepreneur and purpose-driven coach with over 127,000 Instagram followers. As founder of FitU Academy, FitU Health Club, and SOS Sense of Style, she empowers others in health, fitness, and personal branding. A Thammasat University graduate, she shares inspiring perspectives on balancing a creative career with business building, faith-driven leadership, and living with purpose.
 
 ---
 
-## 5. Contact & Social Channels
+## 3. Contact & Channels
+
 - **Website**: https://flowstable.net
 - **Email**: flowstable.th@gmail.com
 - **LINE Official**: [@010eyqrs](https://line.me/R/ti/p/@010eyqrs)
 - **Facebook**: https://www.facebook.com/914737241717875
 - **Instagram**: https://instagram.com/flowstable
-- **Sitemap**: https://flowstable.net/sitemap.xml
 - **Robots**: https://flowstable.net/robots.txt
+- **Sitemap**: https://flowstable.net/sitemap.xml

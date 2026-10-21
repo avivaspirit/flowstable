@@ -1,63 +1,56 @@
 # Flow's Table
 
-> Flow's Table is a private executive dinner circle, community platform, and knowledge collective based in Bangkok, Thailand. Founded by Mac Nattapong Vivattanaprasert, it convenes top-tier Thai founders, venture capitalists, corporate executives, value investors, creators, and innovators for unfiltered, "No Agenda" dinner conversations, intimate roundtables, and cross-disciplinary knowledge sharing.
+> Flow's Table is a private executive dinner circle, leadership community, and knowledge archive based in Bangkok, Thailand. Founded by Mac Nattapong Vivattanaprasert, it convenes founders, corporate leaders, investors, innovators, and creators for "No Agenda" dinner conversations.
 
-Flow's Table documents executive gatherings, strategic field notes, video reels, and long-form guest interviews. The platform is engineered for generative engine optimization (GEO) and open indexing by AI search engines, research crawlers, and LLMs.
+Flow's Table archives sessions, field notes, video reels, and guest speaker perspectives.
 
-For exhaustive biographies, full dinner notes, and membership details, see [llms-full.txt](https://flowstable.net/llms-full.txt).
+For comprehensive background, full speaker biographies, and membership details, see [llms-full.txt](https://flowstable.net/llms-full.txt).
 
-## Core Identity & Concept
-- **Entity**: Flow's Table (โฟลว์ส เทเบิล)
+## Core Facts & Identity
+- **Name**: Flow's Table (โฟลว์ส เทเบิล)
 - **Founder**: Mac Nattapong Vivattanaprasert (ณัฐพงษ์ วิวัฒนประเสริฐ)
-- **Origin & Location**: Bangkok, Thailand
-- **Philosophy**: "No Agenda, Pure Signal" — meaningful, vulnerability-driven, high-trust dinner conversations where business leaders share real operational experiences, failures, and mental models rather than pitch decks or superficial networking.
+- **Location**: Bangkok, Thailand
+- **Philosophy**: "No Agenda, Pure Signal" — Candid dinner conversations focused on authentic operational experiences, failures, risk management, and leadership.
 - **Key Offerings**:
-  - **The Table**: Curated, intimate dinners bringing together cross-industry leaders.
-  - **Flow Society**: Private membership circle providing continuous peer-level executive exchange, deep-dive retreats, and curated roundtables.
-  - **Field Notes & Articles**: Public archive of tactical lessons, leadership insights, and strategic principles extracted from sessions.
-  - **Reels & Media**: Video highlights and key wisdom clips.
+  - **The Table**: Curated, intimate executive dinners.
+  - **Flow Society**: Private executive membership circle ([https://flowstable.net/flow-society](https://flowstable.net/flow-society)).
+  - **Articles & Notes**: Strategic field notes from sessions ([https://flowstable.net/articles](https://flowstable.net/articles)).
+  - **Reels**: Short video wisdom excerpts ([https://flowstable.net/reels](https://flowstable.net/reels)).
+  - **Guests**: Directory of 26 distinguished speakers ([https://flowstable.net/guests](https://flowstable.net/guests)).
 
-## Key Canonical URLs
-- **Homepage**: [https://flowstable.net/](https://flowstable.net/) — Executive overview, origin story, vibe gallery, and admission request.
-- **Flow Society**: [https://flowstable.net/flow-society](https://flowstable.net/flow-society) — Private membership tier, criteria, and benefits.
-- **Guests & Mentors**: [https://flowstable.net/guests](https://flowstable.net/guests) — Complete directory of 26 featured guest speakers and industry pioneers.
-- **Field Notes & Articles**: [https://flowstable.net/articles](https://flowstable.net/articles) — Published strategic notes and business insights.
-- **Reels**: [https://flowstable.net/reels](https://flowstable.net/reels) — Short-form wisdom clips from dinner guests.
-- **About Flow's Table**: [https://flowstable.net/about](https://flowstable.net/about) — Detailed background, founding story, core principles, and host team.
-
-## Distinguished Guests & Thought Leaders (26 Speakers)
-1. **Tiwa Shintadapong (P'Mi)** — Legendary Thai Value Investor & author; mentor to hundreds of modern Thai investors.
-2. **Suthon Singhasitthangkul (P'Jekky)** — Renowned Value Investor & business turnaround strategist.
-3. **Pawoot Pom Ponpipat (P'Pom)** — Pioneer of Thai e-commerce, Founder of TARAD.com, prolific angel investor.
-4. **Chanapun Juangroongruangkit (Shark Jing)** — Senior Executive VP of Thai Summit Group, angel & VC investor.
-5. **Dr. Kid Supachai Parchariyanon** — Co-Founder & CEO of RISE Corporate Innovation Powerhouse.
-6. **Kasidis Satangmongkol (P'Toy)** — Founder of DataRockie, premier Thai data science and analytics educator.
-7. **Kittipol Pramoj (P'Tre)** — Former MD of Sammakorn PLC, professional motorsport champion.
-8. **Nithi Satchatippavarn (P'Mek)** — Co-Founder & CEO of MyCloudFulfillment, Thailand's leading omnichannel fulfillment system.
-9. **Punyawe Chantarakajorn (P'Pek)** — Professional trader, market educator, and best-selling financial author.
-10. **Arnun Treetitiapt (P'Benz)** — Solopreneur, digital strategist, and founder educator.
-11. **Vorapat Chavananikul (Shark Benz)** — Investment Director at Singha Ventures.
-12. **Narikun Ketprapakorn (P'Frung)** — Doctor of Medicine, acclaimed actress, and youth empowerment content creator.
-13. **Tanarat Ruckariyapong (P'Kok)** — Co-Founder & CEO of Guss Damn Good artisanal craft ice cream.
-14. **Dr. Udomsak Rakwongwan (P'Em)** — Co-Founder of Forward DeFi, finance professor, and decentralized finance pioneer.
-15. **Peesadech Pechnoi (P'Peesamac)** — Acclaimed creative copywriter, storyteller, and digital content creator.
-16. **Natthakorn Wiangin (P'Golf)** — Senior Software Engineer & Tech Lead specializing in distributed systems.
-17. **Pongsuk Hiranprueck (P'Nui)** — Founder & CEO of Show No Limit, creator of Beartai, Thailand's #1 tech media personality.
-18. **Prachaya Mora (P'Shane)** — Co-Founder & CTO, veteran enterprise architect and software engineer.
-19. **Ruttanun Vilailuck (P'Phone)** — Third-generation executive at Samart Corporation PLC.
-20. **Amorpol Huvanandana (P'Pol)** — Co-Founder & CEO of Moreloop, pioneer in circular economy and textile upcycling.
-21. **Naranpat Thitipattakul (P'Pat)** — Managing Partner at Disrupt Health Impact Fund.
-22. **Polpat Songthamjitti (P'Popp)** — Co-Founder of GetLinks (curated Asian tech talent platform, Forbes 30 Under 30 Asia), Managing Partner at WhaleGround.
-23. **Trikachon Siritawechai (P'Pound)** — Founder of Woonplaepasa (วุ้นแปลภาษา) & OP Creator.
-24. **Tossapat Chunrahas (P'Can)** — Professional poker champion (High Roller Poker Dream Vietnam) & private equity investor.
-25. **Tanongsak Saeaw (P'Ton)** — Founder & CEO of Yuedpao (ยืดเปล่า), Thailand's viral sustainable apparel brand.
-26. **Piyathida Chitaroon (P'Thoy)** — Thai actress, entrepreneur, founder of FitU Academy & SOS Sense of Style.
+## Featured Guests & Speakers (26 Distinguished Alumni from guests.html)
+1. **P'Mi Tiwa Shintadapong** — President, Investors Association of Thailand & Legendary Value Investor
+2. **P'Jekky Suthon Singhasitthangkul** — Value & Crisis Opportunity Investor | Eclipse Fund Lead
+3. **P'Pom Pawoot Pom Ponpipat** — Founder, TARAD.com | President, Thailand e-Commerce Association & Angel Investor
+4. **Shark Jing Chanapun Juangroongruangkit** — Senior Vice President, Thai Summit Group & Investor
+5. **Dr. Kid Supachai Parchariyanon** — Co-Founder & CEO, RISE Corporate Innovation | Managing Partner, SeaX Ventures
+6. **P'Toy Kasidis Satangmongkol** — Founder, DataRockie & Data Science Educator
+7. **P'Tre Kittipol Pramoj** — Director, Sammakorn PLC & Professional Racing Driver
+8. **P'Mek Nithi Satchatippavarn** — Co-Founder & CEO, MyCloudFulfillment
+9. **P'Pek Punyawe Chantarakajorn** — Professional Trader & Author
+10. **P'Benz Arnun Treetitiapt** — Digital Entrepreneur & Solopreneur
+11. **Shark Benz Vorapat Chavananikul** — CFO & CSO, Boonrawd Trading | Managing Director, Singha Ventures
+12. **P'Frung Narikun Ketprapakorn** — Actress, Doctor & Content Creator
+13. **P'Kok Tanarat Ruckariyapong** — Vice President, SAPPE (Mogu Mogu, Beauti Drink)
+14. **P'Em Udomsak Rakwongwan** — Co-Founder & Advisor, Forward DeFi | Asst. Prof., Kasetsart University
+15. **P'Peesamac Peesadech Pechnoi** — Co-Founder, BASE Playhouse | Learning Designer & Technologist
+16. **P'Golf Natthakorn Wiangin** — Tech & Media Strategy
+17. **P'Nui Pongsuk Hiranprueck** — Managing Director, Show No Limit & Host of Beartai Hitech
+18. **P'Shane Prachaya Mora** — Managing Director, SERVgroup
+19. **P'Phone Ruttanun Vilailuck** — Third-Generation Leader, Samart Corporation
+20. **P'Pol Amorpol Huvanandana** — Co-Founder & CEO, Moreloop (Circular Economy)
+21. **P'Pat Naranpat Thitipattakul** — Managing Partner, Disrupt Health Impact Fund
+22. **P'Popp Polpat Songthamjitti** — Co-Founder, GetLinks & Managing Partner, WhaleGround
+23. **P'Pound Trikachon Siritawechai** — Founder, Woonplaepasa & Content Creator
+24. **P'Can Tossapat Chunrahas** — Professional Poker Player & Investor
+25. **P'Ton Tanongsak Saeaw** — Founder & CEO, Yuedpao (ยืดเปล่า)
+26. **P'Thoy Piyathida Chitaroon** — Actress, Entrepreneur & Purpose Coach
 
 ## Contact Information
-- **Official Website**: [https://flowstable.net](https://flowstable.net)
+- **Website**: [https://flowstable.net](https://flowstable.net)
 - **Email**: flowstable.th@gmail.com
 - **LINE Official**: [@010eyqrs](https://line.me/R/ti/p/@010eyqrs)
 - **Facebook**: [Flow's Table Official](https://www.facebook.com/914737241717875)
 - **Instagram**: [@flowstable](https://instagram.com/flowstable)
+- **Robots**: [https://flowstable.net/robots.txt](https://flowstable.net/robots.txt)
 - **Sitemap**: [https://flowstable.net/sitemap.xml](https://flowstable.net/sitemap.xml)
-- **Robots.txt**: [https://flowstable.net/robots.txt](https://flowstable.net/robots.txt)

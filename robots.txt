@@ -51,3 +51,7 @@ User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://flowstable.net/sitemap.xml
+
+# LLM Context (GEO / Generative Engine Optimization)
+# Canonical markdown overview: https://flowstable.net/llms.txt
+# Full comprehensive context: https://flowstable.net/llms-full.txt

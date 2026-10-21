@@ -1,6 +1,6 @@
 # Flow's Table
 
-> Flow's Table is a private executive dinner circle, leadership community, and knowledge archive based in Bangkok, Thailand. Founded by Mac Nattapong Vivattanaprasert, it convenes founders, corporate leaders, investors, innovators, and creators for "No Agenda" dinner conversations.
+> Flow's Table is a Bangkok-based community bringing together good vibe, high-energy people from diverse backgrounds—creators, thinkers, investors, builders, designers, and mentors—across casual no-agenda dinners, Flow Society networking events, and collaborative partner talks where trust matters more than titles. Founded by Mac Nattapong Vivattanaprasert.
 
 Flow's Table archives sessions, field notes, video reels, and guest speaker perspectives.
 
@@ -11,8 +11,10 @@ For comprehensive background, full speaker biographies, and membership details, 
 - **Founder**: Mac Nattapong Vivattanaprasert (ณัฐพงษ์ วิวัฒนประเสริฐ)
 - **Location**: Bangkok, Thailand
 - **Philosophy**: "No Agenda, Pure Signal" — Candid dinner conversations focused on authentic operational experiences, failures, risk management, and leadership.
-- **Key Offerings**:
-  - **The Table**: Curated, intimate executive dinners.
+- **Key Gathering Formats**:
+  - **Casual Dinner Roundtables**: Intimate, no-agenda dinners (10–12 people) where trust matters more than titles.
+  - **Flow Society Networking Events**: High-energy community gatherings connecting passionate individuals across disciplines.
+  - **Collab Events & Partner Talks**: Collaborative speaker sessions and workshops co-hosted with top mentors and creators.
   - **Flow Society**: Private executive membership circle ([https://flowstable.net/flow-society](https://flowstable.net/flow-society)).
   - **Articles & Notes**: Strategic field notes from sessions ([https://flowstable.net/articles](https://flowstable.net/articles)).
   - **Reels**: Short video wisdom excerpts ([https://flowstable.net/reels](https://flowstable.net/reels)).
